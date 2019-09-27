@@ -14,3 +14,42 @@
 Route::get('/', function () {
     return view('welcome');
 });
+///////Areas de Melvin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////// Area de Brasa
+
+
+
+
+
+
+
+
+
+
+///Area de Alberto
+
+
+
+
+
+
+
+
+
+
+
+/////Area Marvin
