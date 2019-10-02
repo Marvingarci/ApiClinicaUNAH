@@ -28,6 +28,11 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'cuentaUsuario'=>'required|max:11|min:11',
+            'contrasenia'=>'required',
+            ]);           
+
         echo "estoy en store";
         $usuario = new Usuario();
         $usuario->cuentaUsuario = $request->input("cuentaUsuario");
