@@ -18,6 +18,73 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+//rutas brasly
 Route::resource('pacientes','PacienteController');
 Route::resource('antecedentes_familiares','AntecedentesFamiliaresController');
+Route::resource('antecedentes_personales','AntecedentesPersonalesController');
+Route::resource('habitos_toxicologicos_personales','HabitosToxicologicosPersonalesController');
+Route::resource('actividad_sexual','ActividadSexualController');
+Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
+Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
+Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
+
+
+
+
+
+
+
+
+
+//rutas melvin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rutas marvin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// rutas alberto
