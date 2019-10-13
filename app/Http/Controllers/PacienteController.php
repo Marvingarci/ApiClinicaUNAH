@@ -18,6 +18,7 @@ class PacienteController extends Controller
         echo json_encode($pacientes);
 
     }
+    
 
     /**
      * Store a newly created resource in storage.
