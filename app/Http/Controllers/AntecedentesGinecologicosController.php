@@ -28,7 +28,7 @@ class AntecedentesGinecologicosController extends Controller
     public function store(Request $request)
     {
         $antecedente_ginecologico = new antecedentesGinecologicos();
-        $antecedente_ginecologico->menarquia_a = $request->input(['menarquia_a']);
+        $antecedente_ginecologico->edad_inicio_menstruacion = $request->input(['edad_inicio_menstruacion']);
         $antecedente_ginecologico->fum = $request->input(['fum']);
         $antecedente_ginecologico->citologia = $request->input(['citologia']);
         $antecedente_ginecologico->fecha_citologia = $request->input(['fecha_citologia']);
