@@ -29,6 +29,11 @@ class AntecedentesObstetricosController extends Controller
     public function store(Request $request)
     {
         $antecedente_obstetrico = new antecedentesObstetricos();
+        $antecedente_obstetrico->partos = $request->input(['partos']);
+        $antecedente_obstetrico->abortos = $request->input(['abortos']);
+        $antecedente_obstetrico->cesarias = $request->input(['cesarias']);
+        $antecedente_obstetrico->hijos_vivos = $request->input(['hijos_vivos']);
+        $antecedente_obstetrico->hijos_muertos = $request->input(['hijos_muertos']);
         $antecedente_obstetrico->fecha_termino_ult_embarazo = $request->input(['fecha_termino_ult_embarazo']);
         $antecedente_obstetrico->descripcion_termino_ult_embarazo = $request->input(['descripcion_termino_ult_embarazo']);
         $antecedente_obstetrico->observaciones = $request->input(['observaciones']);
