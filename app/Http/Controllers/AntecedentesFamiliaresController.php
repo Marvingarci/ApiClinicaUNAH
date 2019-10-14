@@ -37,8 +37,8 @@ class AntecedentesFamiliaresController extends Controller
         $antecedente_familiar->enfermedades_mentales = $request->input(['enfermedades_mentales']);
         $antecedente_familiar->observacion_enfermedades_mentales = $request->input(['observacion_enfermedades_mentales']);
         $antecedente_familiar->tipo_enfermedad_mental = $request->input(['tipo_enfermedad_mental']);
-        $antecedente_familiar->convulciones = $request->input(['convulciones']);
-        $antecedente_familiar->observacion_convulciones = $request->input(['observacion_convulciones']);
+        $antecedente_familiar->convulsiones = $request->input(['convulsiones']);
+        $antecedente_familiar->observacion_convulsiones = $request->input(['observacion_convulsiones']);
         $antecedente_familiar->alcoholismo_sustancias_psicoactivas = $request->input(['alcoholismo_sustancias_psicoactivas']);
         $antecedente_familiar->observacion_alcoholismo_sustancias_psicoactivas = $request->input(['observacion_alcoholismo_sustancias_psicoactivas']);
         $antecedente_familiar->alergias = $request->input(['alergias']);
@@ -47,7 +47,7 @@ class AntecedentesFamiliaresController extends Controller
         $antecedente_familiar->cancer = $request->input(['cancer']);
         $antecedente_familiar->observacion_cancer = $request->input(['observacion_cancer']);
         $antecedente_familiar->tipo_cancer = $request->input(['tipo_cancer']);
-        $antecedente_familiar->hipertesion_arterial = $request->input(['hipertesion_arterial']);
+        $antecedente_familiar->hipertension_arterial = $request->input(['hipertension_arterial']);
         $antecedente_familiar->observacion_hipertension_arterial = $request->input(['observacion_hipertension_arterial']);        
         $antecedente_familiar->otros = $request->input(['otros']);
         $antecedente_familiar->observacion_otros = $request->input(['observacion_otros']);
