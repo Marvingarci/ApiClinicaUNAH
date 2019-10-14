@@ -27,8 +27,8 @@ class CreateAntecedentesPersonalesTable extends Migration
             $table->string('enfermedades_mentales');
             $table->string('observacion_enfermedades_mentales')->nullable();
             $table->string('tipo_enfermedad_mental')->nullable();
-            $table->string('convulciones');
-            $table->string('observacion_convulciones')->nullable();
+            $table->string('convulsiones');
+            $table->string('observacion_convulsiones')->nullable();
             $table->string('alergias');
             $table->string('observacion_alergias')->nullable();
             $table->string('tipo_alergia')->nullable();
