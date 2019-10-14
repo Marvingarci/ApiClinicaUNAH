@@ -15,7 +15,7 @@ class CreateAntecedentesGinecologicosTable extends Migration
     {
         Schema::create('antecedentes_ginecologicos', function (Blueprint $table) {
             $table->bigIncrements('id_antecedente__ginecologico');
-            $table->string('menarquia_a')->nullable();
+            $table->string('edad_inicio_menstruacion')->nullable();
             $table->string('fum')->nullable();
             $table->string('citologia')->nullable();
             $table->string('fecha_citologia')->nullable();
