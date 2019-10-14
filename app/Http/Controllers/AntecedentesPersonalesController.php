@@ -40,8 +40,8 @@ class AntecedentesPersonalesController extends Controller
         $antecedente_personales->enfermedades_mentales = $request->input(['enfermedades_mentales']);
         $antecedente_personales->observacion_enfermedades_mentales = $request->input(['observacion_enfermedades_mentales']);
         $antecedente_personales->tipo_enfermedad_mental = $request->input(['tipo_enfermedad_mental']);
-        $antecedente_personales->convulciones = $request->input(['convulciones']);
-        $antecedente_personales->observacion_convulciones = $request->input(['observacion_convulciones']);
+        $antecedente_personales->convulsiones = $request->input(['convulsiones']);
+        $antecedente_personales->observacion_convulsiones = $request->input(['observacion_convulsiones']);
         $antecedente_personales->alergias = $request->input(['alergias']);
         $antecedente_personales->observacion_alergias = $request->input(['observacion_alergias']);
         $antecedente_personales->tipo_alergia = $request->input(['tipo_alergia']);
