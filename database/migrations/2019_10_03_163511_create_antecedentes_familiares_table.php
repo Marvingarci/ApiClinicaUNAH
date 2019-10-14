@@ -25,8 +25,8 @@ class CreateAntecedentesFamiliaresTable extends Migration
             $table->string('enfermedades_mentales');
             $table->string('observacion_enfermedades_mentales')->nullable();
             $table->string('tipo_enfermedad_mental')->nullable();
-            $table->string('convulciones');
-            $table->string('observacion_convulciones')->nullable();
+            $table->string('convulsiones');
+            $table->string('observacion_convulsiones')->nullable();
             $table->string('alcoholismo_sustancias_psicoactivas');
             $table->string('observacion_alcoholismo_sustancias_psicoactivas')->nullable();
             $table->string('alergias');
@@ -35,7 +35,7 @@ class CreateAntecedentesFamiliaresTable extends Migration
             $table->string('cancer');
             $table->string('observacion_cancer')->nullable();
             $table->string('tipo_cancer')->nullable();
-            $table->string('hipertesion_arterial');
+            $table->string('hipertension_arterial');
             $table->string('observacion_hipertension_arterial')->nullable();
             $table->string('otros')->nullable();
             $table->string('observacion_otros')->nullable();
