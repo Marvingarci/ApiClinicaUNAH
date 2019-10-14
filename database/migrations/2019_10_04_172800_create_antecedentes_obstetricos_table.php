@@ -15,6 +15,11 @@ class CreateAntecedentesObstetricosTable extends Migration
     {
         Schema::create('antecedentes_obstetricos', function (Blueprint $table) {
             $table->bigIncrements('id_antecedente_obstetrico');
+            $table->string('partos')->nullable();
+            $table->string('abortos')->nullable();
+            $table->string('cesarias')->nullable();
+            $table->string('hijos_vivos')->nullable();
+            $table->string('hijos_muertos')->nullable();
             $table->string('fecha_termino_ult_embarazo')->nullable();
             $table->string('descripcion_termino_ult_embarazo')->nullable();
             $table->string('observaciones')->nullable();
