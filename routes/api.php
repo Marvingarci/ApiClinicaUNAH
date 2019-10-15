@@ -30,15 +30,8 @@ Route::resource('planificaciones_familiares','PlanificacionesFamiliaresControlle
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 
-
-
-
-
-
-
-
-
 //rutas melvin
+Route::resource('login_admin','LoginAdminController');
 
 
 
