@@ -28,6 +28,8 @@ Route::resource('actividad_sexual','ActividadSexualController');
 Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
 Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
+Route::resource('login','LoginController');
+
 
 
 //rutas melvin
