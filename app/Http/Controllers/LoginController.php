@@ -71,4 +71,6 @@ class LoginController extends Controller
     {
         //
     }
+
+    //el que lo lea se la come;
 }
