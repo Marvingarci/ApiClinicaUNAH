@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\facades\DB;
 class PacienteController extends Controller
 {
     /**
@@ -85,8 +85,13 @@ class PacienteController extends Controller
      * @param  \App\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $pacienteId)
     {
+        $nuevaContra = $request->input('contrasenia');
+
+    DB::table('pacientes')
+    ->where('id_paciente', $pacienteId)
+    ->update(['contrasenia' => $nuevaContra]);
         //
     }
 
