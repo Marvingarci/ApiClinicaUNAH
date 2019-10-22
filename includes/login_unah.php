@@ -40,7 +40,7 @@ function accesoAlumno($usuario, $clave){
 	$info = array();
 
 	if( $html->getElementById("MainContent_Label1") != null){
-		$info['correoInstitucional']= trim($html->getElementById("MainContent_Label1")->parent()->find('label > b', 0)->innertext );
+		//$info['correoInstitucional']= trim($html->getElementById("MainContent_Label1")->parent()->find('label > b', 0)->innertext );
 
 	    curl_setopt($ch, CURLOPT_URL, $HISTORIAL_ACADEMICO);
 	    curl_setopt($ch, CURLOPT_TIMEOUT, 120);

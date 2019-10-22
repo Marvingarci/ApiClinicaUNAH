@@ -18,7 +18,10 @@ class PacienteController extends Controller
         echo json_encode($pacientes);
 
     }
-
+    public function ultimoID(){
+        $si= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes;');
+        echo json_encode($si);
+    }
     
 
     /**
