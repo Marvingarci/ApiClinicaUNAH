@@ -56,6 +56,7 @@ Route::resource('login_admin','LoginAdminController');
 
 
 //rutas marvin
+Route::get('pacientes/ultimo/si','PacienteController@ultimoID');
 
 
 

@@ -15,7 +15,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        $logins = Login::get();
+        $logins = Login::first();
         echo json_encode($logins);
     }
 
