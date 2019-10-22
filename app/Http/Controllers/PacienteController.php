@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\facades\DB;
 class PacienteController extends Controller
 {
     /**
@@ -18,6 +18,7 @@ class PacienteController extends Controller
         echo json_encode($pacientes);
 
     }
+
     
 
     /**
@@ -72,6 +73,11 @@ class PacienteController extends Controller
 
     }
 
+    public function show($id)
+    {
+        //Solicitamos al modelo el Paciente con el id solicitado por GET.
+        return Paciente::where('id_paciente', $id)->get();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -79,8 +85,13 @@ class PacienteController extends Controller
      * @param  \App\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $pacienteId)
     {
+        $nuevaContra = $request->input('contrasenia');
+
+    DB::table('pacientes')
+    ->where('id_paciente', $pacienteId)
+    ->update(['contrasenia' => $nuevaContra]);
         //
     }
 
