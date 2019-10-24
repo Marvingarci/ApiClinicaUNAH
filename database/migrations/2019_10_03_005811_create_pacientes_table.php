@@ -14,13 +14,10 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->bigIncrements('id_paciente');
+            $table->char('id_paciente');
             $table->string('numero_paciente')->unique()->nullable();
             $table->string('contrasenia')->nullable();
-            $table->string('primer_apellido');
-            $table->string('segundo_apellido')->nullable();
-            $table->string('primer_nombre');
-            $table->string('segundo_nombre')->nullable();
+            $table->string('nombre_completo');
             $table->string('numero_cuenta')->unique();
             $table->string('numero_identidad')->unique();
             $table->string('lugar_procedencia');
@@ -43,6 +40,8 @@ class CreatePacientesTable extends Migration
             $table->boolean('visitante')->nullable();
             $table->boolean('prosene')->nullable();
             $table->timestamps();
+
+            $table->primary('id_paciente');
         });
     }
 
