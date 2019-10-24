@@ -18,12 +18,8 @@ class PacienteController extends Controller
         echo json_encode($pacientes);
 
     }
-    public function ultimoID(){
-        $si= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes;');
-        echo json_encode($si);
-    }
     
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -57,10 +53,8 @@ class PacienteController extends Controller
         ]);*/
 
         $paciente = new Paciente();
-        $paciente->primer_apellido = $request->input('primer_apellido');
-        $paciente->segundo_apellido = $request->input('segundo_apellido');
-        $paciente->primer_nombre = $request->input('primer_nombre');
-        $paciente->segundo_nombre = $request->input('segundo_nombre');
+        $paciente->id_paciente = $request->input('id_paciente'); 
+        $paciente->nombre_completo = $request->input('nombre_completo');
         $paciente->numero_cuenta = $request->input('numero_cuenta');
         $paciente->numero_identidad = $request->input('numero_identidad');
         $paciente->direccion = $request->input('direccion');
@@ -74,7 +68,18 @@ class PacienteController extends Controller
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->save();
 
+        
+
     }
+
+    public function ultimoID(){
+        $si= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes');
+
+        echo json_encode($si);
+        
+        
+    }
+
 
     public function show($id)
     {
