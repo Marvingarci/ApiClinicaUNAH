@@ -15,9 +15,16 @@ class LoginController extends Controller
      */
     public function index()
     {
-        $logins = Login::first();
+        // $logins = Login::first();
+        // echo json_encode($logins);
+
+        // orderBy('id_login','desc')->take(1); 
+
+    
+        $logins = Login::all()->last();
         echo json_encode($logins);
     }
+
 
 
     /**

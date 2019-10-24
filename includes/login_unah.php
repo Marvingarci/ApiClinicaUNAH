@@ -69,7 +69,7 @@ function accesoAlumno($usuario, $clave){
         unlink('../includes/cookies/'.$usuario.'.txt'); // borrar el archivo de las cookies
 	}
 
-	//el que lo lea se la come
+
 }
 
 ?>
