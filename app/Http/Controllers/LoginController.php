@@ -46,8 +46,7 @@ class LoginController extends Controller
         $datos_login->nombre = $alumno['nombre'];
         $datos_login->carrera = $alumno['carrera'];
         $datos_login->centro = $alumno['centro'];
-        $datos_login->indice_global = $alumno['indiceGlobal'];
-        $datos_login->indice_periodo = $alumno['indicePeriodo'];
+        $datos_login->numero_identidad = $alumno['numero_identidad'];
 
 
         $datos_login->save();
@@ -79,5 +78,4 @@ class LoginController extends Controller
         //
     }
 
-    //el que lo lea se la come;
 }
