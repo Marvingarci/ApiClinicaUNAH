@@ -19,8 +19,7 @@ class CreateLoginsTable extends Migration
             $table->string('nombre');
             $table->string('carrera');
             $table->string('centro');
-            $table->string('indice_global');
-            $table->string('indice_periodo');
+            $table->string('numero_identidad');
             $table->timestamps();
         });
     }
