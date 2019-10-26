@@ -40,8 +40,9 @@ function accesoAlumno($usuario, $clave){
 	$info = array();
 
 	if( $html->getElementById("MainContent_Label1") != null){
-		//$info['correoInstitucional']= trim($html->getElementById("MainContent_Label1")->parent()->find('label > b', 0)->innertext );
-
+		//$info['correoInstitucional']= trim($html->getElementById("MainContent_Label1")->parent()->find('label > b', 0)->innertext);
+		$info['numero_identidad']= substr(trim($html->find('div.main > div > div >label',0)->innertext),44,13);
+		
 	    curl_setopt($ch, CURLOPT_URL, $HISTORIAL_ACADEMICO);
 	    curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 	    $result = curl_exec($ch);
@@ -60,7 +61,8 @@ function accesoAlumno($usuario, $clave){
 	    $info["carrera"] = $CAR2;
 	    $info["centro"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel10")->innertext);
 	    $info["indiceGlobal"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel11")->innertext);
-	    $info["indicePeriodo"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel12")->innertext);
+		$info["indicePeriodo"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel12")->innertext);
+		
 	    curl_close($ch);
         unlink('../includes/cookies/'.$usuario.'.txt'); // borrar el archivo de las cookies
 	    return $info;

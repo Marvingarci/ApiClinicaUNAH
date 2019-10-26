@@ -37,27 +37,22 @@ class PacienteController extends Controller
     {
 
         //Procesar la entrada (validadiones)
-        /*$validatedData = $request->validate([
-            'primerApellido' => 'required',
-            'segundoApellido' => 'nullable',
-            'primerNombre' => 'required',
-            'segundoNombre' => 'nullable',
-            'numeroCuenta' => 'required',
-            'numeroIdentidad' => 'required',
-            'direccion' => 'required',
-            'carrera' => 'required',
-            'lugarProcedencia' => 'required',
-            'fechaNacimiento' => 'required',
-            'sexo' => 'required',
-            'estadoCivil' => 'required',
-            'numeroTelefono' => 'required',
-            'emergenciaTelefono' => 'required',
-            'seguroMedico' => 'required',
+        // $validatedData = $request->validate([
+        //     'numeroIdentidad' => 'required|max:13|min:13',
+        //     'direccion' => 'required',
+        //     'carrera' => 'required',
+        //     'lugarProcedencia' => 'required|string|min:5|max:30',
+        //     'fechaNacimiento' => 'required',
+        //     'sexo' => 'required',
+        //     'estadoCivil' => 'required',
+        //     'numeroTelefono' => 'required|max:8|min:8',
+        //     'emergenciaTelefono' => 'required|max:8|min:8',
+        //     'seguroMedico' => 'required',
 
 
-        ],[
-            '.required' => 'El campo es obligatorio'
-        ]);*/
+        // ],[
+        //     '.required' => 'El campo es obligatorio'
+        // ]);
 
         $paciente = new Paciente();
         $paciente->id_paciente = $request->input('id_paciente'); 

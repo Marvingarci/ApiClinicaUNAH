@@ -28,6 +28,16 @@ class LoginAdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $validatedData = $request->validate([
+        //     'usuario_admin'=>'required|min:6|max:15',
+        //     'contrasenia_admin'=>'required|min:6|max:15',
+        //     'nombre_admin'=>'required|string|max:30|min:10',
+        //     'identidad_admin'=>'required|numeric',
+        //     'especialidad_admin'=>'required',
+        //             ]);
+       
+
         $login_admin = new LoginAdmin();
         $login_admin->usuario_admin = $request->input(['usuario_admin']);
         $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);

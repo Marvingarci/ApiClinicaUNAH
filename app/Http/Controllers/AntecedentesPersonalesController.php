@@ -27,6 +27,22 @@ class AntecedentesPersonalesController extends Controller
      */
     public function store(Request $request)
     {
+        // $validatedData = $request->validate([
+        //     'diabetes' => 'required',
+        //     'tb_pulmonar' => 'required',
+        //     'its' => 'required',
+        //     'desnutricion' => 'required',
+        //     'enfermedades_mentales' => 'required',
+        //     'convulsiones' => 'required',
+        //     'alergias' => 'required',
+        //     'cancer' => 'required',
+        //     'hospitalarias_quirurgicas' => 'required',
+        //     'traumaticos' => 'required',
+        // ],[
+        //     '.required' => 'El campo es obligatorio'
+        // ]);
+
+
         $antecedente_personales = new antecedentesPersonales();
         $antecedente_personales->diabetes = $request->input(['diabetes']);
         $antecedente_personales->observacion_diabetes = $request->input(['observacion_diabetes']);

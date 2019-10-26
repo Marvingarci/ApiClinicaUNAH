@@ -26,6 +26,21 @@ class AntecedentesFamiliaresController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'diabetes' => 'required',
+            'tb_pulmonar' => 'required',
+            'desnutricion' => 'required',
+            'enfermedades_mentales' => 'required',
+            'convulsiones' => 'required',
+            'alcoholismo_sustancias_psicoactivas' => 'required',
+            'alergias' => 'required',
+            'cancer' => 'required',
+            'hipertension_arterial' => 'required',
+        ],[
+            '.required' => 'El campo es obligatorio'
+        ]);
+        
         $antecedente_familiar = new antecedentesFamiliares();
         $antecedente_familiar->diabetes = $request->input(['diabetes']);
         $antecedente_familiar->observacion_diabetes = $request->input(['observacion_diabetes']);
