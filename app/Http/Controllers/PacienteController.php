@@ -15,6 +15,13 @@ class PacienteController extends Controller
     public function index()
     {
         $pacientes = Paciente::get();
+        //convertir los id a numero
+        foreach ($pacientes as $paciente) {
+        $numero = (int)$paciente->id_paciente;
+        $paciente->id_paciente=$numero;
+        }
+        
+
         echo json_encode($pacientes);
 
     }
