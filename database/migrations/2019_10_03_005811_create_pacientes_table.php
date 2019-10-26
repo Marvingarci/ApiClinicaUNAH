@@ -35,10 +35,7 @@ class CreatePacientesTable extends Migration
             $table->string('temperatura')->nullable();
             $table->string('presion')->nullable();
             $table->string('pulso')->nullable();
-            $table->boolean('estudiante')->nullable();
-            $table->boolean('empleado')->nullable();
-            $table->boolean('visitante')->nullable();
-            $table->boolean('prosene')->nullable();
+            $table->char('categoria');
             $table->timestamps();
 
             $table->primary('id_paciente');
