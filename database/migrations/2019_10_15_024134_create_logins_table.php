@@ -20,6 +20,8 @@ class CreateLoginsTable extends Migration
             $table->string('carrera');
             $table->string('centro');
             $table->string('numero_identidad');
+            $table->longText('imagen', 43191);
+
             $table->timestamps();
         });
     }
