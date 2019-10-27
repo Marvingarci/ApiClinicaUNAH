@@ -71,7 +71,11 @@ function accesoAlumno($usuario, $clave){
 		$html = str_get_html($result);
 
 		$img = $html->getElementById("MainContent_ImgEstudiante");
-		$info["imagen"] = $img->src;
+		if($img != null){
+			$info["imagen"] = $img->src;
+		}else{
+			$info["imagen"] = null;
+		}
 		
 	    curl_close($ch);
         unlink('../includes/cookies/'.$usuario.'.txt'); // borrar el archivo de las cookies
