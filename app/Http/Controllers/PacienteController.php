@@ -50,6 +50,7 @@ class PacienteController extends Controller
         $paciente->nombre_completo = $request->input('nombre_completo');
         $paciente->numero_cuenta = $request->input('numero_cuenta');
         $paciente->numero_identidad = $request->input('numero_identidad');
+        $paciente->imagen = $request->input('imagen'); 
         $paciente->direccion = $request->input('direccion');
         $paciente->carrera = $request->input('carrera');
         $paciente->lugar_procedencia = $request->input('lugar_procedencia');
