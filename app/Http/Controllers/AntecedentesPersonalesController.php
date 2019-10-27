@@ -38,8 +38,6 @@ class AntecedentesPersonalesController extends Controller
         //     'cancer' => 'required',
         //     'hospitalarias_quirurgicas' => 'required',
         //     'traumaticos' => 'required',
-        // ],[
-        //     '.required' => 'El campo es obligatorio'
         // ]);
 
 
