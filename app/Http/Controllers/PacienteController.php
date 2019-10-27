@@ -41,7 +41,7 @@ class PacienteController extends Controller
         //     'numeroIdentidad' => 'required|max:13|min:13',
         //     'direccion' => 'required',
         //     'carrera' => 'required',
-        //     'lugarProcedencia' => 'required|string|min:5|max:30',
+        //     'lugarProcedencia' => 'required|string',
         //     'fechaNacimiento' => 'required',
         //     'sexo' => 'required',
         //     'estadoCivil' => 'required',
@@ -50,8 +50,6 @@ class PacienteController extends Controller
         //     'seguroMedico' => 'required',
 
 
-        // ],[
-        //     '.required' => 'El campo es obligatorio'
         // ]);
 
         $paciente = new Paciente();
@@ -59,6 +57,7 @@ class PacienteController extends Controller
         $paciente->nombre_completo = $request->input('nombre_completo');
         $paciente->numero_cuenta = $request->input('numero_cuenta');
         $paciente->numero_identidad = $request->input('numero_identidad');
+        $paciente->imagen = $request->input('imagen'); 
         $paciente->direccion = $request->input('direccion');
         $paciente->carrera = $request->input('carrera');
         $paciente->lugar_procedencia = $request->input('lugar_procedencia');

@@ -8,6 +8,8 @@ function accesoAlumno($usuario, $clave){
     $PREGRA_ESTU_LOGIN = "https://registro.unah.edu.hn/pregra_estu_login.aspx";
     $PREGA_ESTU_MAIN = "https://registro.unah.edu.hn/prega_estu_main.aspx";
 	$HISTORIAL_ACADEMICO = "https://registro.unah.edu.hn/historial_academico.aspx";
+	$FORMA03 = "https://registro.unah.edu.hn/pregra_form03_matricula.aspx";
+
 
 	$data = http_build_query(array(
 		'action'=> $PREGRA_ESTU_LOGIN,
@@ -42,7 +44,7 @@ function accesoAlumno($usuario, $clave){
 	if( $html->getElementById("MainContent_Label1") != null){
 		//$info['correoInstitucional']= trim($html->getElementById("MainContent_Label1")->parent()->find('label > b', 0)->innertext);
 		$info['numero_identidad']= substr(trim($html->find('div.main > div > div >label',0)->innertext),44,13);
-		
+
 	    curl_setopt($ch, CURLOPT_URL, $HISTORIAL_ACADEMICO);
 	    curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 	    $result = curl_exec($ch);
@@ -62,6 +64,14 @@ function accesoAlumno($usuario, $clave){
 	    $info["centro"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel10")->innertext);
 	    $info["indiceGlobal"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel11")->innertext);
 		$info["indicePeriodo"] = trim($html->getElementById("MainContent_ASPxRoundPanel2_ASPxLabel12")->innertext);
+
+		curl_setopt($ch, CURLOPT_URL, $FORMA03);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+	    $result = curl_exec($ch);
+		$html = str_get_html($result);
+
+		$img = $html->getElementById("MainContent_ImgEstudiante");
+		$info["imagen"] = $img->src;
 		
 	    curl_close($ch);
         unlink('../includes/cookies/'.$usuario.'.txt'); // borrar el archivo de las cookies
