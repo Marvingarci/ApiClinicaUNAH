@@ -20,7 +20,7 @@ class CreatePacientesTable extends Migration
             $table->string('nombre_completo');
             $table->string('numero_cuenta')->unique();
             $table->string('numero_identidad')->unique();
-            $table->longText('imagen');
+            $table->longText('imagen')->nullable();
             $table->string('lugar_procedencia');
             $table->string('direccion');
             $table->string('carrera');
