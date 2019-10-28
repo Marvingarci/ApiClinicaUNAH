@@ -15,6 +15,13 @@ class PacienteController extends Controller
     public function index()
     {
         $pacientes = Paciente::get();
+        //convertir los id a numero
+        foreach ($pacientes as $paciente) {
+        $numero = (int)$paciente->id_paciente;
+        $paciente->id_paciente=$numero;
+        }
+        
+
         echo json_encode($pacientes);
 
     }
@@ -34,7 +41,7 @@ class PacienteController extends Controller
         //     'numeroIdentidad' => 'required|max:13|min:13',
         //     'direccion' => 'required',
         //     'carrera' => 'required',
-        //     'lugarProcedencia' => 'required|string|min:5|max:30',
+        //     'lugarProcedencia' => 'required|string',
         //     'fechaNacimiento' => 'required',
         //     'sexo' => 'required',
         //     'estadoCivil' => 'required',
@@ -43,8 +50,6 @@ class PacienteController extends Controller
         //     'seguroMedico' => 'required',
 
 
-        // ],[
-        //     '.required' => 'El campo es obligatorio'
         // ]);
 
         $paciente = new Paciente();

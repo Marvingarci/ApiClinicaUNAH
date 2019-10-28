@@ -20,7 +20,7 @@ class CreatePacientesTable extends Migration
             $table->string('nombre_completo');
             $table->string('numero_cuenta')->unique();
             $table->string('numero_identidad')->unique();
-            $table->longText('imagen');
+            $table->longText('imagen')->nullable();
             $table->string('lugar_procedencia');
             $table->string('direccion');
             $table->string('carrera');
@@ -36,10 +36,7 @@ class CreatePacientesTable extends Migration
             $table->string('temperatura')->nullable();
             $table->string('presion')->nullable();
             $table->string('pulso')->nullable();
-            $table->boolean('estudiante')->nullable();
-            $table->boolean('empleado')->nullable();
-            $table->boolean('visitante')->nullable();
-            $table->boolean('prosene')->nullable();
+            $table->char('categoria')->default('E');
             $table->timestamps();
 
             $table->primary('id_paciente');
