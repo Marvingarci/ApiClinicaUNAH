@@ -36,6 +36,10 @@ Route::resource('login','LoginController');
 Route::resource('login_admin','LoginAdminController');
 
 
+//rutas alberto
+Route::resource('inventarios','InventarioController');
+
+
 
 
 
