@@ -18,7 +18,7 @@ class CreatePacientesTable extends Migration
             $table->string('numero_paciente')->unique()->nullable();
             $table->string('contrasenia')->nullable();
             $table->string('nombre_completo');
-            $table->string('numero_cuenta')->unique();
+            $table->string('numero_cuenta')->unique()->nullable();
             $table->string('numero_identidad')->unique();
             $table->longText('imagen')->nullable();
             $table->string('lugar_procedencia');
