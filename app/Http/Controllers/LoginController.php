@@ -20,8 +20,16 @@ class LoginController extends Controller
 
         // orderBy('id_login','desc')->take(1); 
 
-    
+        
         $logins = Login::all()->last();
+        if($logins==null){
+            $logins= new Login();
+            $logins->cuenta='';
+            $logins->nombre='';
+            $logins->carrera='';
+            $logins->centro='';
+            $logins->numero_identidad='';
+        }
         echo json_encode($logins);
     }
 
