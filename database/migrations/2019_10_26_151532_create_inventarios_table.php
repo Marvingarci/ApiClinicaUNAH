@@ -14,9 +14,11 @@ class CreateInventariosTable extends Migration
     public function up()
     {
         Schema::create('inventarios', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre');
+            $table->bigIncrements('id_inventario');
             $table->integer('cantidad');
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('fecha_vencimiento');
             $table->timestamps();
         });
     }
