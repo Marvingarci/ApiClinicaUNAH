@@ -36,7 +36,8 @@ class CreatePacientesTable extends Migration
             $table->string('temperatura')->nullable();
             $table->string('presion')->nullable();
             $table->string('pulso')->nullable();
-            $table->char('categoria')->default('E');
+            $table->char('categoria');
+            // $table->char('categoria')->default('E');
             $table->timestamps();
 
             $table->primary('id_paciente');
