@@ -67,6 +67,8 @@ class PacienteController extends Controller
         $paciente->numero_telefono = $request->input('numero_telefono');
         $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
+        $paciente->categoria = $request->input('categoria');
+        
         $paciente->save();
 
         
