@@ -96,14 +96,47 @@ class PacienteController extends Controller
      * @param  \App\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $pacienteId)
+    public function update(Request $request, $id_paciente)
     {
-        $nuevaContra = $request->input('contrasenia');
 
-    DB::table('pacientes')
-    ->where('id_paciente', $pacienteId)
-    ->update(['contrasenia' => $nuevaContra]);
-        //
+        
+        if($request->input('contrasenia')!= null){
+            $nuevaContra = $request->input('contrasenia');
+
+            DB::table('pacientes')
+            ->where('id_paciente', $id_paciente)
+            ->update(['contrasenia' => $nuevaContra]);
+
+        }
+
+        if($request->input('nombre_completo')!=null){
+            $nombre_completo = $request->input('nombre_completo');
+            $numero_cuenta = $request->input('numero_cuenta');
+            $numero_identidad = $request->input('numero_identidad');
+            $carrera = $request->input('carrera');
+            $sexo = $request->input('sexo');
+            $numero_telefono = $request->input('numero_telefono');
+
+            DB::table('pacientes')
+            ->where('id_paciente', $id_paciente)
+            ->update([
+                'nombre_completo'=> $nombre_completo,
+                'numero_cuenta' => $numero_cuenta,
+                'numero_identidad' => $numero_identidad,            
+                'carrera' => $carrera,
+                'sexo' => $sexo,
+                'numero_telefono' => $numero_telefono,
+            ]);
+        }
+
+            
+                
+            
+            
+            
+        
+            
+       
     }
 
 
