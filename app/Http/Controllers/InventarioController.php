@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Inventario;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
 
 class InventarioController extends Controller
 {
@@ -45,16 +46,25 @@ class InventarioController extends Controller
      * @param  \App\Inventario  $inventario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $inventario_id)
+    public function update(Request $request, $id_inventario)
     {
-        $inventario = Inventario::find($inventario_id); 
-        $inventario->cantidad = $request->input('cantidad');
-        $inventario->nombre = $request->input('nombre');
-        $inventario->descripcion = $request->input('descripcion');
-        $inventario->fecha_vencimiento = $request->input('fecha_vencimiento');
-        $inventario->save();
+        
+       
+        $cantidad = $request->input('cantidad');
+        $nombre = $request->input('nombre');
+        $descripcion = $request->input('descripcion');
+        //$fecha_vencimiento = $request->input('fecha_vencimiento');
+       
+        
 
-        echo json_encode($inventario);
+        DB::table('inventarios')
+        ->where('id_inventario', $id_inventario)
+        ->update([
+            'cantidad'=> $cantidad,
+            'nombre' => $nombre,
+            'descripcion' => $descripcion,            
+            
+        ]);
     }
 
     /**
