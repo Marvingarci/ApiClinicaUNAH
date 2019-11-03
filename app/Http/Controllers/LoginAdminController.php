@@ -73,22 +73,54 @@ class LoginAdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LoginAdmin  $loginAdmin
+     * @param  \App\LoginAdmin  $loginAdmin_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoginAdmin $loginAdmin)
+    public function update(Request $request, $loginAdmin_id)
     {
-        //
+        $login_admin = LoginAdmin::find($loginAdmin_id);
+        $login_admin->usuario_admin = $request->input(['usuario_admin']);
+        $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
+        $login_admin->nombre_admin= $request->input(['nombre_admin']);
+        $login_admin->identidad_admin = $request->input(['identidad_admin']);
+        $login_admin->especialidad_admin = $request->input(['especialidad_admin']);
+        $login_admin->save();
+        // if($request->input('contraseniaC')!= null){
+        //     $nuevaContra = $request->input('contraseniaC');
+        //     DB::table('login_admins')
+        //     ->where('id', $id)
+        //     ->update(['contrasenia_admin' => $nuevaContra]);
+        // }
+
+        
+        // if($request->input('usuario')!=null){
+        //     $usuario = $request->input('usuario');
+        //     $contraseniaC = $request->input('contraseniaC');
+        //     $nombre = $request->input('nombre');
+        //     $identidad = $request->input('identidad');
+        //     $especialidad = $request->input('especialidad');
+
+        //     DB::table('login_admins')
+        //     ->where('id', $id)
+        //     ->update([
+        //         'usuario_admin'=> $usuario,
+        //         'contrasenia_admin' =>  $contraseniaC,
+        //         'nombre_admin' => $nombre,            
+        //         'identidad_admin' => $identidad ,
+        //         'especialidad_admin' => $especialidad,
+        //     ]);
+        // }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\LoginAdmin  $loginAdmin
+     * @param  \App\LoginAdmin  $loginAdmin_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoginAdmin $loginAdmin)
-    {
-        //
+    public function destroy( $loginAdmin_id)
+        {
+            $login_admin = LoginAdmin::find($loginAdmin_id);
+            $login_admin->delete();
     }
 }
