@@ -36,6 +36,7 @@ Route::resource('login','LoginController');
 
 //rutas melvin
 Route::resource('login_admin','LoginAdminController');
+Route::resource('medicos','MedicosController');
 
 
 //rutas alberto
