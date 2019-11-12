@@ -112,22 +112,45 @@ class PacienteController extends Controller
         }
 
         if($request->input('nombre_completo')!=null){
+
             $nombre_completo = $request->input('nombre_completo');
             $numero_cuenta = $request->input('numero_cuenta');
             $numero_identidad = $request->input('numero_identidad');
+            $imagen = $request->input('imagen'); 
+            $direccion = $request->input('direccion');
             $carrera = $request->input('carrera');
+            $lugar_procedencia = $request->input('lugar_procedencia');
+            $fecha_nacimiento = $request->input('fecha_nacimiento');
             $sexo = $request->input('sexo');
+            $estado_civil = $request->input('estado_civil');
             $numero_telefono = $request->input('numero_telefono');
+            $emergencia_telefono = $request->input('emergencia_telefono');
+            $seguro_medico = $request->input('seguro_medico');
+            $categoria = $request->input('categoria');
+            $contrasenia = $request->input('contrasenia');
+            
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
             ->update([
+
                 'nombre_completo'=> $nombre_completo,
                 'numero_cuenta' => $numero_cuenta,
-                'numero_identidad' => $numero_identidad,            
+                'numero_identidad' => $numero_identidad, 
+                'imagen' => $imagen,
+                'direccion' => $direccion,                           
                 'carrera' => $carrera,
+                'lugar_procedencia' => $lugar_procedencia,
+                'fecha_nacimiento' => $fecha_nacimiento, 
                 'sexo' => $sexo,
+                'estado_civil' => $estado_civil,
                 'numero_telefono' => $numero_telefono,
+                'emergencia_telefono' => $emergencia_telefono,
+                'seguro_medico' => $seguro_medico,
+                'categoria' => $categoria,
+                'contrasenia' => $contrasenia
+
+
             ]);
         }
 
