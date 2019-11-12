@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\habitosToxicologicosPersonales;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class HabitosToxicologicosPersonalesController extends Controller
 {
@@ -52,9 +54,36 @@ class HabitosToxicologicosPersonalesController extends Controller
      * @param  \App\habitosToxicologicosPersonales  $habitosToxicologicosPersonales
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, habitosToxicologicosPersonales $habitosToxicologicosPersonales)
+    public function update(Request $request, $id_paciente)
     {
-        //
+        $alcohol = $request->input(['alcohol']);
+        $observacion_alcohol = $request->input(['observacion_alcohol']);
+        $tabaquismo = $request->input(['tabaquismo']);
+        $observacion_tabaquismo = $request->input(['observacion_tabaquismo']);
+        $marihuana = $request->input(['marihuana']);
+        $observacion_marihuana = $request->input(['observacion_marihuana']);
+        $cocaina = $request->input(['cocaina']);
+        $observacion_cocaina = $request->input(['observacion_cocaina']);
+        $otros = $request->input(['otros']);
+        $observacion_otros = $request->input(['observacion_otros']);
+
+        DB::table('habitos_toxicologicos_personales')
+            ->where('id_paciente', $id_paciente)
+            ->update([
+
+                'alcohol'=> $alcohol,
+                'observacion_alcohol' => $observacion_alcohol,
+                'tabaquismo' => $tabaquismo, 
+                'observacion_tabaquismo' => $observacion_tabaquismo,
+                'marihuana' => $marihuana,                           
+                'observacion_marihuana' => $observacion_marihuana,
+                'cocaina' => $cocaina,
+                'observacion_cocaina' => $observacion_cocaina, 
+                'otros' => $otros,
+                'observacion_otros' => $observacion_otros,
+                
+
+            ]);
     }
 
     /**
