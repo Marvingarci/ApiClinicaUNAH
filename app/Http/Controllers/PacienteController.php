@@ -14,12 +14,27 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::get();
+        // $pacientes = Paciente::get();
+
+       
+        $pacientes = DB::table('pacientes')
+            ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
+            
+            ->select(
+                'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
+                'imagen', 'direccion', 'carrera', 'lugar_procedencia',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'emergencia_telefono', 'seguro_medico', 'categoria', 'contrasenia'
+                )
+            ->get();
+
+
+
         //convertir los id a numero
-        foreach ($pacientes as $paciente) {
-        $numero = (int)$paciente->id_paciente;
-        $paciente->id_paciente=$numero;
-        }
+        // foreach ($pacientes as $paciente) {
+        // $numero = (int)$paciente->id_paciente;
+        // $paciente->id_paciente=$numero;
+        // }
         
 
         echo json_encode($pacientes);
@@ -36,21 +51,8 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
 
-        //Procesar la entrada (validadiones)
-        // $validatedData = $request->validate([
-        //     'numeroIdentidad' => 'required|max:13|min:13',
-        //     'direccion' => 'required',
-        //     'carrera' => 'required',
-        //     'lugarProcedencia' => 'required|string',
-        //     'fechaNacimiento' => 'required',
-        //     'sexo' => 'required',
-        //     'estadoCivil' => 'required',
-        //     'numeroTelefono' => 'required|max:8|min:8',
-        //     'emergenciaTelefono' => 'required|max:8|min:8',
-        //     'seguroMedico' => 'required',
 
-
-        // ]);
+        // $estado_civil = $request->input('estado_civil');
 
         $paciente = new Paciente();
         $paciente->id_paciente = $request->input('id_paciente'); 
@@ -64,6 +66,23 @@ class PacienteController extends Controller
         $paciente->fecha_nacimiento = $request->input('fecha_nacimiento');
         $paciente->sexo = $request->input('sexo');
         $paciente->estado_civil = $request->input('estado_civil');
+
+
+        // $string_estado_civil = 
+        // DB::table('estados_civiles')
+        // ->select('estado_civil')
+        // ->where('id_estado_civil', $estado_civil)->get();
+
+        // $paciente->estado_civil = $string_estado_civil;
+
+
+        // $string_estado_civil = DB::table('estados_civiles')
+        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        //     ->join('orders', 'users.id', '=', 'orders.user_id')
+        //     ->select('users.*', 'contacts.phone', 'orders.price')
+        //     ->get();
+
+        
         $paciente->numero_telefono = $request->input('numero_telefono');
         $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
@@ -112,22 +131,45 @@ class PacienteController extends Controller
         }
 
         if($request->input('nombre_completo')!=null){
+
             $nombre_completo = $request->input('nombre_completo');
             $numero_cuenta = $request->input('numero_cuenta');
             $numero_identidad = $request->input('numero_identidad');
+            $imagen = $request->input('imagen'); 
+            $direccion = $request->input('direccion');
             $carrera = $request->input('carrera');
+            $lugar_procedencia = $request->input('lugar_procedencia');
+            $fecha_nacimiento = $request->input('fecha_nacimiento');
             $sexo = $request->input('sexo');
+            $estado_civil = $request->input('estado_civil');
             $numero_telefono = $request->input('numero_telefono');
+            $emergencia_telefono = $request->input('emergencia_telefono');
+            $seguro_medico = $request->input('seguro_medico');
+            $categoria = $request->input('categoria');
+            $contrasenia = $request->input('contrasenia');
+            
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
             ->update([
+
                 'nombre_completo'=> $nombre_completo,
                 'numero_cuenta' => $numero_cuenta,
-                'numero_identidad' => $numero_identidad,            
+                'numero_identidad' => $numero_identidad, 
+                'imagen' => $imagen,
+                'direccion' => $direccion,                           
                 'carrera' => $carrera,
+                'lugar_procedencia' => $lugar_procedencia,
+                'fecha_nacimiento' => $fecha_nacimiento, 
                 'sexo' => $sexo,
+                'estado_civil' => $estado_civil,
                 'numero_telefono' => $numero_telefono,
+                'emergencia_telefono' => $emergencia_telefono,
+                'seguro_medico' => $seguro_medico,
+                'categoria' => $categoria,
+                'contrasenia' => $contrasenia
+
+
             ]);
         }
 
