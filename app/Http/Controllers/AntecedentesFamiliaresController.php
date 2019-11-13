@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\antecedentesFamiliares;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class AntecedentesFamiliaresController extends Controller
 {
@@ -80,9 +82,67 @@ class AntecedentesFamiliaresController extends Controller
      * @param  \App\antecedentesFamiliares  $antecedentesFamiliares
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, antecedentesFamiliares $antecedentesFamiliares)
+    public function update(Request $request, $id_paciente)
     {
 
+        $diabetes = $request->input(['diabetes']);
+        $parentesco_diabetes = $request->input(['parentesco_diabetes']);
+        $tb_pulmonar = $request->input(['tb_pulmonar']);
+        $parentesco_tb_pulmonar = $request->input(['parentesco_tb_pulmonar']);
+        $desnutricion = $request->input(['desnutricion']);
+        $parentesco_desnutricion = $request->input(['parentesco_desnutricion']);
+        $tipo_desnutricion = $request->input(['tipo_desnutricion']);
+        $enfermedades_mentales = $request->input(['enfermedades_mentales']);
+        $parentesco_enfermedades_mentales = $request->input(['parentesco_enfermedades_mentales']);
+        $tipo_enfermedad_mental = $request->input(['tipo_enfermedad_mental']);
+        $convulsiones = $request->input(['convulsiones']);
+        $parentesco_convulsiones = $request->input(['parentesco_convulsiones']);
+        $alcoholismo_sustancias_psicoactivas = $request->input(['alcoholismo_sustancias_psicoactivas']);
+        $parentesco_alcoholismo_sustancias_psicoactivas = $request->input(['parentesco_alcoholismo_sustancias_psicoactivas']);
+        $alergias = $request->input(['alergias']);
+        $parentesco_alergias = $request->input(['parentesco_alergias']);
+        $tipo_alergia = $request->input(['tipo_alergia']);
+        $cancer = $request->input(['cancer']);
+        $parentesco_cancer = $request->input(['parentesco_cancer']);
+        $tipo_cancer = $request->input(['tipo_cancer']);
+        $hipertension_arterial = $request->input(['hipertension_arterial']);
+        $parentesco_hipertension_arterial = $request->input(['parentesco_hipertension_arterial']);        
+        $otros = $request->input(['otros']);
+        $parentesco_otros = $request->input(['parentesco_otros']);
+
+            
+
+            DB::table('antecedentes_familiares')
+            ->where('id_paciente', $id_paciente)
+            ->update([
+
+                'diabetes'=> $diabetes,
+                'parentesco_diabetes' => $parentesco_diabetes,
+                'tb_pulmonar' => $tb_pulmonar, 
+                'parentesco_tb_pulmonar' => $parentesco_tb_pulmonar,
+                'desnutricion' => $desnutricion,                           
+                'parentesco_desnutricion' => $parentesco_desnutricion,
+                'tipo_desnutricion' => $tipo_desnutricion,
+                'enfermedades_mentales' => $enfermedades_mentales, 
+                'parentesco_enfermedades_mentales' => $parentesco_enfermedades_mentales,
+                'tipo_enfermedad_mental' => $tipo_enfermedad_mental,
+                'convulsiones' => $convulsiones,
+                'parentesco_convulsiones' => $parentesco_convulsiones,
+                'alcoholismo_sustancias_psicoactivas' => $alcoholismo_sustancias_psicoactivas,
+                'parentesco_alcoholismo_sustancias_psicoactivas' => $parentesco_alcoholismo_sustancias_psicoactivas,
+                'alergias' => $alergias,
+                'parentesco_alergias' => $parentesco_alergias,
+                'tipo_alergia' => $tipo_alergia,
+                'cancer' => $cancer,
+                'parentesco_cancer' => $parentesco_cancer,
+                'tipo_cancer' => $tipo_cancer,
+                'hipertension_arterial' => $hipertension_arterial,
+                'parentesco_hipertension_arterial' => $parentesco_hipertension_arterial,
+                'otros' => $otros,
+                'parentesco_otros' => $parentesco_otros,
+
+
+            ]);
     }
 
     /**

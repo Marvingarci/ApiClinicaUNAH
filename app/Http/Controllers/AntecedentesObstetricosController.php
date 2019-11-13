@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\antecedentesObstetricos;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class AntecedentesObstetricosController extends Controller
 {
@@ -51,9 +53,33 @@ class AntecedentesObstetricosController extends Controller
      * @param  \App\antecedentesObstetricos  $antecedentesObstetricos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, antecedentesObstetricos $antecedentesObstetricos)
+    public function update(Request $request, $id_paciente)
     {
-        //
+        $partos = $request->input(['partos']);
+        $abortos = $request->input(['abortos']);
+        $cesarias = $request->input(['cesarias']);
+        $hijos_vivos = $request->input(['hijos_vivos']);
+        $hijos_muertos = $request->input(['hijos_muertos']);
+        $fecha_termino_ult_embarazo = $request->input(['fecha_termino_ult_embarazo']);
+        $descripcion_termino_ult_embarazo = $request->input(['descripcion_termino_ult_embarazo']);
+        $observaciones = $request->input(['observaciones']);
+
+        DB::table('antecedentes_obstetricos')
+        ->where('id_paciente', $id_paciente)
+        ->update([
+
+            'partos'=> $partos,
+            'abortos' => $abortos,
+            'cesarias' => $cesarias, 
+            'hijos_vivos' => $hijos_vivos,
+            'hijos_muertos' => $hijos_muertos,
+            'fecha_termino_ult_embarazo' => $fecha_termino_ult_embarazo,
+            'descripcion_termino_ult_embarazo' => $descripcion_termino_ult_embarazo,
+            'observaciones' => $observaciones,
+            
+
+        ]);
+
     }
 
     /**

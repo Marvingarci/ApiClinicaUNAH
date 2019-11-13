@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ActividadSexual;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class ActividadSexualController extends Controller
 {
@@ -45,9 +47,25 @@ class ActividadSexualController extends Controller
      * @param  \App\ActividadSexual  $actividadSexual
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ActividadSexual $actividadSexual)
+    public function update(Request $request, $id_paciente)
     {
-        //
+        $actividad_sexual = $request->input(['actividad_sexual']);
+        $edad_inicio_sexual = $request->input(['edad_inicio_sexual']);
+        $numero_parejas_sexuales = $request->input(['numero_parejas_sexuales']);
+        $practicas_sexuales_riesgo = $request->input(['practicas_sexuales_riesgo']);
+
+
+        DB::table('actividad_sexuals')
+        ->where('id_paciente', $id_paciente)
+        ->update([
+
+            'actividad_sexual'=> $actividad_sexual,
+            'edad_inicio_sexual' => $edad_inicio_sexual,
+            'numero_parejas_sexuales' => $numero_parejas_sexuales, 
+            'practicas_sexuales_riesgo' => $practicas_sexuales_riesgo,
+            
+
+        ]);
     }
 
     /**
