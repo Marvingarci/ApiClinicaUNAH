@@ -27,7 +27,7 @@ class CreatePacientesTable extends Migration
             $table->string('fecha_nacimiento');
             $table->string('sexo');
             $table->integer('estado_civil');
-            $table->string('seguro_medico')->nullable();
+            $table->integer('seguro_medico')->nullable();
             $table->string('numero_telefono')->unique();
             $table->string('emergencia_telefono');
             $table->string('peso')->nullable();
