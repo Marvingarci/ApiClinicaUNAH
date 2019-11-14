@@ -19,12 +19,13 @@ class PacienteController extends Controller
        
         $pacientes = DB::table('pacientes')
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
+            ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguro_medico', 'categoria', 'contrasenia'
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
                 )
             ->get();
 
@@ -66,23 +67,6 @@ class PacienteController extends Controller
         $paciente->fecha_nacimiento = $request->input('fecha_nacimiento');
         $paciente->sexo = $request->input('sexo');
         $paciente->estado_civil = $request->input('estado_civil');
-
-
-        // $string_estado_civil = 
-        // DB::table('estados_civiles')
-        // ->select('estado_civil')
-        // ->where('id_estado_civil', $estado_civil)->get();
-
-        // $paciente->estado_civil = $string_estado_civil;
-
-
-        // $string_estado_civil = DB::table('estados_civiles')
-        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        //     ->join('orders', 'users.id', '=', 'orders.user_id')
-        //     ->select('users.*', 'contacts.phone', 'orders.price')
-        //     ->get();
-
-        
         $paciente->numero_telefono = $request->input('numero_telefono');
         $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
