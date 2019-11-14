@@ -118,6 +118,13 @@ class PacienteController extends Controller
             $carrera = $request->input('carrera');
             $sexo = $request->input('sexo');
             $numero_telefono = $request->input('numero_telefono');
+             $imc = $request->input('imc');
+                $peso = $request->input('peso');
+                 $presion = $request->input('presion');
+                 $talla = $request->input('talla');
+                $temperatura = $request->input('temperatura');
+                 $pulso = $request->input('pulso');   
+
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
@@ -128,6 +135,12 @@ class PacienteController extends Controller
                 'carrera' => $carrera,
                 'sexo' => $sexo,
                 'numero_telefono' => $numero_telefono,
+                'imc' => $imc,
+                'peso' => $peso,
+                'presion' => $presion,
+                'talla' => $talla,
+                'temperatura' => $temperatura,
+                'pulso' => $pulso      
             ]);
         }
 
