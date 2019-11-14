@@ -15,10 +15,12 @@ class CreateInventariosTable extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->bigIncrements('id_inventario');
-            $table->integer('cantidad');
+            $table->integer('unidad');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('fecha_vencimiento')->nullable();
+            $table->integer('presentacion')->nullable();
+            $table->string('observacion')->nullable();
+            //$table->string('fecha_vencimiento')->nullable();
             $table->timestamps();
         });
     }

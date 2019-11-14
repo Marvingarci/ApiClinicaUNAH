@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\antecedentesGinecologicos;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class AntecedentesGinecologicosController extends Controller
 {
@@ -49,9 +51,33 @@ class AntecedentesGinecologicosController extends Controller
      * @param  \App\antecedentesGinecologicos  $antecedentesGinecologicos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, antecedentesGinecologicos $antecedentesGinecologicos)
+    public function update(Request $request, $id_paciente)
     {
-        //
+        $edad_inicio_menstruacion = $request->input(['edad_inicio_menstruacion']);
+        $fum = $request->input(['fum']);
+        $citologia = $request->input(['citologia']);
+        $fecha_citologia = $request->input(['fecha_citologia']);
+        $resultado_citologia = $request->input(['resultado_citologia']);
+        $duracion_ciclo_menstrual = $request->input(['duracion_ciclo_menstrual']);
+        $periocidad_ciclo_menstrual = $request->input(['periocidad_ciclo_menstrual']);
+        $caracteristicas_ciclo_menstrual = $request->input(['caracteristicas_ciclo_menstrual']);
+
+        DB::table('antecedentes_ginecologicos')
+        ->where('id_paciente', $id_paciente)
+        ->update([
+
+            'edad_inicio_menstruacion'=> $edad_inicio_menstruacion,
+            'fum' => $fum,
+            'citologia' => $citologia, 
+            'fecha_citologia' => $fecha_citologia,
+            'resultado_citologia' => $resultado_citologia,
+            'duracion_ciclo_menstrual' => $duracion_ciclo_menstrual,
+            'periocidad_ciclo_menstrual' => $periocidad_ciclo_menstrual,
+            'caracteristicas_ciclo_menstrual' => $caracteristicas_ciclo_menstrual,
+            
+
+        ]);
+
     }
 
     /**

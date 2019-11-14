@@ -29,10 +29,12 @@ class InventarioController extends Controller
     public function store(Request $request)
     {
         $inventario = new Inventario(); 
-        $inventario->cantidad = $request->input('cantidad');
+        $inventario->unidad = $request->input('unidad');
         $inventario->nombre = $request->input('nombre');
         $inventario->descripcion = $request->input('descripcion');
-        $inventario->fecha_vencimiento = $request->input('fecha_vencimiento');
+        $inventario->presentacion = $request->input('presentacion');
+        $inventario->observacion = $request->input('observacion');
+        //$inventario->fecha_vencimiento = $request->input('fecha_vencimiento');
         $inventario->save();
 
         echo json_encode($inventario);
@@ -50,9 +52,11 @@ class InventarioController extends Controller
     {
         
        
-        $cantidad = $request->input('cantidad');
+        $unidad = $request->input('unidad');
         $nombre = $request->input('nombre');
         $descripcion = $request->input('descripcion');
+        $presentacion = $request->input('presentacion');
+        $observacion = $request->input('observacion');
         //$fecha_vencimiento = $request->input('fecha_vencimiento');
        
         
@@ -60,9 +64,11 @@ class InventarioController extends Controller
         DB::table('inventarios')
         ->where('id_inventario', $id_inventario)
         ->update([
-            'cantidad'=> $cantidad,
+            'unidad'=> $unidad,
             'nombre' => $nombre,
-            'descripcion' => $descripcion,            
+            'descripcion' => $descripcion,
+            'presentacion' => $presentacion,
+            'observacion' => $observacion,            
             
         ]);
     }
