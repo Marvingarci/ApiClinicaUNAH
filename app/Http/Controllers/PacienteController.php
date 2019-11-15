@@ -130,10 +130,56 @@ class PacienteController extends Controller
             $lugar_procedencia = $request->input('lugar_procedencia');
             $fecha_nacimiento = $request->input('fecha_nacimiento');
             $sexo = $request->input('sexo');
-            $estado_civil = $request->input('estado_civil');
+            switch ( $estado_civil = $request->input('estado_civil')) {
+                case 'Union Libre':
+                $estado_civil = 2;
+                    break;
+                case 'Soltero':
+                    # code...
+                    $estado_civil =1;
+                    break;
+                case 'Divorciado':
+                    # code...
+                    $estado_civil = 3;
+                    break;
+                case 'Viudo':
+                    # code...
+                    $estado_civil = 4;
+                    break;
+                case 'Casado':
+                    # code...
+                    $estado_civil = 5;
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            switch ($seguro_medico = $request->input('seguro_medico')) {
+                case 'Privado':
+                $seguro_medico = 1;
+                    break;
+                case 'IHSS':
+                    # code...
+                    $seguro_medico =2;
+                    break;
+                case 'No':
+                    # code...
+                    $estado_civil = 3;
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
             $numero_telefono = $request->input('numero_telefono');
+            $imc = $request->input('imc');
+            $peso = $request->input('peso');
+            $presion = $request->input('presion');
+            $talla = $request->input('talla');
+            $temperatura = $request->input('temperatura');
+            $pulso = $request->input('pulso');   
+
             $emergencia_telefono = $request->input('emergencia_telefono');
-            $seguro_medico = $request->input('seguro_medico');
             $categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
             
@@ -153,6 +199,12 @@ class PacienteController extends Controller
                 'sexo' => $sexo,
                 'estado_civil' => $estado_civil,
                 'numero_telefono' => $numero_telefono,
+                'imc' => $imc,
+                'peso' => $peso,
+                'presion' => $presion,
+                'talla' => $talla,
+                'temperatura' => $temperatura,
+                'pulso' => $pulso,
                 'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
