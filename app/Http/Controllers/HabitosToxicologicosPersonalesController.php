@@ -21,6 +21,16 @@ class HabitosToxicologicosPersonalesController extends Controller
     }
 
 
+    public function show($id_paciente){
+
+        $habito_toxicologico_personal = DB::table('habitos_toxicologicos_personales')
+        ->where('id_paciente', $id_paciente)
+        ->first();
+
+        echo json_encode($habito_toxicologico_personal);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

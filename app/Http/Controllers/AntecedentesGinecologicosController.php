@@ -20,7 +20,15 @@ class AntecedentesGinecologicosController extends Controller
         echo json_encode($antecedentes_ginecologicos);
     }
 
+    public function show($id_paciente){
 
+        $antecedente_ginecologico = DB::table('antecedentes_ginecologicos')
+        ->where('id_paciente', $id_paciente)
+        ->first();
+
+        echo json_encode($antecedente_ginecologico);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *

@@ -20,6 +20,13 @@ class AntecedentesFamiliaresController extends Controller
         echo json_encode($antecendentes_familiares);
     }
 
+
+    public function show($id_paciente){
+        $antecedente_familiar = DB::table('antecedentes_familiares')->where('id_paciente', $id_paciente)->first();
+
+        echo json_encode($antecedente_familiar);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

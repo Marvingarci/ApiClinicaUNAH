@@ -21,6 +21,14 @@ class AntecedentesPersonalesController extends Controller
        echo json_encode($antecedentes_personales);
     }
 
+
+    public function show($id_paciente){
+
+        $antecedente_personal = DB::table('antecedentes_personales')
+                                ->where('id_paciente', $id_paciente)->first();
+
+        echo json_encode($antecedente_personal);
+    }
     /**
      * Store a newly created resource in storage.
      *

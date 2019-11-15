@@ -68,6 +68,15 @@ class ActividadSexualController extends Controller
         ]);
     }
 
+    public function show($id_paciente){
+
+        $actividad_sexual = DB::table('actividad_sexuals')
+        ->where('id_paciente', $id_paciente)
+        ->first();
+
+        echo json_encode($actividad_sexual);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
