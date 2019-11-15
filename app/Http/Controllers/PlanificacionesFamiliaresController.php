@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\planificacionesFamiliares;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
+
 
 class PlanificacionesFamiliaresController extends Controller
 {
@@ -38,7 +40,14 @@ class PlanificacionesFamiliaresController extends Controller
 
     }
 
+    public function show($id_paciente){
 
+        $planificacion_familiar = DB::table('planificaciones_familiares')
+        ->where('id_paciente', $id_paciente)
+        ->first();
+
+        echo json_encode($planificacion_familiar);
+    }
 
     /**
      * Update the specified resource in storage.
