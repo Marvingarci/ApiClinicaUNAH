@@ -41,6 +41,15 @@ class PacienteController extends Controller
         echo json_encode($pacientes);
 
     }
+
+
+    public function show($id_paciente)
+    {
+        //Solicitamos al modelo el Paciente con el id solicitado por GET.
+        $paciente = DB::table('pacientes')->where('id_paciente', $id_paciente)->first();
+
+        echo json_encode($paciente);
+    }
     
     
     /**
@@ -89,11 +98,6 @@ class PacienteController extends Controller
     }
 
 
-    public function show($id)
-    {
-        //Solicitamos al modelo el Paciente con el id solicitado por GET.
-        return Paciente::where('id_paciente', $id)->get();
-    }
     /**
      * Update the specified resource in storage.
      *

@@ -56,9 +56,23 @@ class PlanificacionesFamiliaresController extends Controller
      * @param  \App\planificacionesFamiliares  $planificacionesFamiliares
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, planificacionesFamiliares $planificacionesFamiliares)
+    public function update(Request $request, $id_paciente)
     {
-        //
+
+        $planificacion_familiar = $request->input(['planificacion_familiar']);
+        $metodo_planificacion = $request->input(['metodo_planificacion']);
+        $observacion_planificacion = $request->input(['observacion_planificacion']);
+
+
+        DB::table('planificaciones_familiares')
+            ->where('id_paciente', $id_paciente)
+            ->update([
+
+                'planificacion_familiar'=> $planificacion_familiar,
+                'metodo_planificacion' => $metodo_planificacion,
+                'observacion_planificacion' => $observacion_planificacion,
+
+            ]);
     }
 
     /**
