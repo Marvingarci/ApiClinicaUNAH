@@ -90,6 +90,7 @@ class PacienteController extends Controller
         $paciente->sexo = $request->input('sexo');
         $paciente->estado_civil = $request->input('estado_civil');
         $paciente->numero_telefono = $request->input('numero_telefono');
+        $paciente->emergencia_persona = $request->input('emergencia_persona');
         $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->categoria = $request->input('categoria');
@@ -189,8 +190,9 @@ class PacienteController extends Controller
             $presion = $request->input('presion');
             $talla = $request->input('talla');
             $temperatura = $request->input('temperatura');
-            $pulso = $request->input('pulso');   
-
+            $pulso = $request->input('pulso');  
+            $emergencia_persona = $request->input('emergencia_persona'); 
+  
             $emergencia_telefono = $request->input('emergencia_telefono');
             $categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
@@ -217,6 +219,7 @@ class PacienteController extends Controller
                 'talla' => $talla,
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
+                'emergencia_persona' => $emergencia_persona,
                 'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
