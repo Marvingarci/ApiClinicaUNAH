@@ -14,6 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
+        // $pacientes = Paciente::get();
 
        
         $pacientes = DB::table('pacientes')
@@ -28,8 +29,6 @@ class PacienteController extends Controller
                 )
             ->get();
 
-        echo json_encode($pacientes);
-
 
 
         //convertir los id a numero
@@ -39,14 +38,14 @@ class PacienteController extends Controller
         // }
         
 
+        echo json_encode($pacientes);
 
     }
 
 
     public function show($id_paciente)
     {
-        //buscamos al paciente por id y mostramos solo el primer resultado para 
-        //evitar problemas al momento de mandar a traer los datos en angular
+        //Solicitamos al modelo el Paciente con el id solicitado por GET.
         $paciente = DB::table('pacientes')->where('id_paciente', $id_paciente)->first();
 
         echo json_encode($paciente);
