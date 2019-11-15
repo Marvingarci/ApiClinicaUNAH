@@ -18,7 +18,7 @@ class CreateInventariosTable extends Migration
             $table->integer('unidad');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('presentacion')->nullable();
+            $table->integer('presentacion')->nullable();
             $table->string('observacion')->nullable();
             //$table->string('fecha_vencimiento')->nullable();
             $table->timestamps();
