@@ -21,6 +21,15 @@ class AntecedentesObstetricosController extends Controller
         echo json_encode($antecedentes_obstetricos);
     }
 
+    public function show($id_paciente){
+
+        $antecedente_obstetrico = DB::table('antecedentes_obstetricos')
+        ->where('id_paciente', $id_paciente)
+        ->first();
+
+        echo json_encode($antecedente_obstetrico);
+    }
+
 
     /**
      * Store a newly created resource in storage.
