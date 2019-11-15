@@ -160,7 +160,7 @@ class PacienteController extends Controller
                 'presion' => $presion,
                 'talla' => $talla,
                 'temperatura' => $temperatura,
-                'pulso' => $pulso      
+                'pulso' => $pulso,
                 'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
