@@ -47,7 +47,19 @@ class PacienteController extends Controller
     {
         //buscamos al paciente por id y mostramos solo el primer resultado para 
         //evitar problemas al momento de mandar a traer los datos en angular
-        $paciente = DB::table('pacientes')->where('id_paciente', $id_paciente)->first();
+
+        $paciente = DB::table('pacientes')
+            ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
+            ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
+            ->where('id_paciente', $id_paciente)
+            ->select(
+                'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
+                'imagen', 'direccion', 'carrera', 'lugar_procedencia',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
+                )
+                
+            ->first();
 
         echo json_encode($paciente);
     }
