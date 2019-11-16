@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
          $this->call(EstadosCivilesSeeder::class);
          $this->call(SegurosMedicosSeeder::class);
          $this->call(InventariosPresentacionesSeeder::class);
+         $this->call(AntecedentesSeeder::class);
+         $this->call(ParentescosSeeder::class);
          
     }
 }
