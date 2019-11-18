@@ -15,7 +15,18 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $inventarios = Inventario::get();
+
+        $inventarios = DB::table('inventarios')
+            ->join('inventarios_presentaciones', 'inventarios.presentacion', '=', 'inventarios_presentaciones.id_inventario_presentacion')
+            
+            ->select(
+                'id_inventario','unidad','nombre', 'descripcion','presentacion',
+                'observacion'
+                )
+            ->get();
+
+
+        //$inventarios = Inventario::get();
         echo json_encode($inventarios);
     }
 
