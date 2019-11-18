@@ -18,10 +18,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@signup');
+  
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
+});
+
 
 //rutas brasly
 Route::resource('pacientes','PacienteController');
-Route::resource('antecedentes_familiares','AntecedentesFamiliaresController');
+Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
 Route::resource('antecedentes_personales','AntecedentesPersonalesController');
 Route::resource('habitos_toxicologicos_personales','HabitosToxicologicosPersonalesController');
 Route::resource('actividad_sexual','ActividadSexualController');
@@ -29,6 +39,9 @@ Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosControlle
 Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 Route::resource('login','LoginController');
+
+
+
 
 
 

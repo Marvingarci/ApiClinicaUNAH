@@ -14,7 +14,6 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        // $pacientes = Paciente::get();
 
        
         $pacientes = DB::table('pacientes')
@@ -29,6 +28,8 @@ class PacienteController extends Controller
                 )
             ->get();
 
+        echo json_encode($pacientes);
+
 
 
         //convertir los id a numero
@@ -38,15 +39,27 @@ class PacienteController extends Controller
         // }
         
 
-        echo json_encode($pacientes);
 
     }
 
 
     public function show($id_paciente)
     {
-        //Solicitamos al modelo el Paciente con el id solicitado por GET.
-        $paciente = DB::table('pacientes')->where('id_paciente', $id_paciente)->first();
+        //buscamos al paciente por id y mostramos solo el primer resultado para 
+        //evitar problemas al momento de mandar a traer los datos en angular
+
+        $paciente = DB::table('pacientes')
+            ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
+            ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
+            ->where('id_paciente', $id_paciente)
+            ->select(
+                'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
+                'imagen', 'direccion', 'carrera', 'lugar_procedencia',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
+                )
+                
+            ->first();
 
         echo json_encode($paciente);
     }
@@ -77,6 +90,7 @@ class PacienteController extends Controller
         $paciente->sexo = $request->input('sexo');
         $paciente->estado_civil = $request->input('estado_civil');
         $paciente->numero_telefono = $request->input('numero_telefono');
+        $paciente->emergencia_persona = $request->input('emergencia_persona');
         $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->categoria = $request->input('categoria');
@@ -176,8 +190,9 @@ class PacienteController extends Controller
             $presion = $request->input('presion');
             $talla = $request->input('talla');
             $temperatura = $request->input('temperatura');
-            $pulso = $request->input('pulso');   
-
+            $pulso = $request->input('pulso');  
+            $emergencia_persona = $request->input('emergencia_persona'); 
+  
             $emergencia_telefono = $request->input('emergencia_telefono');
             $categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
@@ -204,6 +219,7 @@ class PacienteController extends Controller
                 'talla' => $talla,
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
+                'emergencia_persona' => $emergencia_persona,
                 'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,

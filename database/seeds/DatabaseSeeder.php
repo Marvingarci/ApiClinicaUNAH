@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
          $this->call(EspecialidadesMsSeeder::class);
          $this->call(actividadesSexualesSeeder::class);
          $this->call(MetodosPlanificacionesSeeder::class);
+         $this->call(AntecedentesSeeder::class);
+         $this->call(ParentescosSeeder::class);
          
     }
 }
