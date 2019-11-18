@@ -18,7 +18,7 @@ class CreateActividadSexualsTable extends Migration
             $table->string('actividad_sexual');
             $table->string('edad_inicio_sexual')->nullable();
             $table->string('numero_parejas_sexuales')->nullable();
-            $table->string('practicas_sexuales_riesgo')->nullable();
+            $table->integer('practicas_sexuales_riesgo')->nullable();
             $table->bigInteger('id_paciente')->nullable();
             $table->timestamps();
         });
