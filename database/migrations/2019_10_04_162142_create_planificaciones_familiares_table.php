@@ -16,7 +16,7 @@ class CreatePlanificacionesFamiliaresTable extends Migration
         Schema::create('planificaciones_familiares', function (Blueprint $table) {
             $table->bigIncrements('id_planificacion_familiar');
             $table->string('planificacion_familiar');
-            $table->string('metodo_planificacion')->nullable();
+            $table->integer('metodo_planificacion')->nullable();
             $table->string('observacion_planificacion')->nullable();
             $table->bigInteger('id_paciente')->nullable();
             $table->timestamps();
