@@ -56,7 +56,8 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia', 'emergencia_persona',
+                'peso', 'talla', 'imc', 'temperatura', 'presion','pulso' 
                 )
                 
             ->first();
