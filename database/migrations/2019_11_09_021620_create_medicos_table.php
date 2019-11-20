@@ -19,7 +19,7 @@ class CreateMedicosTable extends Migration
             $table->string('contraseniaM');
             $table->string('nombreM');
             $table->string('identidadM');
-            $table->integer('especialidadM');
+            $table->string('especialidadM');
             $table->timestamps();
         });
     }
