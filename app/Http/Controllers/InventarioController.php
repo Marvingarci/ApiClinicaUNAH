@@ -20,7 +20,7 @@ class InventarioController extends Controller
             ->join('inventarios_presentaciones', 'inventarios.presentacion', '=', 'inventarios_presentaciones.id_inventario_presentacion')
             
             ->select(
-                'id_inventario','unidad','nombre', 'descripcion','presentacion',
+                'id_inventario','unidad','nombre', 'descripcion','inventarios_presentaciones.presentacion',
                 'observacion'
                 )
             ->get();
@@ -48,6 +48,25 @@ class InventarioController extends Controller
         //$inventario->fecha_vencimiento = $request->input('fecha_vencimiento');
         $inventario->save();
 
+        echo json_encode($inventario);
+    }
+
+    public function show($id_inventario)
+    {
+        //buscamos al paciente por id y mostramos solo el primer resultado para 
+        //evitar problemas al momento de mandar a traer los datos en angular
+
+        $inventario = DB::table('inventarios')
+            ->join('inventarios_presentaciones', 'inventarios.presentacion', '=', 'inventarios_presentaciones.id_inventario_presentacion')
+            ->where('id_inventario', $id_inventario)
+            ->select(
+                'id_inventario','unidad','nombre', 'descripcion','inventarios_presentaciones.presentacion',
+               'observacion'
+                )
+            ->first();
+
+
+        //$inventarios = Inventario::get();
         echo json_encode($inventario);
     }
 
