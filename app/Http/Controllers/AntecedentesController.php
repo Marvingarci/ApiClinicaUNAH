@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Antecedentes;
+use Illuminate\Support\facades\DB;
+
 use Illuminate\Http\Request;
 
 class AntecedentesController extends Controller
@@ -14,18 +16,10 @@ class AntecedentesController extends Controller
      */
     public function index()
     {
-        //
+        $antecedentes = Antecedentes::get();
+        echo json_encode($antecedentes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +29,9 @@ class AntecedentesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $antecedente = new Antecedentes();
+        $antecedente->antecedente = $request->input('antecedente');
+        $antecedente->save();
     }
 
     /**
@@ -46,18 +42,19 @@ class AntecedentesController extends Controller
      */
     public function show(Antecedentes $antecedentes)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Antecedentes  $antecedentes
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Antecedentes $antecedentes)
-    {
-        //
+
+    public function obtenerUltimoIdAntecedente(){
+
+        $id = DB::table('antecedentes')->max('id_antecedente');
+        
+        echo json_encode($id);
+
+        // $id= DB::select('SELECT MAX(id_antecedente) as ultimoId FROM antecedentes');
+
+        // echo json_encode($id);
     }
 
     /**
