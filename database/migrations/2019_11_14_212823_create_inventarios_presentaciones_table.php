@@ -15,7 +15,7 @@ class CreateInventariosPresentacionesTable extends Migration
     {
         Schema::create('inventarios_presentaciones', function (Blueprint $table) {
             $table->bigIncrements('id_inventario_presentacion');
-            $table->string('inventario_presentacion');
+            $table->string('presentacion');
             $table->timestamps();
         });
     }
