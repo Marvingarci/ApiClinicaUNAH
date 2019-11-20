@@ -19,7 +19,7 @@ class CreateLoginAdminsTable extends Migration
             $table->string('contrasenia_admin');
             $table->string('nombre_admin');
             $table->string('identidad_admin');
-            $table->integer('especialidad_admin');
+            $table->string('especialidad_admin');
             $table->timestamps();
         });
     }
