@@ -29,7 +29,7 @@ class InventariosPresentacionesSeeder extends Seeder
 
         foreach($inventarios_presentaciones as $inventario_presentacion){
             DB::table('inventarios_presentaciones')->insert([
-                'inventario_presentacion' => $inventario_presentacion,
+                'presentacion' => $inventario_presentacion,
             ]);
         }
     }
