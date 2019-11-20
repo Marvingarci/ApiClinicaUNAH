@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
          $this->call(AntecedentesSeeder::class);
          $this->call(ParentescosSeeder::class);
          $this->call(SexosSeeder::class);
+         $this->call(remitido_a::class);
+         
          
     }
 }

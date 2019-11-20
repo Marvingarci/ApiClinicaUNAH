@@ -77,6 +77,7 @@ Route::resource('inventarios','InventarioController');
 
 //rutas marvin
 Route::get('pacientes/ultimo/si','PacienteController@ultimoID');
+Route::resource('citas','CitasController');
 
 
 
