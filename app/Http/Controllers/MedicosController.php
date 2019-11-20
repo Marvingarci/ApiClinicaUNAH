@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Medicos;
+use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
 
 class MedicosController extends Controller
@@ -14,7 +15,17 @@ class MedicosController extends Controller
      */
     public function index()
     {
-        $medicos = Medicos::get();
+        $medicos = DB::table('medicos')
+        ->join('especialidades', 'medicos.especialidadM', '=', 'especialidades.id_especialidad')
+        
+       ->select(
+          'id','usuarioM', 'contraseniaM','nombreM',
+           'identidadM', 'especialidades.especialidadM'
+           
+           )
+        ->get();
+
+       // $medicos = Medicos::get();
         echo json_encode($medicos);
     }
 
@@ -51,9 +62,19 @@ class MedicosController extends Controller
      * @param  \App\Medicos  $medicos
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicos $medicos)
+    public function show( $id)
     {
-        //
+        $medicos = DB::table('medicos')
+        ->join('especialidades', 'medicos.especialidadM', '=', 'especialidades.id_especialidad')
+        ->where('id', $id)
+        ->select(
+            'id','usuarioM', 'contraseniaM','nombreM',
+             'identidadM', 'especialidades.especialidadM'
+           
+            ) 
+        ->first();
+
+        echo json_encode($medicos);
     }
 
     /**
