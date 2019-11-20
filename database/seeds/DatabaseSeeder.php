@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
          $this->call(EstadosCivilesSeeder::class);
          $this->call(SegurosMedicosSeeder::class);
          $this->call(InventariosPresentacionesSeeder::class);
-         $this->call(EspecialidadesMsSeeder::class);
-         $this->call(actividadesSexualesSeeder::class);
+         $this->call(EspecialidadesSeeder::class);
+         $this->call(PracticasSexualesSeeder::class);
          $this->call(MetodosPlanificacionesSeeder::class);
          $this->call(AntecedentesSeeder::class);
          $this->call(ParentescosSeeder::class);
+         $this->call(SexosSeeder::class);
          
     }
 }
