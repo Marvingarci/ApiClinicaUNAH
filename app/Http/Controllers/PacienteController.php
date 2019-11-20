@@ -19,11 +19,12 @@ class PacienteController extends Controller
         $pacientes = DB::table('pacientes')
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
+            ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
             
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
-                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
                 'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
                 )
             ->get();
@@ -51,11 +52,12 @@ class PacienteController extends Controller
         $paciente = DB::table('pacientes')
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
+            ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
             ->where('id_paciente', $id_paciente)
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
-                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
                 'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
                 )
                 
