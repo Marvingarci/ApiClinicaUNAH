@@ -14,6 +14,7 @@ class LoginAdminController extends Controller
      */
     public function index()
     {
+
         $login_admin = LoginAdmin::get();
         echo json_encode($login_admin);
     }
