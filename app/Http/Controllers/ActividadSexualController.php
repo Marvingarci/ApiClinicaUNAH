@@ -16,9 +16,34 @@ class ActividadSexualController extends Controller
      */
     public function index()
     {
-        $actividades_sexuales = ActividadSexual::get();
+
+        $actividades_sexuales = DB::table('actividad_sexuals')
+        ->join('practicas_sexuales', 'actividad_sexuals.practicas_sexuales_riesgo', '=', 'practicas_sexuales.id_practica_sexual')
+        
+        ->select(
+            'id_actividad_sexual','actividad_sexual', 'edad_inicio_sexual','numero_parejas_sexuales',
+            'practicas_sexuales.practicas_sexuales_riesgo', 'id_paciente'
+           
+            )
+        ->get();
+
+        //$actividades_sexuales = ActividadSexual::get();
         echo json_encode($actividades_sexuales);
     }
+
+   // public function show($id_actividad_sexual)
+    //{
+        //buscamos al paciente por id y mostramos solo el primer resultado para 
+        //evitar problemas al momento de mandar a traer los datos en angular
+
+       // $actividades_sexuales = DB::table('actividad_sexuals')
+            
+         //   ->where('id_actividad_sexual', $id_actividad_sexual)    
+            
+         //   ->first();
+
+       // echo json_encode($actividades_sexuales);
+   // }
 
 
     /**
@@ -71,7 +96,13 @@ class ActividadSexualController extends Controller
     public function show($id_paciente){
 
         $actividad_sexual = DB::table('actividad_sexuals')
+        ->join('practicas_sexuales', 'actividad_sexuals.practicas_sexuales_riesgo', '=', 'practicas_sexuales.id_practica_sexual')
         ->where('id_paciente', $id_paciente)
+        ->select(
+            'id_actividad_sexual','actividad_sexual', 'edad_inicio_sexual','numero_parejas_sexuales',
+            'practicas_sexuales.practicas_sexuales_riesgo', 'id_paciente'
+           
+            ) 
         ->first();
 
         echo json_encode($actividad_sexual);
