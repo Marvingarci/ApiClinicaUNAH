@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Antecedentes;
+use database\funciones\insertarAntecedente;
 use Illuminate\Support\facades\DB;
-
 use Illuminate\Http\Request;
+
+// include 'database/funciones/insertarAntecedente';
 
 class AntecedentesController extends Controller
 {
+
+    protected $insertarAntecedente;
+    
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +34,19 @@ class AntecedentesController extends Controller
      */
     public function store(Request $request)
     {
-        $antecedente = new Antecedentes();
-        $antecedente->antecedente = $request->input('antecedente');
-        $antecedente->save();
+        // $antecedente = new Antecedentes();
+
+
+        // $antecedente->antecedente = $request->input('antecedente');
+        // $antecedente->save();
+
+        $insertarAntecedente = new insertarAntecedente();
+        $antecedente = $request->input('antecedente');
+
+        $id_antecedente = $insertarAntecedente->ejecutar($antecedente);
+
+        echo json_encode($id_antecedente);
+
     }
 
     /**
@@ -52,10 +67,18 @@ class AntecedentesController extends Controller
         
         echo json_encode($id);
 
-        // $id= DB::select('SELECT MAX(id_antecedente) as ultimoId FROM antecedentes');
-
-        // echo json_encode($id);
     }
+
+
+    // public function insertar(Request $request){
+
+    //     $insertarAntecedente = new insertarAntecedente();
+    //     $antecedente = $request->input('antecedente');
+    //     $id_antecedente = $insertarAntecedente->ejecutar($antecedente);
+
+    //     echo json_encode($id_antecedente);
+
+    // }
 
     /**
      * Update the specified resource in storage.
