@@ -16,6 +16,7 @@ class CreateAntecedentesTable extends Migration
         Schema::create('antecedentes', function (Blueprint $table) {
             $table->bigIncrements('id_antecedente');
             $table->string('antecedente');
+            $table->boolean('tipo')->nullable();
             $table->timestamps();
         });
     }
