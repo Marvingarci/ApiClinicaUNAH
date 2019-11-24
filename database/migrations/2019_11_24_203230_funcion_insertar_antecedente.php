@@ -17,7 +17,7 @@ class FuncionInsertarAntecedente extends Migration
 
         $sql = 
 
-        'DROP FUNCTION IF EXISTS UNAVAILABLE_PRODS;
+        'DROP FUNCTION IF EXISTS insertar_antecedente;
 
         ALTER DATABASE db_clinica CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
         ALTER TABLE antecedentes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
