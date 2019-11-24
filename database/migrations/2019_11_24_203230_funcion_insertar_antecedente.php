@@ -18,6 +18,10 @@ class FuncionInsertarAntecedente extends Migration
         $sql = 
 
         'DROP FUNCTION IF EXISTS UNAVAILABLE_PRODS;
+
+        ALTER DATABASE db_clinica CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
+        ALTER TABLE antecedentes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+        
         CREATE FUNCTION insertar_antecedente(a varchar(50)) returns int
             deterministic
         begin 
