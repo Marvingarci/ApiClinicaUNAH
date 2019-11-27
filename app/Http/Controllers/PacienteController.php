@@ -25,7 +25,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia'
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia','prosene'
                 )
             ->get();
 
@@ -59,7 +59,7 @@ class PacienteController extends Controller
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
                 'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia', 'emergencia_persona',
-                'peso', 'talla', 'imc', 'temperatura', 'presion','pulso' 
+                'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
                 
             ->first();
@@ -194,6 +194,7 @@ class PacienteController extends Controller
             $talla = $request->input('talla');
             $temperatura = $request->input('temperatura');
             $pulso = $request->input('pulso');  
+            $prosene = $request->input('prosene');  
             $emergencia_persona = $request->input('emergencia_persona'); 
   
             $emergencia_telefono = $request->input('emergencia_telefono');
@@ -222,13 +223,12 @@ class PacienteController extends Controller
                 'talla' => $talla,
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
+                'prosene' => $prosene,
                 'emergencia_persona' => $emergencia_persona,
                 'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
                 'contrasenia' => $contrasenia
-
-
             ]);
         }
 
