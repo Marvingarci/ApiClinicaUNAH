@@ -22,12 +22,12 @@ class PacientesAntecedentesFamiliaresController extends Controller
         $pacientesAntecedentesFamiliares = DB::table('pacientes')
             ->join('pacientes_antecedentes_familiares',
              'pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
-            ->join('antecedentes', 'antecedentes.id_antecedente', '=', 'pacientes_antecedentes_familiares.id_antecedente')
+            ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_familiares.id_enfermedad')
             ->join('parentescos', 'parentescos.id_parentesco', '=', 'pacientes_antecedentes_familiares.id_parentesco')
             
             ->select(
                 'pacientes.id_paciente',
-                'antecedentes.antecedente',
+                'enfermedades.enfermedad',
                 'parentescos.parentesco'
                 )
             ->get();
@@ -48,7 +48,7 @@ class PacientesAntecedentesFamiliaresController extends Controller
         $pacienteAntecedenteFamiliar = new PacientesAntecedentesFamiliares();
         
         $pacienteAntecedenteFamiliar->id_paciente = $request->input(['id_paciente']);
-        $pacienteAntecedenteFamiliar->id_antecedente = $request->input(['id_antecedente']);
+        $pacienteAntecedenteFamiliar->id_enfermedad = $request->input(['id_enfermedad']);
         $pacienteAntecedenteFamiliar->id_parentesco = $request->input(['id_parentesco']);
 
         $pacienteAntecedenteFamiliar->save();
@@ -65,13 +65,13 @@ class PacientesAntecedentesFamiliaresController extends Controller
         $pacienteAntecedenteFamiliar = DB::table('pacientes')
             ->join('pacientes_antecedentes_familiares',
              'pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
-            ->join('antecedentes', 'antecedentes.id_antecedente', '=', 'pacientes_antecedentes_familiares.id_antecedente')
+            ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_familiares.id_enfermedad')
             ->join('parentescos', 'parentescos.id_parentesco', '=', 'pacientes_antecedentes_familiares.id_parentesco')
             ->where('pacientes.id_paciente', $id_paciente)
             
             ->select(
                 'pacientes.id_paciente',
-                'antecedentes.antecedente',
+                'enfermedades.enfermedad',
                 'parentescos.parentesco'
                 )
             ->get();
