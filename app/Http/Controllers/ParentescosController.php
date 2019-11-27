@@ -14,7 +14,9 @@ class ParentescosController extends Controller
      */
     public function index()
     {
-        //
+        $parentescos = Parentescos::get();
+
+        echo json_encode($parentescos);
     }
 
     /**
