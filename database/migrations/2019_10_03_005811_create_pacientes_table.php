@@ -37,7 +37,8 @@ class CreatePacientesTable extends Migration
             $table->string('temperatura')->nullable();
             $table->string('presion')->nullable();
             $table->string('pulso')->nullable();
-            $table->char('categoria');
+            $table->char('categoria'); 
+            $table->string('prosene')->nullable();           
             // $table->char('categoria')->default('E');
             $table->timestamps();
 
