@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AntecedentesSeeder extends Seeder
+class EnfermedadesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,16 +11,12 @@ class AntecedentesSeeder extends Seeder
      */
     public function run()
     {
-        $antecedentes = array(
+        $enfermedades = array(
 
             'Diabetes',
             'Tuberculosis pulmonar',
-            'Desnutrición',
-            'Enfermedades mentales',
             'Convulsiones',
             'Alcoholismo o Sustancias psicoactivas',
-            'Alergias',
-            'Cáncer',
             'Hipertensión arterial',
             'ITS/VIH',
             'Hospitalarias y Quirurgicas',
@@ -29,9 +25,9 @@ class AntecedentesSeeder extends Seeder
 
         );
 
-        foreach($antecedentes as $antecedente){
-            DB::table('antecedentes')->insert([
-                'antecedente' => $antecedente,
+        foreach($enfermedades as $enfermedad){
+            DB::table('enfermedades')->insert([
+                'enfermedad' => $enfermedad,
             ]);
         }
     }

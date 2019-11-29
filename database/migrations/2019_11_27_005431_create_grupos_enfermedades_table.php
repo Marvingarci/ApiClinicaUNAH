@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoginAdminsTable extends Migration
+class CreateGruposEnfermedadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateLoginAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('login_admins', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('usuario_admin');
-            $table->string('contrasenia_admin');
-            $table->string('nombre_admin');
-            $table->string('identidad_admin');
+        Schema::create('grupos_enfermedades', function (Blueprint $table) {
+            $table->bigIncrements('id_grupo_enfermedad');
+            $table->string('grupo_enfermedad');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateLoginAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('login_admins');
+        Schema::dropIfExists('grupos_enfermedades');
     }
 }

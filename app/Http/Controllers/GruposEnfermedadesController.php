@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Parentescos;
+use App\GruposEnfermedades;
 use Illuminate\Http\Request;
 
-class ParentescosController extends Controller
+class GruposEnfermedadesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class ParentescosController extends Controller
      */
     public function index()
     {
-        $parentescos = Parentescos::get();
-
-        echo json_encode($parentescos);
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class ParentescosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Parentescos  $parentescos
+     * @param  \App\GruposEnfermedades  $gruposEnfermedades
      * @return \Illuminate\Http\Response
      */
-    public function show(Parentescos $parentescos)
+    public function show(GruposEnfermedades $gruposEnfermedades)
     {
         //
     }
@@ -54,10 +52,10 @@ class ParentescosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Parentescos  $parentescos
+     * @param  \App\GruposEnfermedades  $gruposEnfermedades
      * @return \Illuminate\Http\Response
      */
-    public function edit(Parentescos $parentescos)
+    public function edit(GruposEnfermedades $gruposEnfermedades)
     {
         //
     }
@@ -66,10 +64,10 @@ class ParentescosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Parentescos  $parentescos
+     * @param  \App\GruposEnfermedades  $gruposEnfermedades
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Parentescos $parentescos)
+    public function update(Request $request, GruposEnfermedades $gruposEnfermedades)
     {
         //
     }
@@ -77,10 +75,10 @@ class ParentescosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Parentescos  $parentescos
+     * @param  \App\GruposEnfermedades  $gruposEnfermedades
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Parentescos $parentescos)
+    public function destroy(GruposEnfermedades $gruposEnfermedades)
     {
         //
     }

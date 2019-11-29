@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAntecedentesTable extends Migration
+class CreateEnfermedadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAntecedentesTable extends Migration
      */
     public function up()
     {
-        Schema::create('antecedentes', function (Blueprint $table) {
-            $table->bigIncrements('id_antecedente');
-            $table->string('antecedente');
-            $table->boolean('tipo')->nullable();
+        Schema::create('enfermedades', function (Blueprint $table) {
+            $table->bigIncrements('id_enfermedad');
+            $table->string('enfermedad');
+            $table->bigInteger('id_grupo_enfermedad')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateAntecedentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('antecedentes');
+        Schema::dropIfExists('enfermedades');
     }
 }

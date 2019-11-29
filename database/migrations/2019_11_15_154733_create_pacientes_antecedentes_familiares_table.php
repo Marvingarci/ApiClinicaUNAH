@@ -16,7 +16,7 @@ class CreatePacientesAntecedentesFamiliaresTable extends Migration
         Schema::create('pacientes_antecedentes_familiares', function (Blueprint $table) {
             $table->bigIncrements('id_paciente_antecedente_familiar');
             $table->bigInteger('id_paciente')->nullable();
-            $table->bigInteger('id_antecedente')->nullable();
+            $table->bigInteger('id_enfermedad')->nullable();
             $table->bigInteger('id_parentesco')->nullable();
             $table->timestamps();
         });

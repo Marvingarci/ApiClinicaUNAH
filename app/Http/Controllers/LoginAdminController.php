@@ -44,7 +44,6 @@ class LoginAdminController extends Controller
         $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
         $login_admin->nombre_admin= $request->input(['nombre_admin']);
         $login_admin->identidad_admin = $request->input(['identidad_admin']);
-        $login_admin->especialidad_admin = $request->input(['especialidad_admin']);
         $login_admin->save();
     }
 
@@ -84,7 +83,6 @@ class LoginAdminController extends Controller
         $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
         $login_admin->nombre_admin= $request->input(['nombre_admin']);
         $login_admin->identidad_admin = $request->input(['identidad_admin']);
-        $login_admin->especialidad_admin = $request->input(['especialidad_admin']);
         $login_admin->save();
         // if($request->input('contraseniaC')!= null){
         //     $nuevaContra = $request->input('contraseniaC');

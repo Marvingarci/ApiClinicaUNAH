@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Antecedentes;
-use database\funciones\insertarAntecedente;
+use App\Enfermedades;
+use database\funciones\insertarEnfermedad;
 use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
 
 // include 'database/funciones/insertarAntecedente';
 
-class AntecedentesController extends Controller
+class EnfermedadesController extends Controller
 {
+
 
     protected $insertarAntecedente;
     
@@ -21,8 +22,8 @@ class AntecedentesController extends Controller
      */
     public function index()
     {
-        $antecedentes = Antecedentes::get();
-        echo json_encode($antecedentes);
+        $enfermedades = Enfermedades::get();
+        echo json_encode($enfermedades);
     }
 
 
@@ -34,18 +35,14 @@ class AntecedentesController extends Controller
      */
     public function store(Request $request)
     {
-        // $antecedente = new Antecedentes();
 
+        $insertarEnfermedad = new insertarEnfermedad();
+        $enfermedad = $request->input('enfermedad');
+        $id_grupo_enfermedad = $request->input('id_grupo_enfermedad');
 
-        // $antecedente->antecedente = $request->input('antecedente');
-        // $antecedente->save();
+        $id_enfermedad = $insertarEnfermedad->ejecutar($enfermedad, $id_grupo_enfermedad);
 
-        $insertarAntecedente = new insertarAntecedente();
-        $antecedente = $request->input('antecedente');
-
-        $id_antecedente = $insertarAntecedente->ejecutar($antecedente);
-
-        echo json_encode($id_antecedente);
+        echo json_encode($id_enfermedad);
 
     }
 
