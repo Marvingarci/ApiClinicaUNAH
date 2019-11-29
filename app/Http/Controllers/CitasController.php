@@ -15,6 +15,23 @@ class CitasController extends Controller
      */
     public function index()
     {
+        $actual = Carbon::now();
+        $hoy = $actual->format('d-m-y');
+        $paciente = DB::table('citas')
+        ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
+        ->join('pacientes', 'citas.id_paciente', '=', 'pacientes.id_paciente')
+        ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
+        ->where('fechayHora', $hoy)
+
+        ->select(
+            'pacientes.numero_cuenta','pacientes.nombre_completo','pacientes.categoria','pacientes.carrera','sexos.sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
+            'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
+            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
+            )
+            
+        ->get();
+
+    echo json_encode($paciente);
         
     }
 
@@ -53,7 +70,7 @@ class CitasController extends Controller
         $citas->impresion = $request->input('impresion');
         $citas->indicaciones = $request->input('indicaciones');
         $citas->remitido = $request->input('remitido');
-        $citas->fechayHora = $actual->format('h-1 d-m-y');
+        $citas->fechayHora = $actual->format('d-m-y');
 
 
         $citas->save();
