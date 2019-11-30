@@ -14,7 +14,9 @@ class MetodosPlanificacionesController extends Controller
      */
     public function index()
     {
-        //
+        $metodos_planificaciones = metodosPlanificaciones::get();
+
+        echo json_encode($metodos_planificaciones);
     }
 
     /**

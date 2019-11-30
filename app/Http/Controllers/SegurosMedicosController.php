@@ -14,7 +14,9 @@ class SegurosMedicosController extends Controller
      */
     public function index()
     {
-        //
+        $seguros_Medicos = segurosMedicos::get();
+
+        echo json_encode($seguros_Medicos);
     }
 
     /**
