@@ -35,6 +35,8 @@ Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamili
 Route::resource('enfermedades','EnfermedadesController');
 Route::resource('tipos_enfermedades','TipoEnfermedadController');
 Route::resource('parentescos','ParentescosController');
+Route::resource('estados_civiles','EstadosCivilesController');
+Route::resource('seguros_medicos','SegurosMedicosController');
 
 Route::get('ultimoIdAntecedente','AntecedentesController@obtenerUltimoIdAntecedente');
 
