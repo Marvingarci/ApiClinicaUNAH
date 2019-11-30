@@ -28,6 +28,7 @@ class EnfermedadesSeeder extends Seeder
         foreach($enfermedades as $enfermedad){
             DB::table('enfermedades')->insert([
                 'enfermedad' => $enfermedad,
+                'id_grupo_enfermedad' => 5,
             ]);
         }
     }
