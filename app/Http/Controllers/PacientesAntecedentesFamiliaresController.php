@@ -62,20 +62,27 @@ class PacientesAntecedentesFamiliaresController extends Controller
      */
     public function show($id_paciente)
     {
-        $pacienteAntecedenteFamiliar = DB::table('pacientes')
-            ->join('pacientes_antecedentes_familiares',
-             'pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
-            ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_familiares.id_enfermedad')
-            ->join('parentescos', 'parentescos.id_parentesco', '=', 'pacientes_antecedentes_familiares.id_parentesco')
-            ->where('pacientes.id_paciente', $id_paciente)
+        // $pacienteAntecedenteFamiliar = DB::table('pacientes')
+        //     ->join('pacientes_antecedentes_familiares',
+        //      'pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
+        //     ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_familiares.id_enfermedad')
+        //     ->join('parentescos', 'parentescos.id_parentesco', '=', 'pacientes_antecedentes_familiares.id_parentesco')
+        //     ->where('pacientes.id_paciente', $id_paciente)
             
-            ->select(
-                'pacientes.id_paciente',
-                'enfermedades.enfermedad',
-                'parentescos.parentesco'
-                )
-            ->first();
-     
+        //     ->select(
+        //         'pacientes.id_paciente',
+        //         'enfermedades.enfermedad',
+        //         'parentescos.parentesco'
+        //         )
+        //     ->get();
+
+
+        $pacienteAntecedenteFamiliar = DB::select('SELECT  grupos_enfermedades.grupo_enfermedad,  enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+        join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+        JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+        JOIN grupos_enfermedades ON grupos_enfermedades.id_grupo_enfermedad = enfermedades.id_grupo_enfermedad
+         WHERE id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+
 
         echo json_encode($pacienteAntecedenteFamiliar);
     }

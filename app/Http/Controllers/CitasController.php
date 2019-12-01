@@ -22,7 +22,6 @@ class CitasController extends Controller
         ->join('pacientes', 'citas.id_paciente', '=', 'pacientes.id_paciente')
         ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
         ->where('fechayHora', $hoy)
-
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','pacientes.categoria','pacientes.carrera','sexos.sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
@@ -32,6 +31,8 @@ class CitasController extends Controller
         ->get();
 
     echo json_encode($paciente);
+    
+    //echo json_encode($hoy);
         
     }
 

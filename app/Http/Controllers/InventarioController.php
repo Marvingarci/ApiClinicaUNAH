@@ -117,7 +117,19 @@ class InventarioController extends Controller
     }
     public function obtenerMedicamentos()
     {
-        $medicamentos = DB::select('SELECT nombre as medicamento FROM inventarios');
+        $medicamentos = DB::select('SELECT id_inventario, nombre as medicamento, unidad as unidades FROM inventarios');
         echo json_encode($medicamentos);
     }    
+    public function disminucion(Request $request)
+    {
+        $inventario = new Inventario();
+        //$modificacion = DB::select('SELECT * FROM inventarios where id_inventario = ?',[$request->input('id')]);
+        $modificacion = Inventario::where('id_inventario',$request->input('id'))->first();
+        $modificacion->unidad = $modificacion->unidad - $request->input('cantidad');
+        // $inventario->id_inventario = $request->input('id');
+        // $inventario->unidad = $request->input('cantidad');
+        // $inventario->save();    
+        $inven = Inventario::where('id_inventario',$request->input('id'))->update(['unidad'=> $modificacion->unidad]);    
+        //$modificacion->save();
+    }
 }
