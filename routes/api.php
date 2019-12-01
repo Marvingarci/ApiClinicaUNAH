@@ -70,6 +70,7 @@ Route::resource('medicos','MedicosController');
 //rutas alberto
 Route::resource('inventarios','InventarioController');
 Route::get('medicamentos','InventarioController@obtenerMedicamentos');
+Route::post('medicamentos/egreso','InventarioController@disminucion');
 
 
 
