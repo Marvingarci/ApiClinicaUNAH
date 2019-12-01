@@ -115,4 +115,9 @@ class InventarioController extends Controller
         $inventario->delete();
         
     }
+    public function obtenerMedicamentos()
+    {
+        $medicamentos = DB::select('SELECT nombre as medicamento FROM inventarios');
+        echo json_encode($medicamentos);
+    }    
 }
