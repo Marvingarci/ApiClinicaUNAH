@@ -77,10 +77,11 @@ class PacientesAntecedentesFamiliaresController extends Controller
         //     ->get();
 
 
-        $pacienteAntecedenteFamiliar = DB::select('SELECT enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+        $pacienteAntecedenteFamiliar = DB::select('SELECT  grupos_enfermedades.grupo_enfermedad,  enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
         join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
         JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
-         WHERE id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad ;', [$id_paciente]);
+        JOIN grupos_enfermedades ON grupos_enfermedades.id_grupo_enfermedad = enfermedades.id_grupo_enfermedad
+         WHERE id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
 
 
         echo json_encode($pacienteAntecedenteFamiliar);
