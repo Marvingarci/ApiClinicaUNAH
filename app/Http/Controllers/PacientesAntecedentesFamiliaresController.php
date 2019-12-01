@@ -74,7 +74,7 @@ class PacientesAntecedentesFamiliaresController extends Controller
                 'enfermedades.enfermedad',
                 'parentescos.parentesco'
                 )
-            ->get();
+            ->first();
      
 
         echo json_encode($pacienteAntecedenteFamiliar);
