@@ -32,6 +32,8 @@ Route::group(['prefix' => 'auth'], function () {
 //rutas brasly
 Route::resource('pacientes','PacienteController');
 Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
+Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
+Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicosController');
 Route::resource('enfermedades','EnfermedadesController');
 Route::resource('tipos_enfermedades','TipoEnfermedadController');
 Route::resource('parentescos','ParentescosController');
@@ -41,7 +43,7 @@ Route::get('ultimoIdAntecedente','AntecedentesController@obtenerUltimoIdAntecede
 
 
 
-Route::resource('antecedentes_personales','AntecedentesPersonalesController');
+// Route::resource('antecedentes_personales','AntecedentesPersonalesController');
 Route::resource('habitos_toxicologicos_personales','HabitosToxicologicosPersonalesController');
 Route::resource('actividad_sexual','ActividadSexualController');
 Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
