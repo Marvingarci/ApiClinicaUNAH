@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
          $this->call(SexosSeeder::class);
          $this->call(remitido_a::class);
          $this->call(GruposEnfermedadesSeeder::class);
+         $this->call(HabitosToxicologicosSeeder::class);
+
          
          
          
