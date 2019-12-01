@@ -18,12 +18,14 @@ class GruposEnfermedadesSeeder extends Seeder
             'Enfermedades Mentales',
             'Alergias',
             'Cáncer',
+            'Otros',
 
         );
 
         foreach($grupos_enfermedades as $grupo_enfermedad){
             DB::table('grupos_enfermedades')->insert([
                 'grupo_enfermedad' => $grupo_enfermedad,
+                
             ]);
         }
         
