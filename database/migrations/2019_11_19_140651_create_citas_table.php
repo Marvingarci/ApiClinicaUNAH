@@ -25,7 +25,7 @@ class CreateCitasTable extends Migration
             $table->string('observaciones')->nullable();
             $table->string('impresion')->nullable();
             $table->string('indicaciones')->nullable();
-            $table->integer('Remitido')->nullable();
+            $table->integer('Remitido')->default('7');
             $table->string('fechayHora')->nullable();
 
             $table->timestamps();
