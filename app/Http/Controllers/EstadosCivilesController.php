@@ -14,7 +14,9 @@ class EstadosCivilesController extends Controller
      */
     public function index()
     {
-        //
+        $estados_civiles = estadosCiviles::get();
+
+        echo json_encode($estados_civiles);
     }
 
     /**

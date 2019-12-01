@@ -14,7 +14,9 @@ class PracticasSexualesController extends Controller
      */
     public function index()
     {
-        //
+        $practicas_sexuales = practicasSexuales::get();
+
+        echo json_encode($practicas_sexuales);
     }
 
     /**
