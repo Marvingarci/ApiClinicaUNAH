@@ -19,6 +19,7 @@ class remitido_a extends Seeder
             'Terapia Funcional',
             'CATFA',
             'Trabajo Social',
+            ' '
 
         );
 
