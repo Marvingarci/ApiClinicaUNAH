@@ -35,6 +35,8 @@ Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamili
 Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
 Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicosController');
 Route::resource('enfermedades','EnfermedadesController');
+Route::resource('habitos_toxicologicos','HabitosToxicologicosController');
+
 Route::resource('tipos_enfermedades','TipoEnfermedadController');
 Route::resource('parentescos','ParentescosController');
 Route::resource('estados_civiles','EstadosCivilesController');
@@ -48,7 +50,7 @@ Route::get('ultimoIdAntecedente','AntecedentesController@obtenerUltimoIdAntecede
 
 
 // Route::resource('antecedentes_personales','AntecedentesPersonalesController');
-Route::resource('habitos_toxicologicos_personales','HabitosToxicologicosPersonalesController');
+// Route::resource('habitos_toxicologicos_personales','HabitosToxicologicosPersonalesController');
 Route::resource('actividad_sexual','ActividadSexualController');
 Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
 Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
