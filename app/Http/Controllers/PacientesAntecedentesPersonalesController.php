@@ -59,18 +59,23 @@ class PacientesAntecedentesPersonalesController extends Controller
      */
     public function show(PacientesAntecedentesPersonales $pacientesAntecedentesPersonales, $id_paciente)
     {
-        $paciente_antecedente_personal = DB::table('pacientes')
-            ->join('pacientes_antecedentes_personales',
-             'pacientes.id_paciente', '=', 'pacientes_antecedentes_personales.id_paciente')
-            ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_personales.id_enfermedad')
-            ->where('pacientes.id_paciente', $id_paciente)
+        // $paciente_antecedente_personal = DB::table('pacientes')
+        //     ->join('pacientes_antecedentes_personales',
+        //      'pacientes.id_paciente', '=', 'pacientes_antecedentes_personales.id_paciente')
+        //     ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_personales.id_enfermedad')
+        //     ->where('pacientes.id_paciente', $id_paciente)
             
-            ->select(
-                'pacientes.id_paciente',
-                'enfermedades.enfermedad',
-                'observacion'
-                )
-            ->first();
+        //     ->select(
+        //         'pacientes.id_paciente',
+        //         'enfermedades.enfermedad',
+        //         'observacion'
+        //         )
+        //     ->get();
+
+        $paciente_antecedente_personal = DB::select('SELECT  grupos_enfermedades.grupo_enfermedad,  enfermedades.enfermedad, pacientes_antecedentes_personales.observacion FROM pacientes_antecedentes_personales
+        join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+        JOIN grupos_enfermedades ON grupos_enfermedades.id_grupo_enfermedad = enfermedades.id_grupo_enfermedad
+         WHERE id_paciente = ?;', [$id_paciente]);
 
         echo json_encode($paciente_antecedente_personal);
     }
