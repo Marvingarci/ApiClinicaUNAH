@@ -55,9 +55,13 @@ class PacientesHabitosToxicologicosController extends Controller
      * @param  \App\PacientesHabitosToxicologicos  $pacientesHabitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function show(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos)
+    public function show(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos, $id_paciente)
     {
-        //
+        $toxicologicos= DB::select('SELECT pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
+        join habitos_toxicologicos on pacientes_habitos_toxicologicos.id_habito_toxicologico = habitos_toxicologicos.id_habito_toxicologico 
+         WHERE id_paciente = ?;',[$id_paciente]);
+
+        echo json_encode($toxicologicos);
     }
 
    
