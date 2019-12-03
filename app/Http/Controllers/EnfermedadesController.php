@@ -58,9 +58,11 @@ class EnfermedadesController extends Controller
     }
 
 
-    public function obtenerColumnaEnfermedad(){
+    public function obtenerColumnaEnfermedad($id_grupo_enfermedad){
 
-        $enfermedades = DB::table('enfermedades')->select('enfermedad')->get();
+        $enfermedades = DB::table('enfermedades')->select('enfermedad')
+        ->where('id_grupo_enfermedad', $id_grupo_enfermedad)
+        ->get();
         
         echo json_encode($enfermedades);
 

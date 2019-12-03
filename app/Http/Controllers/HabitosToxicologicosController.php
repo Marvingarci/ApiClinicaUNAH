@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\HabitosToxicologicos;
 use database\funciones\insertarHabito;
+use Illuminate\Support\facades\DB;
+
 use Illuminate\Http\Request;
 
 class HabitosToxicologicosController extends Controller
@@ -47,6 +49,15 @@ class HabitosToxicologicosController extends Controller
     public function show(HabitosToxicologicos $habitosToxicologicos)
     {
         //
+    }
+
+
+    public function obtenerColumnaHabitoToxicologico(){
+
+        $habitoS_toxicologicos = DB::table('habitos_toxicologicos')->select('habito_toxicologico')->get();
+        
+        echo json_encode($habitoS_toxicologicos);
+
     }
 
     

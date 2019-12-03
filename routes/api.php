@@ -36,7 +36,11 @@ Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPerson
 Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicosController');
 Route::resource('p_hospitalarias_quirurgicas','PacientesHospitalariasQuirurgicasController');
 Route::resource('enfermedades','EnfermedadesController');
-Route::get('columna_enfermedades','EnfermedadesController@obtenerColumnaEnfermedad');
+
+
+Route::get('columna_enfermedades/{id_grupo_enfermedad}','EnfermedadesController@obtenerColumnaEnfermedad');
+Route::get('columna_habito_toxicologico','HabitosToxicologicosController@obtenerColumnaHabitoToxicologico');
+Route::get('obtenerColumnaNumeroTelefono/{numero_telefono}','PacienteController@obtenerColumnaNumeroTelefono');
 Route::resource('habitos_toxicologicos','HabitosToxicologicosController');
 
 Route::resource('parentescos','ParentescosController');
