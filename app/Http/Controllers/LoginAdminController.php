@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LoginAdmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginAdminController extends Controller
 {
@@ -37,11 +38,13 @@ class LoginAdminController extends Controller
         //     'identidad_admin'=>'required|numeric',
         //     'especialidad_admin'=>'required',
         //             ]);
-       
+        $contra = $request->input('contrasenia_admin');
+        $hashed = Hash::make($contra);
+
 
         $login_admin = new LoginAdmin();
         $login_admin->usuario_admin = $request->input(['usuario_admin']);
-        $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
+        $login_admin->contrasenia_admin = $hashed;
         $login_admin->nombre_admin= $request->input(['nombre_admin']);
         $login_admin->identidad_admin = $request->input(['identidad_admin']);
         $login_admin->save();
@@ -78,9 +81,13 @@ class LoginAdminController extends Controller
      */
     public function update(Request $request, $loginAdmin_id)
     {
+
+        $contra = $request->input('contrasenia_admin');
+        $hashed = Hash::make($contra);
+
         $login_admin = LoginAdmin::find($loginAdmin_id);
         $login_admin->usuario_admin = $request->input(['usuario_admin']);
-        $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
+        $login_admin->contrasenia_admin = $hashed;
         $login_admin->nombre_admin= $request->input(['nombre_admin']);
         $login_admin->identidad_admin = $request->input(['identidad_admin']);
         $login_admin->save();

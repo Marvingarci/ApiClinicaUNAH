@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
+use Illuminate\Support\Facades\Hash;
 class PacienteController extends Controller
 {
     /**
@@ -116,6 +117,17 @@ class PacienteController extends Controller
     }
 
 
+    public function obtenerColumnaNumeroTelefono($numero_telefono){
+
+        $telefonos = DB::table('pacientes')->select('numero_telefono')
+        ->where('numero_telefono', $numero_telefono)
+        ->first();
+        
+        echo $telefonos->numero_telefono;
+
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -129,10 +141,11 @@ class PacienteController extends Controller
         
         if($request->input('contrasenia')!= null){
             $nuevaContra = $request->input('contrasenia');
+           // $hashed = Hash::make($nuevaContra);
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
-            ->update(['contrasenia' => $nuevaContra]);
+            ->update(['contrasenia' =>  $nuevaContra]);
 
         }
 
@@ -201,6 +214,7 @@ class PacienteController extends Controller
             $emergencia_telefono = $request->input('emergencia_telefono');
             $categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
+           // $hashed = Hash::make($contrasenia);
             
 
             DB::table('pacientes')
