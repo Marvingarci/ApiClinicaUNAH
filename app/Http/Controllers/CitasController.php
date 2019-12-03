@@ -16,6 +16,7 @@ class CitasController extends Controller
     public function index()
     {
         $actual = Carbon::now();
+
         $hoy = $actual->format('d-m-y');
         $paciente = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
@@ -27,7 +28,6 @@ class CitasController extends Controller
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
             'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
-            
         ->get();
 
     echo json_encode($paciente);
