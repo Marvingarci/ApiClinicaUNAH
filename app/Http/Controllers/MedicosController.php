@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Medicos;
 use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MedicosController extends Controller
 {
@@ -22,7 +23,7 @@ class MedicosController extends Controller
           'id','usuarioM', 'contraseniaM','nombreM',
            'identidadM', 'especialidades.especialidadM'
            
-           )
+           ) 
         ->get();
 
        // $medicos = Medicos::get();
@@ -47,9 +48,13 @@ class MedicosController extends Controller
      */
     public function store(Request $request)
     {
+
+        $contra = $request->input('contraseniaM');
+        $hashed = Hash::make($contra);
+
         $medicos = new Medicos();
         $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM = $request->input(['contraseniaM']);
+        $medicos->contraseniaM = $hashed;
         $medicos->nombreM = $request->input(['nombreM']);
         $medicos->identidadM = $request->input(['identidadM']);
         $medicos->especialidadM = $request->input(['especialidadM']);
@@ -97,9 +102,12 @@ class MedicosController extends Controller
      */
     public function update(Request $request, $medicos_id)
     {
+        $contra = $request->input('contraseniaM');
+        $hashed = Hash::make($contra);
+
         $medicos = Medicos::find($medicos_id);
         $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM = $request->input(['contraseniaM']);
+        $medicos->contraseniaM = $hashed;
         $medicos->nombreM= $request->input(['nombreM']);
         $medicos->identidadM = $request->input(['identidadM']);
         $medicos->especialidadM = $request->input(['especialidadM']);

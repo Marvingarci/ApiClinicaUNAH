@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
+use Illuminate\Support\Facades\Hash;
 class PacienteController extends Controller
 {
     /**
@@ -20,11 +21,12 @@ class PacienteController extends Controller
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
+            ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia','prosene'
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia','prosene'
                 )
             ->get();
 
@@ -52,12 +54,13 @@ class PacienteController extends Controller
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
+            ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
             ->where('id_paciente', $id_paciente)
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexos.sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categoria', 'contrasenia', 'emergencia_persona',
+                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia', 'emergencia_persona',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
                 
@@ -144,10 +147,11 @@ class PacienteController extends Controller
         
         if($request->input('contrasenia')!= null){
             $nuevaContra = $request->input('contrasenia');
+           // $hashed = Hash::make($nuevaContra);
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
-            ->update(['contrasenia' => $nuevaContra]);
+            ->update(['contrasenia' =>  $nuevaContra]);
 
         }
 
@@ -216,6 +220,7 @@ class PacienteController extends Controller
             $emergencia_telefono = $request->input('emergencia_telefono');
             $categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
+           // $hashed = Hash::make($contrasenia);
             
 
             DB::table('pacientes')
