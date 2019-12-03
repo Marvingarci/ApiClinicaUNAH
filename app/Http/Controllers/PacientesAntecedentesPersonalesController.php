@@ -63,8 +63,7 @@ class PacientesAntecedentesPersonalesController extends Controller
         //     ->join('pacientes_antecedentes_personales',
         //      'pacientes.id_paciente', '=', 'pacientes_antecedentes_personales.id_paciente')
         //     ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_personales.id_enfermedad')
-        //     ->where('pacientes.id_paciente', $id_paciente)
-            
+        //     ->where('pacientes.id_paciente', $id_paciente)    
         //     ->select(
         //         'pacientes.id_paciente',
         //         'enfermedades.enfermedad',
