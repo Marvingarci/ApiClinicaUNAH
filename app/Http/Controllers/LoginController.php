@@ -56,9 +56,10 @@ class LoginController extends Controller
         $datos_login->centro = $alumno['centro'];
         $datos_login->numero_identidad = $alumno['numero_identidad'];
         $datos_login->imagen = $alumno['imagen'];
-
-
         $datos_login->save();
+
+        
+        // Hash::check($request->input('clave'), $hashed );
 
 
 
