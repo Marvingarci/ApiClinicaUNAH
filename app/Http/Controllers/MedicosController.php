@@ -49,12 +49,12 @@ class MedicosController extends Controller
     public function store(Request $request)
     {
 
-        $contra = $request->input('contraseniaM');
-        $hashed = Hash::make($contra);
+        // $contra = $request->input('contraseniaM');
+        // $hashed = Hash::make($contra);
 
         $medicos = new Medicos();
         $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM = $hashed;
+        $medicos->contraseniaM =$request->input(['contraseniaM']);
         $medicos->nombreM = $request->input(['nombreM']);
         $medicos->identidadM = $request->input(['identidadM']);
         $medicos->especialidadM = $request->input(['especialidadM']);
@@ -102,12 +102,12 @@ class MedicosController extends Controller
      */
     public function update(Request $request, $medicos_id)
     {
-        $contra = $request->input('contraseniaM');
-        $hashed = Hash::make($contra);
+        // $contra = $request->input('contraseniaM');
+        // $hashed = Hash::make($contra);
 
         $medicos = Medicos::find($medicos_id);
         $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM = $hashed;
+        $medicos->contraseniaM = $request->input(['contraseniaM']);
         $medicos->nombreM= $request->input(['nombreM']);
         $medicos->identidadM = $request->input(['identidadM']);
         $medicos->especialidadM = $request->input(['especialidadM']);
