@@ -58,11 +58,11 @@ class EnfermedadesController extends Controller
     }
 
 
-    public function obtenerUltimoIdAntecedente(){
+    public function obtenerColumnaEnfermedad(){
 
-        $id = DB::table('antecedentes')->max('id_antecedente');
+        $enfermedades = DB::table('enfermedades')->select('enfermedad')->get();
         
-        echo json_encode($id);
+        echo json_encode($enfermedades);
 
     }
 
