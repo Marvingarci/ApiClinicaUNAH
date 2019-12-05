@@ -88,12 +88,12 @@ class CitasController extends Controller
     {
         $paciente = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
-        ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
+        //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('id_paciente', $id_paciente)
         ->select(
             'id_paciente','peso', 'talla','imc',
             'temperatura', 'presion', 'pulso', 'siguiente_cita',
-            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora','categorias.categoria'
+            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
             
         ->get();
