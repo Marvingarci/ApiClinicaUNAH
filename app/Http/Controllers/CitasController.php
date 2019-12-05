@@ -21,11 +21,11 @@ class CitasController extends Controller
         $paciente = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
         ->join('pacientes', 'citas.id_paciente', '=', 'pacientes.id_paciente')
-        ->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
+        //->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
         ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('fechayHora', $hoy)
         ->select(
-            'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexos.sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
+            'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
             'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
