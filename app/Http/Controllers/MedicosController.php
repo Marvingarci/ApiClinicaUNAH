@@ -120,7 +120,7 @@ class MedicosController extends Controller
      * @param  \App\Medicos  $medicos_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $medicos_id)
+    public function destroy($medicos_id)
     {
         $medicos = Medicos::find($medicos_id);
             $medicos->delete();
