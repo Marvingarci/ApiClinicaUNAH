@@ -26,7 +26,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia','prosene'
+                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia','prosene'
                 )
             ->get();
 
@@ -60,7 +60,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'emergencia_telefono', 'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia', 'emergencia_persona',
+                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia', 'emergencia_persona',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
                 
@@ -96,7 +96,6 @@ class PacienteController extends Controller
         $paciente->estado_civil = $request->input('estado_civil');
         $paciente->numero_telefono = $request->input('numero_telefono');
         $paciente->emergencia_persona = $request->input('emergencia_persona');
-        $paciente->emergencia_telefono = $request->input('emergencia_telefono');
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->categoria = $request->input('categoria');
         $paciente->contrasenia = $request->input('contrasenia');
@@ -217,8 +216,6 @@ class PacienteController extends Controller
             $prosene = $request->input('prosene');  
             $emergencia_persona = $request->input('emergencia_persona'); 
   
-            $emergencia_telefono = $request->input('emergencia_telefono');
-
             switch ($request->input('categoria')) {
                 case 'Estudiante':
                 $categoria = 3;
@@ -260,7 +257,6 @@ class PacienteController extends Controller
                 'pulso' => $pulso,
                 'prosene' => $prosene,
                 'emergencia_persona' => $emergencia_persona,
-                'emergencia_telefono' => $emergencia_telefono,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
                 'contrasenia' => $contrasenia
