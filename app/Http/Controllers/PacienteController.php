@@ -60,7 +60,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia', 'emergencia_persona',
+                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
                 
@@ -95,7 +95,7 @@ class PacienteController extends Controller
         $paciente->sexo = $request->input('sexo');
         $paciente->estado_civil = $request->input('estado_civil');
         $paciente->numero_telefono = $request->input('numero_telefono');
-        $paciente->emergencia_persona = $request->input('emergencia_persona');
+        // $paciente->emergencia_persona = $request->input('emergencia_persona');
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->categoria = $request->input('categoria');
         $paciente->contrasenia = $request->input('contrasenia');
