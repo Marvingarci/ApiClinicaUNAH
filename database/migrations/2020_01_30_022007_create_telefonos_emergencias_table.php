@@ -17,6 +17,7 @@ class CreateTelefonosEmergenciasTable extends Migration
             $table->bigIncrements('id_telefono_emergencia');
             $table->bigInteger('id_paciente');
             $table->string('telefono_emergencia');
+            $table->string('emergencia_persona');
             $table->timestamps();
         });
     }
