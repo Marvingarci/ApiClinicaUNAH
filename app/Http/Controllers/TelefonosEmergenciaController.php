@@ -32,6 +32,7 @@ class TelefonosEmergenciaController extends Controller
         $telefono_emergencia = new TelefonosEmergencia();
         $telefono_emergencia->id_paciente = $request->input(['id_paciente']);
         $telefono_emergencia->telefono_emergencia =$request->input(['telefono_emergencia']);
+        $telefono_emergencia->emergencia_persona =$request->input(['emergencia_persona']);
         $telefono_emergencia->save();
     }
 
