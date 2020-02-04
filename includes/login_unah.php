@@ -3,8 +3,8 @@ include 'simple_html_dom.php';
 
 function accesoAlumno($usuario, $clave){
 
-    $EVENTVALIDATION = '/wEdAA29ABtgHzbDLDZ8i2IiL66qLhWkvKFYsOaCSvCAkdnA3SQuzYxkS4BZfgj9eFosIfs1B3wBeDBSuytLP7WXV1Wj+Acom66qoXdW8H8Sfu1pSjtzpTW31CVGZjUL8cEDHE6QgRsNye+5nJGG/r2nAU1DQtxIMJcI6+vKNwSodoSvppubsFfb0Q/444pjdjzlFB/uWt948gHaAca80ARUswcec1+BY+fffscDi0LTojZe0thmXI8lnGMQDgg7nfbST1P53d8HLcsMPPSWw23i74K4e+kOTxPLlE5Ebau9Ir/h8etd2j0XTw+F62k03bpdIt0=';
-    $VIEWSTATE = '/wEPDwULLTEzMTA2NjU0ODQPZBYCZg9kFgICAw9kFgICAw9kFgICAQ8PZBYCHgpvbmtleXByZXNzBSVqYXZhc2NyaXB0OnJldHVybiBzb2xvbnVtZXJvcyhldmVudCk7ZGSGfHEiMMKqZ8fLhm5gdCRpF1d2pGQRxUR7l/uvEVbNyQ==';
+    $EVENTVALIDATION = '/wEdAA3vKNDfo4EQOKcH8zycBBfTLhWkvKFYsOaCSvCAkdnA3SQuzYxkS4BZfgj9eFosIfs1B3wBeDBSuytLP7WXV1Wj+Acom66qoXdW8H8Sfu1pSjtzpTW31CVGZjUL8cEDHE6QgRsNye+5nJGG/r2nAU1DQtxIMJcI6+vKNwSodoSvppubsFfb0Q/444pjdjzlFB/uWt948gHaAca80ARUswcec1+BY+fffscDi0LTojZe0thmXI8lnGMQDgg7nfbST1P53d8HLcsMPPSWw23i74K44UWHe5NjDCWd6tjYss2dHXQUs2TL/1hf+MrMQOU3uQI=';
+    $VIEWSTATE = '/wEPDwUKLTE2OTM0NTUxMA9kFgJmD2QWAgIBD2QWAgIBD2QWAgIBDw9kFgIeCm9ua2V5cHJlc3MFJWphdmFzY3JpcHQ6cmV0dXJuIHNvbG9udW1lcm9zKGV2ZW50KTtkZAzWrWIpsjXYOi5duNd3+nW18rW7TK5EnBZLsDY5rJ2v';
     $PREGRA_ESTU_LOGIN = "https://registro.unah.edu.hn/pregra_estu_login.aspx";
     $PREGA_ESTU_MAIN = "https://registro.unah.edu.hn/prega_estu_main.aspx";
 	$HISTORIAL_ACADEMICO = "https://registro.unah.edu.hn/historial_academico.aspx";
