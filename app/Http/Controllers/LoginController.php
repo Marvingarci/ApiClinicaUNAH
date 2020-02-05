@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Login;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterAuthRequest;
+use  JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 include '../includes/login_unah.php';
 
 class LoginController extends Controller
+
+    
 {
+
+    public  $loginAfterSignUp = true;
+
+
     /**
      * Display a listing of the resource.
      *
@@ -43,10 +52,10 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $cuenta= $request->input('cuenta');
-        $clave= $request->input('clave');
+        $cuenta = $request->input('cuenta');
+        $password = $request->input('password');
 
-        $alumno = accesoAlumno($cuenta, $clave);
+        $alumno = accesoAlumno($cuenta, $password);
 
         $datos_login= new Login();
         
@@ -56,12 +65,20 @@ class LoginController extends Controller
         $datos_login->centro = $alumno['centro'];
         $datos_login->numero_identidad = $alumno['numero_identidad'];
         $datos_login->imagen = $alumno['imagen'];
+        $datos_login->password = bcrypt($request->password);
         $datos_login->save();
 
+		if ($this->loginAfterSignUp) {
+			return  $this->login($request);
+		}
+
+		return  response()->json([
+			'status' => 'ok',
+			'data' => $datos_login
+        ], 200);
         
-        // Hash::check($request->input('clave'), $hashed );
 
-
+        
 
     }
 
@@ -87,5 +104,49 @@ class LoginController extends Controller
     {
         //
     }
+
+    public  function  login(Request  $request) {
+		$input = $request->only('cuenta', 'password');
+		$jwt_token = null;
+		if (!$jwt_token = JWTAuth::attempt($input)) {
+			return  response()->json([
+				'status' => 'invalid_credentials',
+				'message' => 'Correo o contraseña no válidos.',
+			], 401);
+		}
+
+		return  response()->json([
+			'status' => 'ok',
+			'token' => $jwt_token,
+		]);
+	}
+
+	public  function  logout(Request  $request) {
+		$this->validate($request, [
+			'token' => 'required'
+		]);
+
+		try {
+			JWTAuth::invalidate($request->token);
+			return  response()->json([
+				'status' => 'ok',
+				'message' => 'Cierre de sesión exitoso.'
+			]);
+		} catch (JWTException  $exception) {
+			return  response()->json([
+				'status' => 'unknown_error',
+				'message' => 'Al usuario no se le pudo cerrar la sesión.'
+			], 500);
+		}
+	}
+
+	public  function  getAuthUser(Request  $request) {
+		$this->validate($request, [
+			'token' => 'required'
+		]);
+
+		$user = JWTAuth::authenticate($request->token);
+		return  response()->json(['user' => $user]);
+	}
 
 }
