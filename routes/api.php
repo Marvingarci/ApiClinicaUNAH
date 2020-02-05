@@ -18,15 +18,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
-  
-    Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
-    });
+// estas rutas se pueden acceder sin proveer de un token válido.
+// Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
+
+// estas rutas requiren de un token válido para poder accederse.
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::post('/logout', 'AuthController@logout');
 });
+
+// Route::group(['middleware' => ['jwt.verify']], function() {
+//     /*AÑADE AQUI LAS RUTAS QUE QUIERAS PROTEGER CON JWT*/
+//     Route::post('/logout', 'AuthController@logout');
+// });
 
 
 //rutas brasly
@@ -62,7 +66,7 @@ Route::resource('actividad_sexual','ActividadSexualController');
 Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
 Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
-Route::resource('login','LoginController');
+Route::resource('login','LoginController'); // esta choca con la ruta de los token
 
 
 
