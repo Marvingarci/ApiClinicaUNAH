@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterAuthRequest;
 use  JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\facades\DB;
 include '../includes/login_unah.php';
 
 class LoginController extends Controller
@@ -42,6 +43,13 @@ class LoginController extends Controller
         echo json_encode($logins);
     }
 
+    public function ultimoIdLogin(){
+        $si= DB::select('SELECT MAX(id_login) as ultimoId FROM logins');
+
+        echo json_encode($si);
+        
+        
+    }
 
 
     /**
@@ -52,32 +60,6 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $cuenta = $request->input('cuenta');
-        $password = $request->input('password');
-
-        $alumno = accesoAlumno($cuenta, $password);
-
-        $datos_login= new Login();
-        
-        $datos_login->cuenta = $alumno['cuenta'];
-        $datos_login->nombre = $alumno['nombre'];
-        $datos_login->carrera = $alumno['carrera'];
-        $datos_login->centro = $alumno['centro'];
-        $datos_login->numero_identidad = $alumno['numero_identidad'];
-        $datos_login->imagen = $alumno['imagen'];
-        $datos_login->password = bcrypt($request->password);
-        $datos_login->save();
-
-		if ($this->loginAfterSignUp) {
-			return  $this->login($request);
-		}
-
-		return  response()->json([
-			'status' => 'ok',
-			'data' => $datos_login
-        ], 200);
-        
-
         
 
     }
@@ -89,9 +71,15 @@ class LoginController extends Controller
      * @param  \App\Login  $login
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Login $login)
+    public function update(Request $request, $id_login)
     {
-        //
+        if($request->input('password')!= null){
+            $nuevo_password = bcrypt($request->password);
+
+            DB::table('logins')
+            ->where('id_login', $id_login)
+            ->update(['password' =>  $nuevo_password]);
+        }
     }
 
     /**
@@ -104,6 +92,36 @@ class LoginController extends Controller
     {
         //
     }
+
+    public  function  register(Request  $request) {
+
+
+		$cuenta = $request->input('cuenta');
+        $password = $request->input('password');
+
+        $alumno = accesoAlumno($cuenta, $password);
+        
+        $datos_login= new Login();
+        
+        $datos_login->cuenta = $alumno['cuenta'];
+        $datos_login->nombre = $alumno['nombre'];
+        $datos_login->carrera = $alumno['carrera'];
+        $datos_login->centro = $alumno['centro'];
+        $datos_login->numero_identidad = $alumno['numero_identidad'];
+        $datos_login->imagen = $alumno['imagen'];
+        $datos_login->password = bcrypt($request->password);
+        $datos_login->save();
+
+        if ($this->loginAfterSignUp) {
+            return  $this->login($request);
+        }
+
+        return  response()->json([
+            'status' => 'ok',
+            'data' => $datos_login
+        ], 200);
+        
+	}
 
     public  function  login(Request  $request) {
 		$input = $request->only('cuenta', 'password');
