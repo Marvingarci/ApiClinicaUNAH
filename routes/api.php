@@ -19,8 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // estas rutas se pueden acceder sin proveer de un token válido.
-// Route::post('/login', 'AuthController@login');
-Route::post('/register', 'AuthController@register');
+
+Route::post('loguear', 'LoginController@login');// cuando el usuario ya esta registrado.
+Route::post('registrar', 'LoginController@register');// cuando el usuario entra por primera vez.
 
 // estas rutas requiren de un token válido para poder accederse.
 Route::group(['middleware' => 'jwt.auth'], function () {
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
 
 //rutas brasly
+Route::resource('datos_login','LoginController');
 Route::resource('pacientes','PacienteController');
 Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
 Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
@@ -57,6 +59,7 @@ Route::resource('metodos_planificaciones','MetodosPlanificacionesController');
 
 
 Route::get('ultimoIdAntecedente','AntecedentesController@obtenerUltimoIdAntecedente');
+Route::get('ultimoIdLogin','LoginController@ultimoIdLogin');
 
 
 
@@ -66,7 +69,7 @@ Route::resource('actividad_sexual','ActividadSexualController');
 Route::resource('antecedentes_ginecologicos','AntecedentesGinecologicosController');
 Route::resource('planificaciones_familiares','PlanificacionesFamiliaresController');
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
-Route::resource('login','LoginController'); // esta choca con la ruta de los token
+
 
 
 
