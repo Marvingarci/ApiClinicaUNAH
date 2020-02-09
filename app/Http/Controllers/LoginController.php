@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterAuthRequest;
 use  JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\facades\DB;
+use Illuminate\Support\Facades\Hash;
 include '../includes/login_unah.php';
 
 class LoginController extends Controller
@@ -44,11 +45,18 @@ class LoginController extends Controller
     }
 
     public function ultimoIdLogin(){
+
         $si= DB::select('SELECT MAX(id_login) as ultimoId FROM logins');
 
         echo json_encode($si);
         
         
+    }
+
+    public function show($id_paciente)
+    {
+
+
     }
 
 
@@ -109,6 +117,7 @@ class LoginController extends Controller
         $datos_login->centro = $alumno['centro'];
         $datos_login->numero_identidad = $alumno['numero_identidad'];
         $datos_login->imagen = $alumno['imagen'];
+        // $datos_login->password = $request->password;
         $datos_login->password = bcrypt($request->password);
         $datos_login->save();
 
@@ -165,6 +174,43 @@ class LoginController extends Controller
 
 		$user = JWTAuth::authenticate($request->token);
 		return  response()->json(['user' => $user]);
-	}
+    }
+    
+    // funcion que sirve para verificar si un usuario existe en la base de datos y si su contrasenia
+    // es correcta, arrojando diferentes resultados segun sea el caso.
+    public function obtenerUsuario($cuenta, $password){
+
+        //verifico si el numero de cuenta del usuario existe en la base de datos
+        if($usuario = DB::table('logins')->where('cuenta', $cuenta)->first()){
+
+            // si el usuario existe en la base de datos verifico si la contrasenia introducida es 
+            // la correcta.
+            if (Hash::check($password, $usuario->password)) {
+    
+                //si la contrasenia es la correcta se devuelve como resultado los datos completos del 
+                //usuario en formato json.
+                echo json_encode($usuario);
+    
+            }else{
+
+                //si la contrasenia no es correcta la correcta, se devuelvo el siguiente
+                // mensaje en formato json.
+                echo json_encode("contrasenia incorrecta");
+            }
+                
+
+        // si el numero de cuenta del usuario no se encuentra en la base de datos entonces se devuelve como
+        // resultado null.
+        } else{
+
+            echo json_encode(null);
+        }
+
+        
+
+
+
+    }
+
 
 }
