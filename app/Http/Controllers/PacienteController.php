@@ -26,7 +26,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia','prosene'
+                'seguros_medicos.seguro_medico', 'categorias.categoria','prosene'
                 )
             ->get();
 
@@ -60,7 +60,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'seguros_medicos.seguro_medico', 'categorias.categoria', 'contrasenia',
+                'seguros_medicos.seguro_medico', 'categorias.categoria',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
                 
@@ -98,7 +98,7 @@ class PacienteController extends Controller
         // $paciente->emergencia_persona = $request->input('emergencia_persona');
         $paciente->seguro_medico = $request->input('seguro_medico');
         $paciente->categoria = $request->input('categoria');
-        $paciente->contrasenia = $request->input('contrasenia');
+        // $paciente->contrasenia = $request->input('contrasenia');
         
         
         $paciente->save();
@@ -284,4 +284,18 @@ class PacienteController extends Controller
     {
         //
     }
+
+
+    public function obtenerPaciente($cuenta){
+
+        $usuario = DB::table('pacientes')->where('numero_cuenta', $cuenta)->first();
+
+        echo json_encode($usuario);
+
+
+    }
+
+
+
+
 }
