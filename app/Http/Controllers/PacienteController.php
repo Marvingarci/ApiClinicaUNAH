@@ -214,7 +214,7 @@ class PacienteController extends Controller
             $temperatura = $request->input('temperatura');
             $pulso = $request->input('pulso');  
             $prosene = $request->input('prosene');  
-            $emergencia_persona = $request->input('emergencia_persona'); 
+            //$emergencia_persona = $request->input('emergencia_persona'); 
   
             switch ($request->input('categoria')) {
                 case 'Estudiante':
@@ -256,7 +256,7 @@ class PacienteController extends Controller
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
                 'prosene' => $prosene,
-                'emergencia_persona' => $emergencia_persona,
+                //'emergencia_persona' => $emergencia_persona,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
                 'contrasenia' => $contrasenia
