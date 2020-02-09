@@ -16,7 +16,6 @@ class CreatePacientesTable extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             $table->char('id_paciente');
             $table->string('numero_paciente')->unique()->nullable();
-            $table->string('contrasenia')->nullable();
             $table->string('nombre_completo');
             $table->string('numero_cuenta')->unique()->nullable();
             $table->string('numero_identidad')->unique();
@@ -29,7 +28,6 @@ class CreatePacientesTable extends Migration
             $table->integer('estado_civil');
             $table->integer('seguro_medico')->nullable();
             $table->string('numero_telefono')->unique();
-            // $table->string('emergencia_persona');
             $table->string('peso')->nullable();
             $table->string('talla')->nullable();
             $table->string('imc')->nullable();
@@ -38,7 +36,6 @@ class CreatePacientesTable extends Migration
             $table->string('pulso')->nullable();
             $table->integer('categoria'); 
             $table->string('prosene')->nullable();           
-            // $table->char('categoria')->default('E');
             $table->timestamps();
 
             $table->primary('id_paciente');
