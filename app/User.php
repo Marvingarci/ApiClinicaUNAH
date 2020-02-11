@@ -12,7 +12,7 @@ class  User  extends  Authenticatable  implements  JWTSubject {
     protected $table = 'logins'; // colocamos el nombre de la tabla
 
 	protected  $fillable = [
-		'cuenta', 'password', 'nombre', 'carrera','centro','numero_identidad','imagen'
+		'id_login','cuenta', 'password', 'nombre', 'carrera','centro','numero_identidad','imagen'
 	];
 
 	protected  $hidden = [
