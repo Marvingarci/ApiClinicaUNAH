@@ -9,6 +9,7 @@ use  JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 include '../includes/login_unah.php';
 
 class LoginController extends Controller
@@ -175,6 +176,8 @@ class LoginController extends Controller
 		$user = JWTAuth::authenticate($request->token);
 		return  response()->json(['user' => $user]);
     }
+
+    
     
     // funcion que sirve para verificar si un usuario existe en la base de datos y si su contrasenia
     // es correcta, arrojando diferentes resultados segun sea el caso.
