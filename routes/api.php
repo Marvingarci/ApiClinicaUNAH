@@ -54,7 +54,6 @@ Route::get('obtenerColumnaNumeroTelefono/{numero_telefono}','PacienteController@
 Route::resource('habitos_toxicologicos','HabitosToxicologicosController');
 Route::get('obtenerUsuario/{cuenta}/{clave}','LoginController@obtenerUsuario');
 Route::get('obtenerAdministrador/{nombre_usuario}','AdministradorController@obtenerAdministrador');
-
 Route::get('obtenerPaciente/{cuenta}','PacienteController@obtenerPaciente');
 
 
