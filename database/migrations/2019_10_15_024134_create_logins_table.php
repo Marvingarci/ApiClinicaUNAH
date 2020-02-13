@@ -17,11 +17,13 @@ class CreateLoginsTable extends Migration
             $table->bigIncrements('id_login');
             $table->string('cuenta');
             $table->string('password');
-            $table->string('nombre');
-            $table->string('carrera');
-            $table->string('centro');
-            $table->string('numero_identidad');
+            $table->string('nombre')->nullable();
+            $table->string('carrera')->nullable();
+            $table->string('centro')->nullable();
+            $table->string('numero_identidad')->nullable();
             $table->longText('imagen')->nullable();
+            $table->bigInteger('id_administrador')->nullable();
+            $table->bigInteger('id_medico')->nullable();
 
             $table->timestamps();
         });
