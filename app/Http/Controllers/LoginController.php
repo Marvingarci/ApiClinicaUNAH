@@ -118,7 +118,6 @@ class LoginController extends Controller
         $datos_login->centro = $alumno['centro'];
         $datos_login->numero_identidad = $alumno['numero_identidad'];
         $datos_login->imagen = $alumno['imagen'];
-        // $datos_login->password = $request->password;
         $datos_login->password = bcrypt($request->password);
         $datos_login->save();
 
