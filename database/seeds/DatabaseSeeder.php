@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
          $this->call(GruposEnfermedadesSeeder::class);
          $this->call(HabitosToxicologicosSeeder::class);
          $this->call(CategoriasSeeder::class);
+         $this->call(AdministradorSeeder::class);
 
          
          
