@@ -101,4 +101,15 @@ class AdministradorController extends Controller
 
 
     }
+
+
+    public function obtenerColumnaUsuarioAdmin($usuario){
+
+        $admin = DB::table('administradores')->select('usuario')
+        ->where('usuario', $usuario)
+        ->first();
+        
+        echo json_encode($admin);
+
+    }
 }
