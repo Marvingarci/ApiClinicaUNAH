@@ -129,4 +129,19 @@ class LoginAdminController extends Controller
             $login_admin = LoginAdmin::find($loginAdmin_id);
             $login_admin->delete();
     }
+
+    public function obtenerColumnaUsuario($usuario_admin){
+
+        // $telefonos = DB::table('pacientes')->select('numero_telefono')
+        // ->where('numero_telefono', $numero_telefono)
+        // ->first();
+        
+        // echo $telefonos->numero_telefono;
+
+        $usuarios = DB::table('login_admins')->select('usuario_admin')
+        ->where('usuario_admin', $usuario_admin) ->first();
+        
+        echo json_encode($usuarios);
+
+    }
 }
