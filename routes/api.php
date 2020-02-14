@@ -85,6 +85,7 @@ Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 
 //rutas melvin
+Route::get('obtenerColumnaUsuarioAdmin/{usuario}','AdministradorController@obtenerColumnaUsuarioAdmin');
 Route::resource('administradores','AdministradorController');
 Route::resource('medicos','MedicosController');
 
