@@ -32,12 +32,18 @@ class AdministradorController extends Controller
     public function store(Request $request)
     {
 
-        $login_admin = new Administrador();
-        $login_admin->usuario_admin = $request->input(['usuario_admin']);
-        $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
-        $login_admin->nombre_admin= $request->input(['nombre_admin']);
-        $login_admin->identidad_admin = $request->input(['identidad_admin']);
-        $login_admin->save();
+        $administrador = new Administrador();
+        $administrador->usuario = $request->input(['usuario']);
+        $administrador->nombre_completo = $request->input(['nombre_completo']);
+        $administrador->identidad = $request->input(['identidad']);
+        $administrador->save();
+
+        DB::table('logins')->insert([
+            'cuenta' => $administrador->usuario,
+            'password' => bcrypt($request->input(['password'])),
+            'id_administrador' => $administrador->id,
+        ]);
+
     }
 
     /**
@@ -87,19 +93,17 @@ class AdministradorController extends Controller
      * @param  \App\Administrador  $loginAdmin_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $loginAdmin_id)
-        {
-            $login_admin = Administrador::find($loginAdmin_id);
-            $login_admin->delete();
-    }
+    public function destroy( $id_administrador)
+    
+    {
+        if($id_administrador != 1 ){
+            //elimino al medico de la tabla administradores
+            DB::table('administradores')->where('id_administrador', $id_administrador)->delete();
 
-    public function obtenerAdministrador($nombre_usuario){
-
-        $admin = DB::table('administradores')->where('usuario_admin', $nombre_usuario)->first();
-
-        echo json_encode($admin);
-
-
+            //elimino al admnistrador de la tabla login para que ya no tengo acceso
+            DB::table('logins')->where('id_administrador', $id_administrador)->delete();
+        }
+        
     }
 
 
@@ -111,5 +115,16 @@ class AdministradorController extends Controller
         
         echo json_encode($admin);
 
+    }
+
+    public function obtenerAdministrador($id){
+        
+
+        $administrador = DB::table('administradores')->where('id_administrador', $id)->first();
+
+        echo json_encode($administrador);
+    
+    
+        
     }
 }
