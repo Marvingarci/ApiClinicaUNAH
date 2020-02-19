@@ -144,4 +144,14 @@ class MedicosController extends Controller
 
 
     }
+
+    public function obtenerColumnaUsuarioMedicos($usuario){
+
+        $medicos = DB::table('medicos')->select('usuario')
+        ->where('usuario', $usuario)
+        ->first();
+        
+        echo json_encode($medicos);
+
+    }
 }
