@@ -32,7 +32,7 @@ class EspecialidadesSeeder extends Seeder
 
         foreach($especialidades as $especialidad){
             DB::table('especialidades')->insert([
-                'especialidadM' => $especialidad,
+                'especialidad' => $especialidad,
             ]);
         }
     }
