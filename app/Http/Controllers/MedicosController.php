@@ -17,11 +17,11 @@ class MedicosController extends Controller
     public function index()
     {
         $medicos = DB::table('medicos')
-        ->join('especialidades', 'medicos.especialidadM', '=', 'especialidades.id_especialidad')
+        ->join('especialidades', 'medicos.especialidad', '=', 'especialidades.id_especialidad')
         
        ->select(
-          'id','usuarioM', 'contraseniaM','nombreM',
-           'identidadM', 'especialidades.especialidadM'
+          'id_medico','usuario','nombre',
+           'numero_identidad', 'especialidades.especialidad'
            
            ) 
         ->get();
@@ -52,13 +52,19 @@ class MedicosController extends Controller
         // $contra = $request->input('contraseniaM');
         // $hashed = Hash::make($contra);
 
-        $medicos = new Medicos();
-        $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM =$request->input(['contraseniaM']);
-        $medicos->nombreM = $request->input(['nombreM']);
-        $medicos->identidadM = $request->input(['identidadM']);
-        $medicos->especialidadM = $request->input(['especialidadM']);
-        $medicos->save();
+        $medico = new Medicos();
+        $medico->usuario = $request->input(['usuario']);
+        $medico->nombre = $request->input(['nombre']);
+        $medico->numero_identidad = $request->input(['numero_identidad']);
+        $medico->especialidad = $request->input(['especialidad']);
+        $medico->save();
+
+        DB::table('logins')->insert([
+            'cuenta' => $medico->usuario,
+            'password' => bcrypt($request->input(['password'])),
+            'id_medico' => $medico->id,
+        ]);
+
     }
 
     /**
@@ -70,11 +76,11 @@ class MedicosController extends Controller
     public function show( $id)
     {
         $medicos = DB::table('medicos')
-        ->join('especialidades', 'medicos.especialidadM', '=', 'especialidades.id_especialidad')
-        ->where('id', $id)
+        ->join('especialidades', 'medicos.especialidad', '=', 'especialidades.id_especialidad')
+        ->where('id_medico', $id)
         ->select(
-            'id','usuarioM', 'contraseniaM','nombreM',
-             'identidadM', 'especialidades.especialidadM'
+            'id_medico','usuario','nombre',
+             'numero_identidad', 'especialidades.especialidad'
            
             ) 
         ->first();
@@ -106,11 +112,11 @@ class MedicosController extends Controller
         // $hashed = Hash::make($contra);
 
         $medicos = Medicos::find($medicos_id);
-        $medicos->usuarioM = $request->input(['usuarioM']);
-        $medicos->contraseniaM = $request->input(['contraseniaM']);
-        $medicos->nombreM= $request->input(['nombreM']);
-        $medicos->identidadM = $request->input(['identidadM']);
-        $medicos->especialidadM = $request->input(['especialidadM']);
+        $medicos->usuarioM = $request->input(['usuario']);
+        // $medicos->contraseniaM = $request->input(['contraseniaM']);
+        $medicos->nombre= $request->input(['nombre']);
+        $medicos->numero_identidad = $request->input(['numero_identidad']);
+        $medicos->especialidad = $request->input(['especialidad']);
         $medicos->save();
     }
 
@@ -120,9 +126,22 @@ class MedicosController extends Controller
      * @param  \App\Medicos  $medicos_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($medicos_id)
+    public function destroy($id_medico)
     {
-        $medicos = Medicos::find($medicos_id);
-            $medicos->delete();
+
+        //elimino al medico de la tabla medicos
+        DB::table('medicos')->where('id_medico', $id_medico)->delete();
+
+        //elimino al medico de la tabla login para que ya no tengo acceso
+        DB::table('logins')->where('id_medico', $id_medico)->delete();
+    }
+
+    public function obtenerMedico($id){
+
+        $medico = DB::table('medicos')->where('id_medico', $id)->first();
+
+        echo json_encode($medico);
+
+
     }
 }
