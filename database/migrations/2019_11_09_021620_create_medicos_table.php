@@ -14,12 +14,12 @@ class CreateMedicosTable extends Migration
     public function up()
     {
         Schema::create('medicos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('usuarioM');
-            $table->string('contraseniaM');
-            $table->string('nombreM');
-            $table->string('identidadM');
-            $table->string('especialidadM');
+            $table->bigIncrements('id_medico');
+            $table->string('usuario');
+            // $table->string('contraseniaM');
+            $table->string('nombre');
+            $table->string('numero_identidad');
+            $table->string('especialidad');
             $table->timestamps();
         });
     }
