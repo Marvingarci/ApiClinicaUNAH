@@ -23,16 +23,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('loguear', 'LoginController@login');// cuando el usuario ya esta registrado.
 Route::post('registrar', 'LoginController@register');// cuando el usuario entra por primera vez.
 
+
 // estas rutas requiren de un token válido para poder accederse.
 Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::post('logout', 'AuthController@logout');
-    Route::get('getCurrentUser', 'LoginController@getAuthUser');
+
+    Route::post('logout', 'LoginController@logout'); 
+    Route::post('getCurrentUser', 'LoginController@getAuthUser');
+
 
 });
 
 // Route::group(['middleware' => ['jwt.verify']], function() {
 //     /*AÑADE AQUI LAS RUTAS QUE QUIERAS PROTEGER CON JWT*/
-//     Route::post('/logout', 'AuthController@logout');
+//     // Route::post('/logout', 'AuthController@logout');
+//     Route::post('getCurrentUser', 'LoginController@getAuthUser');
+
 // });
 
 
