@@ -101,6 +101,7 @@ Route::resource('medicos','MedicosController');
 Route::resource('inventarios','InventarioController');
 Route::get('medicamentos','InventarioController@obtenerMedicamentos');
 Route::post('medicamentos/egreso','InventarioController@disminucion');
+Route::get('obtenerColumnaUsuarioMedicos/{usuario}','MedicosController@obtenerColumnaUsuarioMedicos');
 
 
 
