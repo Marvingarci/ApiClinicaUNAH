@@ -75,15 +75,14 @@ class AdministradorController extends Controller
      * @param  \App\Administrador  $loginAdmin_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $loginAdmin_id)
+    public function update(Request $request, $id_administrador)
     {
 
-        $login_admin = Administrador::find($loginAdmin_id);
-        $login_admin->usuario_admin = $request->input(['usuario_admin']);
-        $login_admin->contrasenia_admin = $request->input(['contrasenia_admin']);
-        $login_admin->nombre_admin= $request->input(['nombre_admin']);
-        $login_admin->identidad_admin = $request->input(['identidad_admin']);
-        $login_admin->save();
+        $administrador = Administrador::find($id_administrador);
+        $administrador->usuario = $request->input(['usuario']);
+        $administrador->nombre_completo= $request->input(['nombre_completo']);
+        $administrador->identidad = $request->input(['identidad']);
+        $administrador->save();
     
     }
 

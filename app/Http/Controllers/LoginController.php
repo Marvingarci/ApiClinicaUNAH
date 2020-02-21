@@ -173,7 +173,7 @@ class LoginController extends Controller
 		]);
 
 		$user = JWTAuth::authenticate($request->token);
-		return  response()->json(['user' => $user]);
+		return  response()->json($user);
     }
 
     

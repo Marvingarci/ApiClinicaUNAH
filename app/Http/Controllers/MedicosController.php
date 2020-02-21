@@ -106,18 +106,15 @@ class MedicosController extends Controller
      * @param  \App\Medicos  $medicos_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $medicos_id)
+    public function update(Request $request, $id_medico)
     {
-        // $contra = $request->input('contraseniaM');
-        // $hashed = Hash::make($contra);
-
-        $medicos = Medicos::find($medicos_id);
-        $medicos->usuarioM = $request->input(['usuario']);
-        // $medicos->contraseniaM = $request->input(['contraseniaM']);
-        $medicos->nombre= $request->input(['nombre']);
-        $medicos->numero_identidad = $request->input(['numero_identidad']);
-        $medicos->especialidad = $request->input(['especialidad']);
-        $medicos->save();
+    
+        $medico = Medicos::find($id_medico);
+        $medico->usuario = $request->input(['usuario']);
+        $medico->nombre = $request->input(['nombre']);
+        $medico->numero_identidad = $request->input(['numero_identidad']);
+        $medico->especialidad = $request->input(['especialidad']);
+        $medico->save();
     }
 
     /**
