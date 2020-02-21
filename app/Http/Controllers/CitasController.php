@@ -27,7 +27,7 @@ class CitasController extends Controller
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
-            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
+            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 

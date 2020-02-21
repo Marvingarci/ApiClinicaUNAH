@@ -26,7 +26,7 @@ class PacienteController extends Controller
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
-                'seguros_medicos.seguro_medico', 'categorias.categoria','prosene'
+                'seguros_medicos.seguro_medico', 'categorias.categoria','prosene',DB::raw("DATEDIFF(current_date, fecha_nacimiento)/365 as edad")
                 )
             ->get();
 
@@ -102,6 +102,7 @@ class PacienteController extends Controller
         
         
         $paciente->save();
+
 
         
 
