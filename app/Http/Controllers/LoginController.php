@@ -80,15 +80,31 @@ class LoginController extends Controller
      * @param  \App\Login  $login
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_login)
+    public function update(Request $request)
     {
-        if($request->input('password')!= null){
-            $nuevo_password = bcrypt($request->password);
+        if($request->cuenta){
 
-            DB::table('logins')
-            ->where('id_login', $id_login)
-            ->update(['password' =>  $nuevo_password]);
+            if($request->input('password')!= null ){
+
+                $nuevo_password = bcrypt($request->password);
+    
+                DB::table('logins')
+                ->where('cuenta', $request->cuenta)
+                ->update(['password' =>  $nuevo_password]);
+            }
+
+        }else{
+
+            if($request->input('password')!= null ){
+
+                $nuevo_password = bcrypt($request->password);
+    
+                DB::table('logins')
+                ->where('id_login', $request->id_login)
+                ->update(['password' =>  $nuevo_password]);
+            }
         }
+        
     }
 
     /**
@@ -133,19 +149,32 @@ class LoginController extends Controller
 	}
 
     public  function  login(Request  $request) {
+
 		$input = $request->only('cuenta', 'password');
-		$jwt_token = null;
-		if (!$jwt_token = JWTAuth::attempt($input)) {
-			return  response()->json([
+        $jwt_token = JWTAuth::attempt($input);
+        
+		if ($jwt_token = JWTAuth::attempt($input)) {
+
+            return  response()->json([
+                'codigoError' => 0,
+                'msg' => 'Todo bien',
+                'token' => $jwt_token
+            ]);
+
+			
+        } else{
+
+            return  response()->json([
 				'status' => 'invalid_credentials',
 				'message' => 'Correo o contraseña no válidos.',
-			], 401);
-		}
+            ], 401);
+            
 
-		return  response()->json([
-			'status' => 'ok',
-			'token' => $jwt_token,
-		]);
+
+        }
+        
+
+		
 	}
 
 	public  function  logout(Request  $request) {
@@ -167,20 +196,34 @@ class LoginController extends Controller
 		}
 	}
 
-	public  function  getAuthUser(Request  $request) {
+    public  function  getAuthUser(Request $request) {
+
 		$this->validate($request, [
 			'token' => 'required'
 		]);
 
-		$user = JWTAuth::authenticate($request->token);
-		return  response()->json($user);
+        $user = JWTAuth::authenticate($request->token);
+        
+		return  response()->json([
+
+            'cuenta' => $user->cuenta,
+            'nombre' => $user->nombre,
+            'carrera' => $user->carrera,
+            'numero_identidad' => $user->numero_identidad,
+            'id_medico' => $user->id_medico,
+            'id_administrador' => $user->id_administrador,
+
+        ]);
     }
 
     
     
     // funcion que sirve para verificar si un usuario existe en la base de datos y si su contrasenia
     // es correcta, arrojando diferentes resultados segun sea el caso.
-    public function obtenerUsuario($cuenta, $password){
+    public function obtenerUsuario(Request $request){
+
+        $cuenta = $request->cuenta;
+        $password = $request->password;
 
         //verifico si el numero de cuenta del usuario existe en la base de datos
         if($usuario = DB::table('logins')->where('cuenta', $cuenta)->first()){
@@ -191,13 +234,30 @@ class LoginController extends Controller
     
                 //si la contrasenia es la correcta se devuelve como resultado los datos completos del 
                 //usuario en formato json.
-                echo json_encode($usuario);
+                
+                // return  response()->json(["codigoError"=>0, "msg"=> "eso mero"]);
+                return $this->login($request);
+
+                // $user = $this->getAuthUser($token);
+
+                // return response()->json([
+                //     'codigoError' => 0,
+                //     'msg' => 'Todo bien',
+                //     'token' => $jwt_token,
+                //     // 'cuenta' => $user->cuenta,
+                //     // 'nombre' => $user->nombre,
+                //     // 'carrera' => $user->carrera,
+                //     // 'numero_identidad' => $user->numero_identidad,
+                //     // 'id_medico' => $user->id_medico,
+                //     // 'id_administrador' => $user->id_administrador,
+
+                // ]);
     
             }else{
 
                 //si la contrasenia no es correcta la correcta, se devuelvo el siguiente
                 // mensaje en formato json.
-                echo json_encode("contrasenia incorrecta");
+                return  response()->json(["codigoError" => 1, "msg"=> "clave incorrecta"]);
             }
                 
 
@@ -205,10 +265,35 @@ class LoginController extends Controller
         // resultado null.
         } else{
 
-            echo json_encode(null);
+            return  response()->json(["codigoError"=> 2, "msg"=> "el usuario no existe"]);
+
         }
 
-        
+
+    }
+
+    public function verificarClave(Request $request){
+
+        $cuenta = $request->cuenta;
+        $password = $request->password;
+
+
+        $usuario = DB::table('logins')->where('cuenta', $cuenta)->first();
+
+        if(Hash::check($password, $usuario->password)){
+
+            return response()->json([
+                'codigoError' => 0,
+                'msg' => 'todo bien'
+            ]);
+        } else {
+
+            return response()->json([
+                'codigoError' => 1,
+                'msg' => 'Clave incorrecta'
+            ]);
+        }
+
 
 
 
