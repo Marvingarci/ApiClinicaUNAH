@@ -62,7 +62,7 @@ class MedicosController extends Controller
         DB::table('logins')->insert([
             'cuenta' => $medico->usuario,
             'password' => bcrypt($request->input(['password'])),
-            'id_medico' => $medico->id,
+            'id_medico' => $medico->id_medico,
         ]);
 
     }
