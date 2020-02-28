@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TelefonosEmergencia;
+use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
 
 class TelefonosEmergenciaController extends Controller
@@ -14,6 +15,19 @@ class TelefonosEmergenciaController extends Controller
      */
     public function index()
     {
+       
+    //     $telefonos_emergencia = DB::table('pacientes')
+    //     ->join('telefonos_emergencias','pacientes.id_paciente', '=', 'telefonos_emergencias.id_telefono_emergencia')
+        
+    //     ->select(
+    //         'pacientes.id_paciente',
+    //         'telefonos_emergencias.telefono_emergencia',
+    //         'telefonos_emergencias.emergencia_persona'
+    //         )
+    //     ->get();
+
+    // echo json_encode($telefonos_emergencia);
+
         $telefonos_emergencia = TelefonosEmergencia::get();
         echo json_encode($telefonos_emergencia);
     
@@ -42,9 +56,14 @@ class TelefonosEmergenciaController extends Controller
      * @param  \App\TelefonosEmergencia  $telefonosEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function show(TelefonosEmergencia $telefonosEmergencia)
+    public function show($id_paciente)
     {
-        //
+        $telefonosEmergencia = DB::select(
+        'SELECT  telefono_emergencia, emergencia_persona
+         FROM telefonos_emergencias
+         WHERE id_paciente = ? 
+        ', [$id_paciente]);
+        echo json_encode($telefonosEmergencia);
     }
 
     
