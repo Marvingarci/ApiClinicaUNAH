@@ -41,7 +41,7 @@ class AdministradorController extends Controller
         DB::table('logins')->insert([
             'cuenta' => $administrador->usuario,
             'password' => bcrypt($request->input(['password'])),
-            'id_administrador' => $administrador->id,
+            'id_administrador' => $administrador->id_administrador,
         ]);
 
     }
