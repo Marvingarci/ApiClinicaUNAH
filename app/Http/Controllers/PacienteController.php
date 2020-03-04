@@ -133,6 +133,21 @@ class PacienteController extends Controller
 
     }
 
+    public function obtenerColumnaIdentidad($numero_identidad){
+
+        // $telefonos = DB::table('pacientes')->select('numero_telefono')
+        // ->where('numero_telefono', $numero_telefono)
+        // ->first();
+        
+        // echo $telefonos->numero_telefono;
+
+        $identidad = DB::table('pacientes')->select('numero_identidad')
+        ->where('numero_identidad', $numero_identidad)
+        ->first();
+        
+        echo json_encode($identidad);
+
+    }
 
     /**
      * Update the specified resource in storage.
