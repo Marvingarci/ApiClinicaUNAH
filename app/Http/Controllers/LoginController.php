@@ -135,6 +135,7 @@ class LoginController extends Controller
         $datos_login->numero_identidad = $alumno['numero_identidad'];
         $datos_login->imagen = $alumno['imagen'];
         $datos_login->password = bcrypt($request->password);
+        $datos_login->id_rol = 1;
         $datos_login->save();
 
         if ($this->loginAfterSignUp) {
@@ -198,11 +199,22 @@ class LoginController extends Controller
 
     public  function  getAuthUser(Request $request) {
 
+        $rol;
+
 		$this->validate($request, [
 			'token' => 'required'
 		]);
 
         $user = JWTAuth::authenticate($request->token);
+
+        if($user->id_rol == 1){
+            $rol = 'Estudiante'; 
+        }else if($user->id_rol == 2){
+            $rol = 'Administrador';
+        } else{
+            $rol = 'Medico';
+        }
+        
         
 		return  response()->json([
 
@@ -210,8 +222,7 @@ class LoginController extends Controller
             'nombre' => $user->nombre,
             'carrera' => $user->carrera,
             'numero_identidad' => $user->numero_identidad,
-            'id_medico' => $user->id_medico,
-            'id_administrador' => $user->id_administrador,
+            'rol' => $rol
 
         ]);
     }
