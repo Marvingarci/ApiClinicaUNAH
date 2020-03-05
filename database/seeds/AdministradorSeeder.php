@@ -21,7 +21,7 @@ class AdministradorSeeder extends Seeder
         DB::table('logins')->insert([
             'cuenta' => 'admin',
             'password' => bcrypt('admin'),
-            'id_administrador' => '1'
+            'id_rol' => '2'
         ]);
 
     }

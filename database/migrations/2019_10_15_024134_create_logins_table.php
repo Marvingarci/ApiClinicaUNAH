@@ -22,8 +22,7 @@ class CreateLoginsTable extends Migration
             $table->string('centro')->nullable();
             $table->string('numero_identidad')->nullable();
             $table->longText('imagen')->nullable();
-            $table->bigInteger('id_administrador')->nullable();
-            $table->bigInteger('id_medico')->nullable();
+            $table->bigInteger('id_rol')->nullable();
 
             $table->timestamps();
         });
