@@ -11,7 +11,7 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-        $Categoria = array(
+        $Categorias = array(
 
             'Empleado',
             'Visitante',
@@ -20,9 +20,9 @@ class CategoriasSeeder extends Seeder
 
         );
 
-        foreach($Categoria as $Categorias){
+        foreach($Categorias as $Categoria){
             DB::table('categorias')->insert([
-                'categoria' => $Categorias,
+                'categoria' => $Categoria,
             ]);
         }
     
