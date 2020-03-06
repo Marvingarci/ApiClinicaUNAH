@@ -20,8 +20,7 @@ class PacientesAntecedentesFamiliaresController extends Controller
         // echo json_encode($pacientesAntecedentesFamiliares);
 
         $pacientesAntecedentesFamiliares = DB::table('pacientes')
-            ->join('pacientes_antecedentes_familiares',
-             'pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
+            ->join('pacientes_antecedentes_familiares','pacientes.id_paciente', '=', 'pacientes_antecedentes_familiares.id_paciente')
             ->join('enfermedades', 'enfermedades.id_enfermedad', '=', 'pacientes_antecedentes_familiares.id_enfermedad')
             ->join('parentescos', 'parentescos.id_parentesco', '=', 'pacientes_antecedentes_familiares.id_parentesco')
             
@@ -60,6 +59,7 @@ class PacientesAntecedentesFamiliaresController extends Controller
      * @param  \App\PacientesAntecedentesFamiliares  $pacientesAntecedentesFamiliares
      * @return \Illuminate\Http\Response
      */
+
     public function show($id_paciente)
     {
         // $pacienteAntecedenteFamiliar = DB::table('pacientes')
@@ -77,7 +77,8 @@ class PacientesAntecedentesFamiliaresController extends Controller
         //     ->get();
 
 
-        $pacienteAntecedenteFamiliar = DB::select('SELECT  grupos_enfermedades.grupo_enfermedad,  enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+        $pacienteAntecedenteFamiliar = DB::select(
+    'SELECT  grupos_enfermedades.grupo_enfermedad,  enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
         join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
         JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
         JOIN grupos_enfermedades ON grupos_enfermedades.id_grupo_enfermedad = enfermedades.id_grupo_enfermedad

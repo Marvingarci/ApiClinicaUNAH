@@ -86,8 +86,8 @@ class TelefonosEmergenciaController extends Controller
      * @param  \App\TelefonosEmergencia  $telefonosEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TelefonosEmergencia $telefonosEmergencia)
+    public function destroy( $id_telefono_emergencia)
     {
-        //
+        DB::table('telefonos_emergencias')->where('id_telefono_emergencia', $id_telefono_emergencia)->delete(); 
     }
 }
