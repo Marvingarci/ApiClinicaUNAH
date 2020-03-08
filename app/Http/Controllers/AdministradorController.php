@@ -79,10 +79,16 @@ class AdministradorController extends Controller
     {
 
         $administrador = Administrador::find($id_administrador);
+
+        DB::table('logins')
+            ->where('cuenta', $administrador->usuario)
+            ->update(['cuenta' => $request->usuario]);
+
         $administrador->usuario = $request->input(['usuario']);
         $administrador->nombre_completo= $request->input(['nombre_completo']);
         $administrador->identidad = $request->input(['identidad']);
-        $administrador->save();
+        $administrador->save();  
+
     
     }
 
