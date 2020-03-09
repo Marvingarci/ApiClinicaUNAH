@@ -59,7 +59,7 @@ class TelefonosEmergenciaController extends Controller
     public function show($id_paciente)
     {
         $telefonosEmergencia = DB::select(
-        'SELECT  telefono_emergencia, emergencia_persona
+        'SELECT id_telefono_emergencia, telefono_emergencia, emergencia_persona
          FROM telefonos_emergencias
          WHERE id_paciente = ? 
         ', [$id_paciente]);
@@ -91,3 +91,4 @@ class TelefonosEmergenciaController extends Controller
         DB::table('telefonos_emergencias')->where('id_telefono_emergencia', $id_telefono_emergencia)->delete(); 
     }
 }
+
