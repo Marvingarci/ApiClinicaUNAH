@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Medicos;
+use App\Medico;
 use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -52,7 +52,7 @@ class MedicosController extends Controller
         // $contra = $request->input('contraseniaM');
         // $hashed = Hash::make($contra);
 
-        $medico = new Medicos();
+        $medico = new Medico();
         $medico->usuario = $request->input(['usuario']);
         $medico->nombre = $request->input(['nombre']);
         $medico->numero_identidad = $request->input(['numero_identidad']);
@@ -103,34 +103,58 @@ class MedicosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medicos  $medicos_id
+     * @param  \App\Medico  $medicos_id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id_medico)
     {
-    
-        $medico = Medicos::find($id_medico);
+
+        $medico = Medico::find($id_medico);    
+
+        DB::table('logins')
+            ->where('cuenta', $medico->usuario)
+            ->update(['cuenta' => $request->usuario]);
+            
         $medico->usuario = $request->input(['usuario']);
         $medico->nombre = $request->input(['nombre']);
         $medico->numero_identidad = $request->input(['numero_identidad']);
         $medico->especialidad = $request->input(['especialidad']);
         $medico->save();
+
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Medicos  $medicos_id
+     * @param  \App\Medico  $medicos_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id_medico)
     {
 
-        //elimino al medico de la tabla medicos
-        DB::table('medicos')->where('id_medico', $id_medico)->delete();
+    
+        $medico = Medico::find($id_medico);
 
-        //elimino al medico de la tabla login para que ya no tengo acceso
-        DB::table('logins')->where('id_medico', $id_medico)->delete();
+        //elimino al admnistrador de la tabla login para que ya no tengo acceso
+        DB::table('logins')->where([
+
+            ['cuenta', $medico->usuario],
+            ['id_rol', 3],
+
+        ])->delete();
+
+
+        //elimino al medico de la tabla administradores
+        DB::table('medicos')->where('id_medico', $medico->id_medico)->delete();
+
+            
+    
+        // //elimino al medico de la tabla medicos
+        // DB::table('medicos')->where('id_medico', $id_medico)->delete();
+
+        // //elimino al medico de la tabla login para que ya no tengo acceso
+        // DB::table('logins')->where('id_medico', $id_medico)->delete();
     }
 
     public function obtenerMedico($id){

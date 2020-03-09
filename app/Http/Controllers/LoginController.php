@@ -208,23 +208,60 @@ class LoginController extends Controller
         $user = JWTAuth::authenticate($request->token);
 
         if($user->id_rol == 1){
+
             $rol = 'Estudiante'; 
-        }else if($user->id_rol == 2){
+            $usuarioRol = DB::table('pacientes')->where('numero_cuenta', $user->cuenta)->first();
+
+            return  response()->json([
+
+                'id' => $usuarioRol->id_paciente,
+                'usuario' => $usuarioRol->numero_cuenta,
+                'nombre' => $usuarioRol->nombre_completo,
+                'carrera' => $usuarioRol->carrera,
+                'numero_identidad' => $usuarioRol->numero_identidad,
+                'rol' => $rol
+    
+            ]);
+
+        } else if($user->id_rol == 2){
+
             $rol = 'Administrador';
+            $usuarioRol = DB::table('administradores')->where('usuario', $user->cuenta)->first();
+
+            return  response()->json([
+
+                'id' => $usuarioRol->id_administrador,
+                'usuario' => $usuarioRol->usuario,
+                'nombre' => $usuarioRol->nombre_completo,
+                'numero_identidad' => $usuarioRol->identidad,
+                'rol' => $rol
+    
+            ]);
+
+
+
         } else{
+
             $rol = 'Medico';
+            $usuarioRol = DB::table('medicos')->where('usuario', $user->cuenta)->first();
+
+            return  response()->json([
+
+                'id' => $usuarioRol->id_medico,
+                'usuario' => $usuarioRol->usuario,
+                'nombre' => $usuarioRol->nombre,
+                'numero_identidad' => $usuarioRol->numero_identidad,
+                'especialidad' => $usuarioRol->especialidad,
+                'rol' => $rol
+    
+            ]);
+
         }
+
         
         
-		return  response()->json([
-
-            'cuenta' => $user->cuenta,
-            'nombre' => $user->nombre,
-            'carrera' => $user->carrera,
-            'numero_identidad' => $user->numero_identidad,
-            'rol' => $rol
-
-        ]);
+        
+		
     }
 
     
@@ -243,26 +280,9 @@ class LoginController extends Controller
             // la correcta.
             if (Hash::check($password, $usuario->password)) {
     
-                //si la contrasenia es la correcta se devuelve como resultado los datos completos del 
-                //usuario en formato json.
-                
-                // return  response()->json(["codigoError"=>0, "msg"=> "eso mero"]);
+                //si la contrasenia es la correcta se manda a loguear al usuario
                 return $this->login($request);
 
-                // $user = $this->getAuthUser($token);
-
-                // return response()->json([
-                //     'codigoError' => 0,
-                //     'msg' => 'Todo bien',
-                //     'token' => $jwt_token,
-                //     // 'cuenta' => $user->cuenta,
-                //     // 'nombre' => $user->nombre,
-                //     // 'carrera' => $user->carrera,
-                //     // 'numero_identidad' => $user->numero_identidad,
-                //     // 'id_medico' => $user->id_medico,
-                //     // 'id_administrador' => $user->id_administrador,
-
-                // ]);
     
             }else{
 

@@ -79,10 +79,16 @@ class AdministradorController extends Controller
     {
 
         $administrador = Administrador::find($id_administrador);
+
+        DB::table('logins')
+            ->where('cuenta', $administrador->usuario)
+            ->update(['cuenta' => $request->usuario]);
+
         $administrador->usuario = $request->input(['usuario']);
         $administrador->nombre_completo= $request->input(['nombre_completo']);
         $administrador->identidad = $request->input(['identidad']);
-        $administrador->save();
+        $administrador->save();  
+
     
     }
 
@@ -96,11 +102,23 @@ class AdministradorController extends Controller
     
     {
         if($id_administrador != 1 ){
-            //elimino al medico de la tabla administradores
-            DB::table('administradores')->where('id_administrador', $id_administrador)->delete();
+
+            $administrador = Administrador::find($id_administrador);
+
+            DB::table('logins')->where([
+
+                ['cuenta', $administrador->usuario],
+                ['id_rol', 2],
+
+            ])->delete();
 
             //elimino al admnistrador de la tabla login para que ya no tengo acceso
-            DB::table('logins')->where('id_administrador', $id_administrador)->delete();
+            // DB::table('logins')->where('cuenta', 'id_rol', [$administrador->usuario, $administrador->id_rol])->delete();
+
+            //elimino al medico de la tabla administradores
+            DB::table('administradores')->where('id_administrador', $administrador->id_administrador)->delete();
+
+            
         }
         
     }
