@@ -21,13 +21,14 @@ class CitasController extends Controller
         $paciente = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
         ->join('pacientes', 'citas.id_paciente', '=', 'pacientes.id_paciente')
+        ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
         //->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
         ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('fechayHora', $hoy)
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
-            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','inventarios.nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 
@@ -73,6 +74,7 @@ class CitasController extends Controller
         $citas->indicaciones = $request->input('indicaciones');
         $citas->remitido = $request->input('remitido');
         $citas->fechayHora = $actual->format('d-m-y');
+        $citas->nombre = $request->input('nombre');
 
 
         $citas->save();
@@ -88,12 +90,13 @@ class CitasController extends Controller
     {
         $paciente = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
+        ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
         //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('id_paciente', $id_paciente)
         ->select(
             'id_paciente','peso', 'talla','imc',
             'temperatura', 'presion', 'pulso', 'siguiente_cita',
-            'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
+            'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
             
         ->get();
