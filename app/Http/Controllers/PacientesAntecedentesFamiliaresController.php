@@ -84,8 +84,18 @@ class PacientesAntecedentesFamiliaresController extends Controller
         JOIN grupos_enfermedades ON grupos_enfermedades.id_grupo_enfermedad = enfermedades.id_grupo_enfermedad
          WHERE id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
 
-
         echo json_encode($pacienteAntecedenteFamiliar);
+    }
+
+    public function obtenerdesnutricionAF( $id_paciente){
+        $desnutricionAF = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+                join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+                JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+                 WHERE id_grupo_enfermedad = 1 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+        
+                echo json_encode($desnutricionAF);
+
     }
 
    
@@ -108,8 +118,8 @@ class PacientesAntecedentesFamiliaresController extends Controller
      * @param  \App\PacientesAntecedentesFamiliares  $pacientesAntecedentesFamiliares
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PacientesAntecedentesFamiliares $pacientesAntecedentesFamiliares)
+    public function destroy( $pacientesAntecedentesFamiliares)
     {
-        //
+        DB::table('pacientes_antecedentes_familiares')->where('id_enfermedad', $pacientesAntecedentesFamiliares)->delete(); 
     }
 }
