@@ -64,6 +64,9 @@ Route::get('obtenerPaciente/{cuenta}','PacienteController@obtenerPaciente');
 Route::get('obtenerMedico/{id}','MedicosController@obtenerMedico');
 Route::post('verificarClave','LoginController@verificarClave');
 
+//obtener datos de los grupos de enfermedades Antecedentes Familiares
+Route::get('obtenerdesnutricionAF/{id}','PacientesAntecedentesFamiliaresController@obtenerdesnutricionAF');
+
 
 
 
