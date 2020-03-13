@@ -63,6 +63,11 @@ Route::get('obtenerAdministrador/{id}','AdministradorController@obtenerAdministr
 Route::get('obtenerPaciente/{cuenta}','PacienteController@obtenerPaciente');
 Route::get('obtenerMedico/{id}','MedicosController@obtenerMedico');
 Route::post('verificarClave','LoginController@verificarClave');
+Route::post('duplicarRegistro','LoginController@duplicarRegistro');
+Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico');
+
+
+
 
 
 
