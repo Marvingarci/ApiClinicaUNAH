@@ -57,6 +57,7 @@ class MedicosController extends Controller
         $medico->nombre = $request->input(['nombre']);
         $medico->numero_identidad = $request->input(['numero_identidad']);
         $medico->especialidad = $request->input(['especialidad']);
+        $medico->permisos = $request->permisos;
         $medico->save();
 
         DB::table('logins')->insert([
@@ -108,17 +109,19 @@ class MedicosController extends Controller
      */
     public function update(Request $request, $id_medico)
     {
-
         $medico = Medico::find($id_medico);    
 
         DB::table('logins')
             ->where('cuenta', $medico->usuario)
-            ->update(['cuenta' => $request->usuario]);
+            ->update([
+                'cuenta' => $request->usuario,
+            ]);
             
         $medico->usuario = $request->input(['usuario']);
         $medico->nombre = $request->input(['nombre']);
         $medico->numero_identidad = $request->input(['numero_identidad']);
         $medico->especialidad = $request->input(['especialidad']);
+        $medico->permisos = $request->permisos;
         $medico->save();
 
         
