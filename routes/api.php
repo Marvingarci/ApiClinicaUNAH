@@ -69,6 +69,9 @@ Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico
 
 
 
+//obtener datos de los grupos de enfermedades Antecedentes Familiares
+Route::get('obtenerdesnutricionAF/{id}','PacientesAntecedentesFamiliaresController@obtenerdesnutricionAF');
+
 
 
 
