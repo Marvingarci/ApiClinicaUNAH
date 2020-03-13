@@ -34,6 +34,7 @@ class LoginController extends Controller
 
         
         $logins = Login::all()->last();
+
         if($logins==null){
             $logins= new Login();
             $logins->cuenta='';
@@ -42,14 +43,15 @@ class LoginController extends Controller
             $logins->centro='';
             $logins->numero_identidad='';
         }
-        echo json_encode($logins);
+
+        return  response()->json($logins);
     }
 
     public function ultimoIdLogin(){
 
         $si= DB::select('SELECT MAX(id_login) as ultimoId FROM logins');
 
-        echo json_encode($si);
+        return response()->json($si);
         
         
     }
@@ -89,8 +91,12 @@ class LoginController extends Controller
                 $nuevo_password = bcrypt($request->password);
     
                 DB::table('logins')
-                ->where('cuenta', $request->cuenta)
-                ->update(['password' =>  $nuevo_password]);
+                ->where([
+                    ['cuenta', $request->cuenta],
+                    // ['id_rol', $request->id_rol]
+
+                ])->update([
+                    'password' =>  $nuevo_password]);
             }
 
         }else{
@@ -104,6 +110,7 @@ class LoginController extends Controller
                 ->update(['password' =>  $nuevo_password]);
             }
         }
+        
         
     }
 
@@ -219,7 +226,7 @@ class LoginController extends Controller
                 'nombre' => $usuarioRol->nombre_completo,
                 'carrera' => $usuarioRol->carrera,
                 'numero_identidad' => $usuarioRol->numero_identidad,
-                'rol' => $rol
+                'rol' => $rol,
     
             ]);
 
@@ -252,7 +259,9 @@ class LoginController extends Controller
                 'nombre' => $usuarioRol->nombre,
                 'numero_identidad' => $usuarioRol->numero_identidad,
                 'especialidad' => $usuarioRol->especialidad,
-                'rol' => $rol
+                'rol' => $rol,
+                'permisos' => $usuarioRol->permisos,
+
     
             ]);
 
@@ -328,6 +337,27 @@ class LoginController extends Controller
 
 
 
+    }
+
+    public function duplicarRegistro(Request $request){
+
+        	
+        $registro = Login::find($request->id_login);
+        $nuevo_registro = $registro->replicate();
+        $nuevo_registro->id_rol = $request->id_rol;
+        $nuevo_registro->save();
+
+    }
+    
+    public function obtenerIdLoginMedico($medico){
+
+        $id = DB::table('logins')
+            ->select('id_login')
+            ->where('cuenta', $medico)
+            ->first();
+
+           
+        return response()->json($id);
     }
 
 
