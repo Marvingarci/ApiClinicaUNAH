@@ -95,7 +95,42 @@ class PacientesAntecedentesFamiliaresController extends Controller
                  WHERE id_grupo_enfermedad = 1 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
         
                 echo json_encode($desnutricionAF);
-
+    }
+    public function obtenermentalesAF( $id_paciente){
+        $mentalesAF = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+                join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+                JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+                 WHERE id_grupo_enfermedad = 2 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+        
+                echo json_encode($mentalesAF);
+    }
+    public function obteneralergiasAF( $id_paciente){
+        $alergiasAF = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+                join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+                JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+                 WHERE id_grupo_enfermedad = 3 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+        
+                echo json_encode($alergiasAF);
+    }
+    public function obtenercanceresAF( $id_paciente){
+        $canceresAF = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+                join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+                JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+                 WHERE id_grupo_enfermedad = 4 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+        
+                echo json_encode($canceresAF);
+    }
+    public function obtenerotrosAF( $id_paciente){
+        $otrosAF = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad, GROUP_CONCAT(parentescos.parentesco) AS parentesco FROM pacientes_antecedentes_familiares 
+                join enfermedades on pacientes_antecedentes_familiares.id_enfermedad = enfermedades.id_enfermedad 
+                JOIN parentescos ON pacientes_antecedentes_familiares.id_parentesco = parentescos.id_parentesco
+                 WHERE id_grupo_enfermedad = 5 && id_paciente = ? GROUP BY pacientes_antecedentes_familiares.id_enfermedad', [$id_paciente]);
+        
+                echo json_encode($otrosAF);
     }
 
    
