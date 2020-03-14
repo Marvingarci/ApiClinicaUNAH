@@ -30,7 +30,7 @@ class PacienteController extends Controller
                 )
             ->get();
 
-        return response()-json($pacientes);
+        return response()->json($pacientes);
 
 
 
