@@ -79,6 +79,46 @@ class PacientesAntecedentesPersonalesController extends Controller
         echo json_encode($paciente_antecedente_personal);
     }
 
+    public function obtenerdesnutricionAP( $id_paciente){
+        $desnutricionAP = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad,observacion FROM pacientes_antecedentes_personales 
+                join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+                 WHERE id_grupo_enfermedad = 1 && id_paciente = ?', [$id_paciente]);        
+                echo json_encode($desnutricionAP);
+    }
+
+    public function obtenermentalesAP( $id_paciente){
+        $mentalAP = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad,observacion FROM pacientes_antecedentes_personales 
+                join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+                 WHERE id_grupo_enfermedad = 2 && id_paciente = ?', [$id_paciente]);        
+                echo json_encode($mentalAP);
+    }
+
+    public function obteneralergiasAP( $id_paciente){
+        $alergiaAP = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad,observacion FROM pacientes_antecedentes_personales 
+                join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+                 WHERE id_grupo_enfermedad = 3 && id_paciente = ?', [$id_paciente]);        
+                echo json_encode($alergiaAP);
+    }
+
+    public function obtenercanceresAP( $id_paciente){
+        $cancerAP = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad,observacion FROM pacientes_antecedentes_personales 
+                join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+                 WHERE id_grupo_enfermedad = 4 && id_paciente = ?', [$id_paciente]);        
+                echo json_encode($cancerAP);
+    }
+
+    public function obtenerotrosAP( $id_paciente){
+        $otrosAP = DB::select(
+            'SELECT enfermedades.id_enfermedad ,enfermedades.id_grupo_enfermedad, enfermedades.enfermedad,observacion FROM pacientes_antecedentes_personales 
+                join enfermedades on pacientes_antecedentes_personales.id_enfermedad = enfermedades.id_enfermedad 
+                 WHERE id_grupo_enfermedad = 5 && id_paciente = ?', [$id_paciente]);        
+                echo json_encode($otrosAP);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
