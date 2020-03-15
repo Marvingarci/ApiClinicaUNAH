@@ -69,12 +69,21 @@ Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico
 
 
 
+
 //obtener datos de los grupos de enfermedades Antecedentes Familiares
 Route::get('obtenerdesnutricionAF/{id}','PacientesAntecedentesFamiliaresController@obtenerdesnutricionAF');
 Route::get('obtenermentalesAF/{id}','PacientesAntecedentesFamiliaresController@obtenermentalesAF');
 Route::get('obteneralergiasAF/{id}','PacientesAntecedentesFamiliaresController@obteneralergiasAF');
 Route::get('obtenercanceresAF/{id}','PacientesAntecedentesFamiliaresController@obtenercanceresAF');
 Route::get('obtenerotrosAF/{id}','PacientesAntecedentesFamiliaresController@obtenerotrosAF');
+
+//obtener datos de los grupos de enfermedades Antecedentes Personal
+Route::get('obtenerdesnutricionAP/{id}','PacientesAntecedentesPersonalesController@obtenerdesnutricionAP');
+Route::get('obtenermentalesAP/{id}','PacientesAntecedentesPersonalesController@obtenermentalesAP');
+Route::get('obteneralergiasAP/{id}','PacientesAntecedentesPersonalesController@obteneralergiasAP');
+Route::get('obtenercanceresAP/{id}','PacientesAntecedentesPersonalesController@obtenercanceresAP');
+Route::get('obtenerotrosAP/{id}','PacientesAntecedentesPersonalesController@obtenerotrosAP');
+Route::get('obtenerhospitalarias_quirurgicas/{id}','PacientesHospitalariasQuirurgicasController@obtenerhospitalarias_quirurgicas');
 
 
 
