@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PacientesHospitalariasQuirurgicas;
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\DB;
 
 class PacientesHospitalariasQuirurgicasController extends Controller
 {
@@ -49,6 +50,15 @@ class PacientesHospitalariasQuirurgicasController extends Controller
     {
         //
     }
+
+    public function obtenerhospitalarias_quirurgicas($id_paciente){
+        $paciente_hospitalarias_quirurgicas = DB::select('SELECT  id_hospitalaria_quirurgica, fecha, tiempo_hospitalizacion,       diagnostico,
+        tratamiento FROM pacientes_hospitalarias_quirurgicas
+         WHERE id_paciente = ?;', [$id_paciente]);
+
+        echo json_encode($paciente_hospitalarias_quirurgicas);
+    }
+    
 
     /**
      * Update the specified resource in storage.
