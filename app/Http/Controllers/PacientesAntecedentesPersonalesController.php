@@ -148,8 +148,8 @@ class PacientesAntecedentesPersonalesController extends Controller
      * @param  \App\PacientesAntecedentesPersonales  $pacientesAntecedentesPersonales
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PacientesAntecedentesPersonales $pacientesAntecedentesPersonales)
+    public function destroy( $pacientesAntecedentesPersonales)
     {
-        //
+        DB::table('pacientes_antecedentes_personales')->where('id_enfermedad', $pacientesAntecedentesPersonales)->delete(); 
     }
 }
