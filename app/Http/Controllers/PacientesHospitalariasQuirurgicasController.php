@@ -78,8 +78,8 @@ class PacientesHospitalariasQuirurgicasController extends Controller
      * @param  \App\PacientesHospitalariasQuirurgicas  $pacientesHospitalariasQuirurgicas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PacientesHospitalariasQuirurgicas $pacientesHospitalariasQuirurgicas)
+    public function destroy( $pacientesHospitalariasQuirurgicas)
     {
-        //
+        DB::table('pacientes_hospitalarias_quirurgicas')->where('id_hospitalaria_quirurgica', $pacientesHospitalariasQuirurgicas)->delete(); 
     }
 }
