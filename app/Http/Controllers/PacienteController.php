@@ -273,7 +273,7 @@ class PacienteController extends Controller
                 'pulso' => $pulso,
                 'prosene' => $prosene,
                 //'emergencia_persona' => $emergencia_persona,
-                'seguro_medico' => $seguro_medico,
+                //'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
                 //'contrasenia' => $contrasenia
             ]);
