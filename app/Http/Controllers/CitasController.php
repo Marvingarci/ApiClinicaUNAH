@@ -18,21 +18,24 @@ class CitasController extends Controller
         $actual = Carbon::now();
 
         $hoy = $actual->format('d-m-y');
-        $paciente = DB::table('citas')
+        $citas = DB::table('citas')
         ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
         ->join('pacientes', 'citas.id_paciente', '=', 'pacientes.id_paciente')
-        ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
-        //->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
         ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('fechayHora', $hoy)
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','citas.id_paciente','citas.peso', 'citas.talla','citas.imc',
             'citas.temperatura', 'citas.presion', 'citas.pulso', 'siguiente_cita',
-            'observaciones','inventarios.nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 
-    echo json_encode($paciente);
+        return response()->json($citas);
+
+
+        
+
+    // echo json_encode($paciente);
     
     //echo json_encode($hoy);
         
@@ -74,6 +77,10 @@ class CitasController extends Controller
         $citas->indicaciones = $request->input('indicaciones');
         $citas->remitido = $request->input('remitido');
         $citas->fechayHora = $actual->format('d-m-y');
+       // if($request->input('nombre') == 0){
+       //     $citas->nombre = null;
+       // }
+
         $citas->nombre = $request->input('nombre');
 
 
@@ -88,20 +95,56 @@ class CitasController extends Controller
      */
     public function show($id_paciente)
     {
-        $paciente = DB::table('citas')
-        ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
-        ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
-        //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
-        ->where('id_paciente', $id_paciente)
-        ->select(
-            'id_paciente','peso', 'talla','imc',
-            'temperatura', 'presion', 'pulso', 'siguiente_cita',
-            'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
-            )
-            
-        ->get();
+        $cita = citas::find($id_paciente);
 
-    echo json_encode($paciente);
+        if($cita->nombre != 0){
+
+             $cita = DB::table('citas')
+            ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
+            ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
+            //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
+            ->where('id_paciente', $id_paciente)
+            ->select(
+                'id_paciente','peso', 'talla','imc',
+                'temperatura', 'presion', 'pulso', 'siguiente_cita',
+                'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
+                )
+                
+            ->get();
+
+            return response()->json($cita);
+
+        }else{
+
+            return response()->json([$cita]);
+
+        }
+
+       
+
+
+        // if(empty($paciente)){
+
+
+        //     $paciente = DB::table('citas')
+        //     ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
+        //     ->where('id_paciente', $id_paciente)
+        //     ->select(
+        //         'id_paciente','peso', 'talla','imc',
+        //         'temperatura', 'presion', 'pulso', 'siguiente_cita',
+        //         'observaciones', 'impresion', 'nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
+        //         )
+                
+        //     ->get();
+
+        //     return response()->json($paciente);
+
+        // }else{
+
+        //     return response()->json($paciente);
+        // }
+
+
     }
 
     /**
