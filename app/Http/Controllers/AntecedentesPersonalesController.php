@@ -18,7 +18,7 @@ class AntecedentesPersonalesController extends Controller
     public function index()
     {
        $antecedentes_personales = antecedentesPersonales::get();
-       echo json_encode($antecedentes_personales);
+       return response()->json($antecedentes_personales);
     }
 
 
@@ -27,7 +27,7 @@ class AntecedentesPersonalesController extends Controller
         $antecedente_personal = DB::table('antecedentes_personales')
                                 ->where('id_paciente', $id_paciente)->first();
 
-        echo json_encode($antecedente_personal);
+        return response()->json($antecedente_personal);
     }
     /**
      * Store a newly created resource in storage.
@@ -37,47 +37,49 @@ class AntecedentesPersonalesController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'diabetes' => 'required',
-        //     'tb_pulmonar' => 'required',
-        //     'its' => 'required',
-        //     'desnutricion' => 'required',
-        //     'enfermedades_mentales' => 'required',
-        //     'convulsiones' => 'required',
-        //     'alergias' => 'required',
-        //     'cancer' => 'required',
-        //     'hospitalarias_quirurgicas' => 'required',
-        //     'traumaticos' => 'required',
-        // ]);
+        $datos_validados = $request->validate([
+
+            'diabetes' => 'required',
+            'tb_pulmonar' => 'required',
+            'its' => 'required',
+            'desnutricion' => 'required',
+            'enfermedades_mentales' => 'required',
+            'convulsiones' => 'required',
+            'alergias' => 'required',
+            'cancer' => 'required',
+            'hospitalarias_quirurgicas' => 'required',
+            'traumaticos' => 'required',
+
+        ]);
 
 
         $antecedente_personales = new antecedentesPersonales();
-        $antecedente_personales->diabetes = $request->input(['diabetes']);
+        $antecedente_personales->diabetes = $datos_validados['diabetes'];
         $antecedente_personales->observacion_diabetes = $request->input(['observacion_diabetes']);
-        $antecedente_personales->tb_pulmonar = $request->input(['tb_pulmonar']);
+        $antecedente_personales->tb_pulmonar = $datos_validados['tb_pulmonar'];
         $antecedente_personales->observacion_tb_pulmonar = $request->input(['observacion_tb_pulmonar']);
-        $antecedente_personales->its = $request->input(['its']);
+        $antecedente_personales->its = $datos_validados['its'];
         $antecedente_personales->observacion_its = $request->input(['observacion_its']);
-        $antecedente_personales->desnutricion = $request->input(['desnutricion']);
+        $antecedente_personales->desnutricion = $datos_validados['desnutricion'];
         $antecedente_personales->observacion_desnutricion = $request->input(['observacion_desnutricion']);
         $antecedente_personales->tipo_desnutricion = $request->input(['tipo_desnutricion']);
-        $antecedente_personales->enfermedades_mentales = $request->input(['enfermedades_mentales']);
+        $antecedente_personales->enfermedades_mentales = $datos_validados['enfermedades_mentales'];
         $antecedente_personales->observacion_enfermedades_mentales = $request->input(['observacion_enfermedades_mentales']);
         $antecedente_personales->tipo_enfermedad_mental = $request->input(['tipo_enfermedad_mental']);
-        $antecedente_personales->convulsiones = $request->input(['convulsiones']);
+        $antecedente_personales->convulsiones = $datos_validados['convulsiones'];
         $antecedente_personales->observacion_convulsiones = $request->input(['observacion_convulsiones']);
-        $antecedente_personales->alergias = $request->input(['alergias']);
+        $antecedente_personales->alergias = $datos_validados['alergias'];
         $antecedente_personales->observacion_alergias = $request->input(['observacion_alergias']);
         $antecedente_personales->tipo_alergia = $request->input(['tipo_alergia']);
-        $antecedente_personales->cancer = $request->input(['cancer']);
+        $antecedente_personales->cancer = $datos_validados['cancer'];
         $antecedente_personales->observacion_cancer = $request->input(['observacion_cancer']);
         $antecedente_personales->tipo_cancer = $request->input(['tipo_cancer']);
-        $antecedente_personales->hospitalarias_quirurgicas = $request->input(['hospitalarias_quirurgicas']);
+        $antecedente_personales->hospitalarias_quirurgicas = $datos_validados['hospitalarias_quirurgicas'];
         $antecedente_personales->fecha_antecedente_hospitalario = $request->input(['fecha_antecedente_hospitalario']);
         $antecedente_personales->tratamiento = $request->input(['tratamiento']);
         $antecedente_personales->diagnostico = $request->input(['diagnostico']);
         $antecedente_personales->tiempo_hospitalizacion = $request->input(['tiempo_hospitalizacion']); 
-        $antecedente_personales->traumaticos = $request->input(['traumaticos']);
+        $antecedente_personales->traumaticos = $datos_validados['traumaticos'];
         $antecedente_personales->observacion_traumaticos = $request->input(['observacion_traumaticos']);
         $antecedente_personales->otros = $request->input(['otros']);
         $antecedente_personales->observacion_otros = $request->input(['observacion_otros']);
