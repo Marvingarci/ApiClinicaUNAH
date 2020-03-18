@@ -36,7 +36,8 @@ class AntecedentesFamiliaresController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $datos_validados = $request->validate([
+
             'diabetes' => 'required',
             'tb_pulmonar' => 'required',
             'desnutricion' => 'required',
@@ -48,30 +49,31 @@ class AntecedentesFamiliaresController extends Controller
             'hipertension_arterial' => 'required',
         ],[
             '.required' => 'El campo es obligatorio'
+
         ]);
         
         $antecedente_familiar = new antecedentesFamiliares();
-        $antecedente_familiar->diabetes = $request->input(['diabetes']);
+        $antecedente_familiar->diabetes = $datos_validados['diabetes'];
         $antecedente_familiar->parentesco_diabetes = $request->input(['parentesco_diabetes']);
-        $antecedente_familiar->tb_pulmonar = $request->input(['tb_pulmonar']);
+        $antecedente_familiar->tb_pulmonar = $datos_validados['tb_pulmonar'];
         $antecedente_familiar->parentesco_tb_pulmonar = $request->input(['parentesco_tb_pulmonar']);
-        $antecedente_familiar->desnutricion = $request->input(['desnutricion']);
+        $antecedente_familiar->desnutricion = $datos_validados['desnutricion'];
         $antecedente_familiar->parentesco_desnutricion = $request->input(['parentesco_desnutricion']);
         $antecedente_familiar->tipo_desnutricion = $request->input(['tipo_desnutricion']);
-        $antecedente_familiar->enfermedades_mentales = $request->input(['enfermedades_mentales']);
+        $antecedente_familiar->enfermedades_mentales = $datos_validados['enfermedades_mentales'];
         $antecedente_familiar->parentesco_enfermedades_mentales = $request->input(['parentesco_enfermedades_mentales']);
         $antecedente_familiar->tipo_enfermedad_mental = $request->input(['tipo_enfermedad_mental']);
-        $antecedente_familiar->convulsiones = $request->input(['convulsiones']);
+        $antecedente_familiar->convulsiones = $datos_validados['convulsiones'];
         $antecedente_familiar->parentesco_convulsiones = $request->input(['parentesco_convulsiones']);
-        $antecedente_familiar->alcoholismo_sustancias_psicoactivas = $request->input(['alcoholismo_sustancias_psicoactivas']);
+        $antecedente_familiar->alcoholismo_sustancias_psicoactivas = $datos_validados['alcoholismo_sustancias_psicoactivas'];
         $antecedente_familiar->parentesco_alcoholismo_sustancias_psicoactivas = $request->input(['parentesco_alcoholismo_sustancias_psicoactivas']);
-        $antecedente_familiar->alergias = $request->input(['alergias']);
+        $antecedente_familiar->alergias = $datos_validados['alergias'];
         $antecedente_familiar->parentesco_alergias = $request->input(['parentesco_alergias']);
         $antecedente_familiar->tipo_alergia = $request->input(['tipo_alergia']);
-        $antecedente_familiar->cancer = $request->input(['cancer']);
+        $antecedente_familiar->cancer = $datos_validados['cancer'];
         $antecedente_familiar->parentesco_cancer = $request->input(['parentesco_cancer']);
         $antecedente_familiar->tipo_cancer = $request->input(['tipo_cancer']);
-        $antecedente_familiar->hipertension_arterial = $request->input(['hipertension_arterial']);
+        $antecedente_familiar->hipertension_arterial = $datos_validados['hipertension_arterial'];
         $antecedente_familiar->parentesco_hipertension_arterial = $request->input(['parentesco_hipertension_arterial']);        
         $antecedente_familiar->otros = $request->input(['otros']);
         $antecedente_familiar->parentesco_otros = $request->input(['parentesco_otros']);
