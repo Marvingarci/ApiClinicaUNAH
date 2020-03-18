@@ -22,11 +22,11 @@ class CreatePacientesTable extends Migration
             $table->longText('imagen')->nullable();
             $table->string('lugar_procedencia');
             $table->string('direccion');
-            $table->string('carrera');
+            $table->string('carrera')->nullable();
             $table->string('fecha_nacimiento');
             $table->string('sexo');
             $table->integer('estado_civil');
-            $table->integer('seguro_medico')->nullable();
+            $table->integer('seguro_medico');
             $table->string('numero_telefono')->unique();
             $table->string('peso')->nullable();
             $table->string('talla')->nullable();
