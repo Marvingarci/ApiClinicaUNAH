@@ -19,7 +19,7 @@ class HabitosToxicologicosController extends Controller
     {
         $habito_toxicologicos = HabitosToxicologicos::get();
 
-        echo json_encode($habito_toxicologicos);
+        response()->json($habito_toxicologicos);
     }
 
 
@@ -32,12 +32,20 @@ class HabitosToxicologicosController extends Controller
      */
     public function store(Request $request)
     {
+
+        $datos_validados = $request->validate([
+
+            'habito_toxicologico' => 'required',
+
+        ]);
+
         $insertarHabito = new insertarHabito();
-        $habito_toxicologico = $request->input('habito_toxicologico');
+
+        $habito_toxicologico = $datos_validados['habito_toxicologico'];
 
         $id_habito_toxicologico = $insertarHabito->ejecutar($habito_toxicologico);
 
-        echo json_encode($id_habito_toxicologico);
+        return response()->json($id_habito_toxicologico);
     }
 
     /**
@@ -56,7 +64,7 @@ class HabitosToxicologicosController extends Controller
 
         $habitoS_toxicologicos = DB::table('habitos_toxicologicos')->select('habito_toxicologico')->get();
         
-        echo json_encode($habitoS_toxicologicos);
+        return response()->json($habitoS_toxicologicos);
 
     }
 
