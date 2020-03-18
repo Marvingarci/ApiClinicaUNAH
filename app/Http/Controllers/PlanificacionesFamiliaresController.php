@@ -27,8 +27,7 @@ class PlanificacionesFamiliaresController extends Controller
             )
         ->get();
 
-        //$planificaciones_familiares = planificacionesFamiliares::get();
-        echo json_encode($planificaciones_familiares);
+        return response()->json($planificaciones_familiares);
     }
 
 
@@ -41,10 +40,16 @@ class PlanificacionesFamiliaresController extends Controller
      */
     public function store(Request $request)
     {
+        $datos_validados = $request->validate([
+            'planificacion_familiar' => 'required',
+            'observacion_planificacion' => 'max:60|min:4'
+        ]);
+
         $planificacion_familiar = new planificacionesFamiliares();
-        $planificacion_familiar->planificacion_familiar = $request->input(['planificacion_familiar']);
+
+        $planificacion_familiar->planificacion_familiar = $datos_validados['planificacion_familiar'];
         $planificacion_familiar->metodo_planificacion = $request->input(['metodo_planificacion']);
-        $planificacion_familiar->observacion_planificacion = $request->input(['observacion_planificacion']);
+        $planificacion_familiar->observacion_planificacion = $datos_validados['observacion_planificacion'];
         $planificacion_familiar->id_paciente = $request->input(['id_paciente']);
 
         $planificacion_familiar->save();
@@ -63,7 +68,7 @@ class PlanificacionesFamiliaresController extends Controller
             )
         ->first();
 
-        echo json_encode($planificacion_familiar);
+        return response()->json($planificacion_familiar);
     }
 
     /**
