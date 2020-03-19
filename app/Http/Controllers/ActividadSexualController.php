@@ -27,8 +27,7 @@ class ActividadSexualController extends Controller
             )
         ->get();
 
-        //$actividades_sexuales = ActividadSexual::get();
-        echo json_encode($actividades_sexuales);
+        return response()->json($actividades_sexuales);
     }
 
    // public function show($id_actividad_sexual)
@@ -54,10 +53,21 @@ class ActividadSexualController extends Controller
      */
     public function store(Request $request)
     {
+
+        $datos_validados = $request->validate([
+
+            'actividad_sexual' => 'required',
+            'edad_inicio_sexual' => ['max:1000', 'min:0'],
+            'numero_parejas_sexuales' => ['max:1000', 'min:0']
+
+
+        ]);
+
         $actividad_sexual = new ActividadSexual();
-        $actividad_sexual->actividad_sexual = $request->input(['actividad_sexual']);
-        $actividad_sexual->edad_inicio_sexual = $request->input(['edad_inicio_sexual']);
-        $actividad_sexual->numero_parejas_sexuales = $request->input(['numero_parejas_sexuales']);
+
+        $actividad_sexual->actividad_sexual = $datos_validados['actividad_sexual'];
+        $actividad_sexual->edad_inicio_sexual = $datos_validados['edad_inicio_sexual'];
+        $actividad_sexual->numero_parejas_sexuales = $datos_validados['numero_parejas_sexuales'];
         $actividad_sexual->practicas_sexuales_riesgo = $request->input(['practicas_sexuales_riesgo']);
         $actividad_sexual->id_paciente = $request->input(['id_paciente']);
 

@@ -18,7 +18,7 @@ class AntecedentesObstetricosController extends Controller
     {
 
         $antecedentes_obstetricos = antecedentesObstetricos::get();
-        echo json_encode($antecedentes_obstetricos);
+        return response()->json($antecedentes_obstetricos);
     }
 
     public function show($id_paciente){
@@ -27,7 +27,7 @@ class AntecedentesObstetricosController extends Controller
         ->where('id_paciente', $id_paciente)
         ->first();
 
-        echo json_encode($antecedente_obstetrico);
+        return response()->json($antecedente_obstetrico);
     }
 
 
@@ -39,15 +39,27 @@ class AntecedentesObstetricosController extends Controller
      */
     public function store(Request $request)
     {
+        $datos_validados = $request->validate([
+            
+            'partos' => ['required', 'max:100', '0'],
+            'abortos' => ['required', 'max:100', '0'],
+            'cesarias' => ['required', 'max:100', '0'],
+            'hijos_vivos' => ['required', 'max:100', '0'],
+            'hijos_muertos' => ['required', 'max:100', '0'],
+            'observaciones' => ['max:60', 'min:4']
+        ]);
+
+
         $antecedente_obstetrico = new antecedentesObstetricos();
-        $antecedente_obstetrico->partos = $request->input(['partos']);
-        $antecedente_obstetrico->abortos = $request->input(['abortos']);
-        $antecedente_obstetrico->cesarias = $request->input(['cesarias']);
-        $antecedente_obstetrico->hijos_vivos = $request->input(['hijos_vivos']);
-        $antecedente_obstetrico->hijos_muertos = $request->input(['hijos_muertos']);
+        
+        $antecedente_obstetrico->partos = $datos_validados['partos'];
+        $antecedente_obstetrico->abortos = $datos_validados['abortos'];
+        $antecedente_obstetrico->cesarias = $datos_validados['cesarias'];
+        $antecedente_obstetrico->hijos_vivos = $datos_validados['hijos_vivos'];
+        $antecedente_obstetrico->hijos_muertos = $datos_validados['hijos_muertos'];
         $antecedente_obstetrico->fecha_termino_ult_embarazo = $request->input(['fecha_termino_ult_embarazo']);
         $antecedente_obstetrico->descripcion_termino_ult_embarazo = $request->input(['descripcion_termino_ult_embarazo']);
-        $antecedente_obstetrico->observaciones = $request->input(['observaciones']);
+        $antecedente_obstetrico->observaciones = $datos_validados['observaciones'];
         $antecedente_obstetrico->id_paciente = $request->input(['id_paciente']);
 
         $antecedente_obstetrico->save();

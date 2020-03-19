@@ -6,6 +6,7 @@ use App\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class PacienteController extends Controller
 {
     /**
@@ -20,7 +21,6 @@ class PacienteController extends Controller
         $pacientes = DB::table('pacientes')
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
-            //->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
             ->select(
                 'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
@@ -30,16 +30,7 @@ class PacienteController extends Controller
                 )
             ->get();
 
-        echo json_encode($pacientes);
-
-
-
-        //convertir los id a numero
-        // foreach ($pacientes as $paciente) {
-        // $numero = (int)$paciente->id_paciente;
-        // $paciente->id_paciente=$numero;
-        // }
-        
+        return response()->json($pacientes);
 
 
     }
@@ -53,7 +44,6 @@ class PacienteController extends Controller
         $paciente = DB::table('pacientes')
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
-            //->join('sexos', 'pacientes.sexo', '=', 'sexos.id_sexos')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
             ->where('id_paciente', $id_paciente)
             ->select(
@@ -66,7 +56,8 @@ class PacienteController extends Controller
                 
             ->first();
 
-        echo json_encode($paciente);
+        return response()->json($paciente);
+
     }
     
     
@@ -80,25 +71,42 @@ class PacienteController extends Controller
     {
 
 
-        // $estado_civil = $request->input('estado_civil');
+        $datos_validados = $request->validate([
+
+            'id_paciente' => 'required',
+            'nombre_completo' => ['required', 'regex:/^[a-zA-zñÑáéíóúÁÉÍÓÚ\s]{0,100}$/'],
+            'numero_cuenta' => ['nullable','regex:/^[2][0-9]{10}$/', 'unique:pacientes'],
+            'numero_identidad' => ['required', 'regex: /^\d{4}\d{4}\d{5}$/ ', 'unique:pacientes'],
+            'imagen'=>'nullable',
+            'direccion'=> ['required','min:20', 'max:50'],
+            'carrera' => ['nullable'],
+            'lugar_procedencia' => ['required' , 'regex:/^[a-zA-zñÑáéíóúÁÉÍÓÚ\s]{3,20}$/'],
+            'fecha_nacimiento' => ['required' , 'date'],
+            'sexo' => 'required',
+            'estado_civil' => ['required', 'integer'],
+            'numero_telefono' => ['required', 'regex:/^\d{8}$/'],
+            'seguro_medico' => ['required' , 'integer'],
+            'categoria' => ['required', 'integer'],
+        ]);
+
+
 
         $paciente = new Paciente();
-        $paciente->id_paciente = $request->input('id_paciente'); 
-        $paciente->nombre_completo = $request->input('nombre_completo');
-        $paciente->numero_cuenta = $request->input('numero_cuenta');
-        $paciente->numero_identidad = $request->input('numero_identidad');
-        $paciente->imagen = $request->input('imagen'); 
-        $paciente->direccion = $request->input('direccion');
-        $paciente->carrera = $request->input('carrera');
-        $paciente->lugar_procedencia = $request->input('lugar_procedencia');
-        $paciente->fecha_nacimiento = $request->input('fecha_nacimiento');
-        $paciente->sexo = $request->input('sexo');
-        $paciente->estado_civil = $request->input('estado_civil');
-        $paciente->numero_telefono = $request->input('numero_telefono');
-        // $paciente->emergencia_persona = $request->input('emergencia_persona');
-        $paciente->seguro_medico = $request->input('seguro_medico');
-        $paciente->categoria = $request->input('categoria');
-        // $paciente->contrasenia = $request->input('contrasenia');
+
+        $paciente->id_paciente = $datos_validados['id_paciente']; 
+        $paciente->nombre_completo = $datos_validados['nombre_completo'];
+        $paciente->numero_cuenta = $datos_validados['numero_cuenta'];
+        $paciente->numero_identidad = $datos_validados['numero_identidad'];
+        $paciente->imagen = $datos_validados['imagen']; 
+        $paciente->direccion = $datos_validados['direccion'];
+        $paciente->carrera = $datos_validados['carrera'];
+        $paciente->lugar_procedencia = $datos_validados['lugar_procedencia'];
+        $paciente->fecha_nacimiento = $datos_validados['fecha_nacimiento'];
+        $paciente->sexo = $datos_validados['sexo'];
+        $paciente->estado_civil = $datos_validados['estado_civil'];
+        $paciente->numero_telefono = $datos_validados['numero_telefono'];
+        $paciente->seguro_medico = $datos_validados['seguro_medico'];
+        $paciente->categoria = $datos_validados['categoria'];
         
         
         $paciente->save();
@@ -109,9 +117,11 @@ class PacienteController extends Controller
     }
 
     public function ultimoID(){
+
         $si= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes');
 
-        echo json_encode($si);
+        return response()->json($si);
+
         
         
     }
@@ -119,33 +129,23 @@ class PacienteController extends Controller
 
     public function obtenerColumnaNumeroTelefono($numero_telefono){
 
-        // $telefonos = DB::table('pacientes')->select('numero_telefono')
-        // ->where('numero_telefono', $numero_telefono)
-        // ->first();
         
-        // echo $telefonos->numero_telefono;
-
         $telefonos = DB::table('pacientes')->select('numero_telefono')
         ->where('numero_telefono', $numero_telefono)
         ->first();
         
-        echo json_encode($telefonos);
+        return response()->json($telefonos);
 
     }
 
     public function obtenerColumnaIdentidad($numero_identidad){
 
-        // $telefonos = DB::table('pacientes')->select('numero_telefono')
-        // ->where('numero_telefono', $numero_telefono)
-        // ->first();
-        
-        // echo $telefonos->numero_telefono;
 
         $identidad = DB::table('pacientes')->select('numero_identidad')
         ->where('numero_identidad', $numero_identidad)
         ->first();
         
-        echo json_encode($identidad);
+        return response()->json($identidad);
 
     }
 
@@ -162,7 +162,6 @@ class PacienteController extends Controller
         
         if($request->input('contrasenia')!= null){
             $nuevaContra = $request->input('contrasenia');
-           // $hashed = Hash::make($nuevaContra);
 
             DB::table('pacientes')
             ->where('id_paciente', $id_paciente)
@@ -230,7 +229,6 @@ class PacienteController extends Controller
             $temperatura = $request->input('temperatura');
             $pulso = $request->input('pulso');  
             $prosene = $request->input('prosene');  
-            //$emergencia_persona = $request->input('emergencia_persona'); 
   
             switch ($request->input('categoria')) {
                 case 'Estudiante':
@@ -245,9 +243,7 @@ class PacienteController extends Controller
                     break;
             }
 
-            //$categoria = $request->input('categoria');
             $contrasenia = $request->input('contrasenia');
-           // $hashed = Hash::make($contrasenia);
             
 
             DB::table('pacientes')
@@ -272,20 +268,12 @@ class PacienteController extends Controller
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
                 'prosene' => $prosene,
-                //'emergencia_persona' => $emergencia_persona,
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
-                //'contrasenia' => $contrasenia
             ]);
         }
 
-            
-                
-            
-            
-            
-        
-            
+                 
        
     }
 
@@ -306,7 +294,7 @@ class PacienteController extends Controller
 
         $usuario = DB::table('pacientes')->where('numero_cuenta', $cuenta)->first();
 
-        echo json_encode($usuario);
+        return response()->json($usuario);
 
 
     }
