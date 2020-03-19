@@ -129,6 +129,8 @@ Route::get('obtenerColumnaIdentidad/{numero_identidad}','PacienteController@obte
 //rutas marvin
 Route::get('pacientes/ultimo/si','PacienteController@ultimoID');
 Route::resource('citas','CitasController');
+Route::post('pacientes/actualizarImagen','PacienteController@actualizarfoto');
+
 
 
 

@@ -310,8 +310,15 @@ class PacienteController extends Controller
 
 
     }
+    public function actualizarfoto(Request $request){
+        $paciente = new Paciente();
 
-
-
+        $paciente->imagen = $request->input('imagen');
+        $paciente->id_paciente = $request->input('id_paciente');
+        $modificacion = Paciente::where('id_paciente',$request->input('id_paciente'))->first();
+        $new = Paciente::where('id_paciente', $paciente->id_paciente)
+            ->update(['imagen' =>  $paciente->imagen]);
+        
+    }
 
 }
