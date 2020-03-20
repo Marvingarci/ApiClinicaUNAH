@@ -108,8 +108,18 @@ class PacienteController extends Controller
         $paciente->seguro_medico = $datos_validados['seguro_medico'];
         $paciente->categoria = $datos_validados['categoria'];
         
-        
         $paciente->save();
+
+        $usuario = DB::table('logins')->where('cuenta', $paciente->numero_identidad)->first();
+
+        if(!isset($usuario)){
+
+            DB::table('logins')->insert([
+                'cuenta' => $paciente->numero_identidad,
+                'password' => bcrypt($request->input(['password'])),
+                'id_rol' => 1,
+            ]);
+        }
 
 
         
@@ -290,11 +300,42 @@ class PacienteController extends Controller
     }
 
 
-    public function obtenerPaciente($cuenta){
+    public function obtenerPaciente(Request $request){
 
-        $usuario = DB::table('pacientes')->where('numero_cuenta', $cuenta)->first();
+        
 
-        return response()->json($usuario);
+        $usuario = DB::table('pacientes')->where('numero_cuenta', $request->cuenta)->first();
+
+            // return response()->json($usuario);
+
+        if(!isset($usuario)){
+
+            $usuario = DB::table('pacientes')->where('numero_identidad', $request->cuenta)->first();
+
+            return response()->json($usuario);
+    
+
+        }else{
+        
+            return response()->json($usuario);
+    
+        }
+
+        // if($request->cuenta){
+
+        //     $usuario = DB::table('pacientes')->where('numero_cuenta', $request->cuenta)->first();
+
+        //      return response()->json($usuario);
+
+        // }else if($request->identidad){
+
+        //     $usuario = DB::table('pacientes')->where('numero_identidad', $request->identidad)->first();
+
+        //     return response()->json($usuario);
+
+        // }
+
+        
 
 
     }
