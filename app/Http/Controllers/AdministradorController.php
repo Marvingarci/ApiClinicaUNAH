@@ -18,7 +18,7 @@ class AdministradorController extends Controller
     {
 
         $login_admin = Administrador::get();
-        echo json_encode($login_admin);
+        return response()->json($login_admin);
     }
 
    
