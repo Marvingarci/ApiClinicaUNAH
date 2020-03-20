@@ -278,7 +278,7 @@ class PacienteController extends Controller
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
                 'prosene' => $prosene,
-                'seguro_medico' => $seguro_medico,
+                //'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
             ]);
         }
