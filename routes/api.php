@@ -60,7 +60,7 @@ Route::resource('habitos_toxicologicos','HabitosToxicologicosController');
 // Route::get('obtenerUsuario/{cuenta}/{clave}','LoginController@obtenerUsuario');
 Route::post('obtenerUsuario','LoginController@obtenerUsuario');
 Route::get('obtenerAdministrador/{id}','AdministradorController@obtenerAdministrador');
-Route::get('obtenerPaciente/{cuenta}','PacienteController@obtenerPaciente');
+Route::post('obtenerPaciente','PacienteController@obtenerPaciente');
 Route::get('obtenerMedico/{id}','MedicosController@obtenerMedico');
 Route::post('verificarClave','LoginController@verificarClave');
 Route::post('duplicarRegistro','LoginController@duplicarRegistro');
