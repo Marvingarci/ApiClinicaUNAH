@@ -217,18 +217,40 @@ class LoginController extends Controller
         if($user->id_rol == 1){
 
             $rol = 'Estudiante'; 
+
             $usuarioRol = DB::table('pacientes')->where('numero_cuenta', $user->cuenta)->first();
 
-            return  response()->json([
+            if(!isset($usuarioRol)){
 
-                'id' => $usuarioRol->id_paciente,
-                'usuario' => $usuarioRol->numero_cuenta,
-                'nombre' => $usuarioRol->nombre_completo,
-                'carrera' => $usuarioRol->carrera,
-                'numero_identidad' => $usuarioRol->numero_identidad,
-                'rol' => $rol,
-    
-            ]);
+                $usuarioRol = DB::table('pacientes')->where('numero_identidad', $user->cuenta)->first();
+
+                return  response()->json([
+
+                    'id' => $usuarioRol->id_paciente,
+                    'usuario' => $usuarioRol->numero_cuenta,
+                    'nombre' => $usuarioRol->nombre_completo,
+                    'carrera' => $usuarioRol->carrera,
+                    'numero_identidad' => $usuarioRol->numero_identidad,
+                    'rol' => $rol,
+        
+                ]);
+
+
+            }else{
+
+                return  response()->json([
+
+                    'id' => $usuarioRol->id_paciente,
+                    'usuario' => $usuarioRol->numero_cuenta,
+                    'nombre' => $usuarioRol->nombre_completo,
+                    'carrera' => $usuarioRol->carrera,
+                    'numero_identidad' => $usuarioRol->numero_identidad,
+                    'rol' => $rol,
+        
+                ]);
+            }
+
+            
 
         } else if($user->id_rol == 2){
 

@@ -38,10 +38,10 @@ class AntecedentesGinecologicosController extends Controller
     public function store(Request $request)
     {
         $datos_validados = $request->validate([
-            'edad_inicio_menstruacion' => ['required', 'max:18' , 'min:6'],
+            'edad_inicio_menstruacion' => ['required', 'max:18' , 'min:6', 'integer'],
             'fum' => ['required'],
             'citologia' => ['required'],
-            'resultado_citologia' => ['max:60','min:4'],
+            'resultado_citologia' => ['nullable','max:60','min:4'],
             'duracion_ciclo_menstrual' => ['max:60','min:4'],
             'periocidad_ciclo_menstrual' => ['required'],
             'caracteristicas_ciclo_menstrual' => ['required']
