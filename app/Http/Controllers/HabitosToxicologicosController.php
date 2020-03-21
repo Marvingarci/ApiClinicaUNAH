@@ -18,7 +18,6 @@ class HabitosToxicologicosController extends Controller
     public function index()
     {
         $habito_toxicologicos = HabitosToxicologicos::get();
-
         response()->json($habito_toxicologicos);
     }
 
@@ -34,17 +33,12 @@ class HabitosToxicologicosController extends Controller
     {
 
         $datos_validados = $request->validate([
-
             'habito_toxicologico' => 'required',
-
         ]);
 
         $insertarHabito = new insertarHabito();
-
         $habito_toxicologico = $datos_validados['habito_toxicologico'];
-
         $id_habito_toxicologico = $insertarHabito->ejecutar($habito_toxicologico);
-
         return response()->json($id_habito_toxicologico);
     }
 
@@ -54,18 +48,17 @@ class HabitosToxicologicosController extends Controller
      * @param  \App\HabitosToxicologicos  $habitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function show(HabitosToxicologicos $habitosToxicologicos)
-    {
-        //
+    public function show(HabitosToxicologicos $habitosToxicologicos,$id_habito_toxicologico)    {
+        $toxicologicos= DB::select('SELECT id_habito_toxicologico,habito_toxicologico
+        FROM habitos_toxicologicos
+         WHERE id_habito_toxicologico = ?;',[$id_habito_toxicologico]);
+        echo json_encode($toxicologicos);
     }
 
 
     public function obtenerColumnaHabitoToxicologico(){
-
-        $habitoS_toxicologicos = DB::table('habitos_toxicologicos')->select('habito_toxicologico')->get();
-        
+        $habitoS_toxicologicos = DB::table('habitos_toxicologicos')->select('habito_toxicologico')->get();        
         return response()->json($habitoS_toxicologicos);
-
     }
 
     
@@ -77,9 +70,14 @@ class HabitosToxicologicosController extends Controller
      * @param  \App\HabitosToxicologicos  $habitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HabitosToxicologicos $habitosToxicologicos)
-    {
-        //
+    public function update(Request $request,  $id_habito_toxicologico)    {
+        $habito_toxicologico = $request->input(['habito_toxicologico']);
+
+        DB::table('habitos_toxicologicos')
+        ->where('id_habito_toxicologico', $id_habito_toxicologico)
+        ->update([
+            'habito_toxicologico'=> $habito_toxicologico,
+        ]);
     }
 
     /**
@@ -90,6 +88,6 @@ class HabitosToxicologicosController extends Controller
      */
     public function destroy(HabitosToxicologicos $habitosToxicologicos)
     {
-        //
+       
     }
 }
