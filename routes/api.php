@@ -85,6 +85,10 @@ Route::get('obtenercanceresAP/{id}','PacientesAntecedentesPersonalesController@o
 Route::get('obtenerotrosAP/{id}','PacientesAntecedentesPersonalesController@obtenerotrosAP');
 Route::get('obtenerhospitalarias_quirurgicas/{id}','PacientesHospitalariasQuirurgicasController@obtenerhospitalarias_quirurgicas');
 
+//obtener unhabito para editar
+Route::get('obtenerUnhabito/{id}','PacientesHabitosToxicologicosController@obtenerUnhabito');
+
+
 
 
 
