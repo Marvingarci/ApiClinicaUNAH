@@ -69,7 +69,7 @@ class PacientesHabitosToxicologicosController extends Controller
 
     public function obtenerUnhabito(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos, $id_paciente_habito_toxicologico)
     {
-        $toxicologicos= DB::select('SELECT pacientes_habitos_toxicologicos.id_paciente_habito_toxicologico,pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
+        $toxicologicos= DB::select('SELECT habitos_toxicologicos.id_habito_toxicologico,pacientes_habitos_toxicologicos.id_paciente_habito_toxicologico,pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
         join habitos_toxicologicos on pacientes_habitos_toxicologicos.id_habito_toxicologico = habitos_toxicologicos.id_habito_toxicologico 
          WHERE id_paciente_habito_toxicologico = ?;',[$id_paciente_habito_toxicologico]);
 
@@ -85,23 +85,16 @@ class PacientesHabitosToxicologicosController extends Controller
      * @param  \App\PacientesHabitosToxicologicos  $pacientesHabitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id_habito_toxicologico)
-    {
-        $id_paciente = $request->input(['id_paciente']);
-        $id_habito_toxicologico = $request->input(['id_habito_toxicologico']);
+    public function update(Request $request,  $id_habito_toxicologico)    {       
         $observacion = $request->input(['observacion']);
-
-
-
         DB::table('pacientes_habitos_toxicologicos')
-            ->where('id_habito_toxicologico', $id_habito_toxicologico)
-            ->update([
-
-                'id_paciente'=> $id_paciente,
-                'id_habito_toxicologico' => $id_habito_toxicologico,
+            ->where('id_paciente_habito_toxicologico', $id_habito_toxicologico)
+            ->update([               
                 'observacion' => $observacion,
             ]);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
