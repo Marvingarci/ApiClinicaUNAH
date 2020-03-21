@@ -18,6 +18,7 @@ class HabitosToxicologicosPersonalesController extends Controller
     {
         $habitosToxicologicosPersonales = habitosToxicologicosPersonales::get();
         echo json_encode($habitosToxicologicosPersonales);
+      
     }
 
 
@@ -26,8 +27,7 @@ class HabitosToxicologicosPersonalesController extends Controller
         $habito_toxicologico_personal = DB::table('habitos_toxicologicos_personales')
         ->where('id_paciente', $id_paciente)
         ->first();
-
-        echo json_encode($habito_toxicologico_personal);
+        echo json_encode($habito_toxicologico_personal);      
     }
 
 
@@ -104,6 +104,6 @@ class HabitosToxicologicosPersonalesController extends Controller
      */
     public function destroy(habitosToxicologicosPersonales $habitosToxicologicosPersonales)
     {
-        //
+        DB::table('pacientes_habitos_toxicologicos')->where('id_enfermedad', $pacientesAntecedentesFamiliares)->delete(); 
     }
 }
