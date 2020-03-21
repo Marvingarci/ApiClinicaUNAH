@@ -23,6 +23,7 @@ class PacientesHabitosToxicologicosController extends Controller
                 'habitos_toxicologicos.id_habito_toxicologico', '=', 'pacientes_habitos_toxicologicos.id_habito_toxicologico')
             
             ->select(
+                'id_paciente_habito_toxicologico',
                 'pacientes.id_paciente',
                 'habitos_toxicologicos.habito_toxicologico',
                 'observacion'
@@ -49,6 +50,8 @@ class PacientesHabitosToxicologicosController extends Controller
         $paciente_habito_toxicologico->save();
     }
 
+    
+
     /**
      * Display the specified resource.
      *
@@ -57,9 +60,18 @@ class PacientesHabitosToxicologicosController extends Controller
      */
     public function show(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos, $id_paciente)
     {
-        $toxicologicos= DB::select('SELECT pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
+        $toxicologicos= DB::select('SELECT pacientes_habitos_toxicologicos.id_paciente_habito_toxicologico,pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
         join habitos_toxicologicos on pacientes_habitos_toxicologicos.id_habito_toxicologico = habitos_toxicologicos.id_habito_toxicologico 
          WHERE id_paciente = ?;',[$id_paciente]);
+
+        echo json_encode($toxicologicos);
+    }
+
+    public function obtenerUnhabito(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos, $id_paciente_habito_toxicologico)
+    {
+        $toxicologicos= DB::select('SELECT pacientes_habitos_toxicologicos.id_paciente_habito_toxicologico,pacientes_habitos_toxicologicos.id_paciente, habitos_toxicologicos.habito_toxicologico, pacientes_habitos_toxicologicos.observacion FROM pacientes_habitos_toxicologicos
+        join habitos_toxicologicos on pacientes_habitos_toxicologicos.id_habito_toxicologico = habitos_toxicologicos.id_habito_toxicologico 
+         WHERE id_paciente_habito_toxicologico = ?;',[$id_paciente_habito_toxicologico]);
 
         echo json_encode($toxicologicos);
     }
@@ -73,9 +85,22 @@ class PacientesHabitosToxicologicosController extends Controller
      * @param  \App\PacientesHabitosToxicologicos  $pacientesHabitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PacientesHabitosToxicologicos $pacientesHabitosToxicologicos)
+    public function update(Request $request,  $id_habito_toxicologico)
     {
-        //
+        $id_paciente = $request->input(['id_paciente']);
+        $id_habito_toxicologico = $request->input(['id_habito_toxicologico']);
+        $observacion = $request->input(['observacion']);
+
+
+
+        DB::table('pacientes_habitos_toxicologicos')
+            ->where('id_habito_toxicologico', $id_habito_toxicologico)
+            ->update([
+
+                'id_paciente'=> $id_paciente,
+                'id_habito_toxicologico' => $id_habito_toxicologico,
+                'observacion' => $observacion,
+            ]);
     }
 
     /**
@@ -84,8 +109,8 @@ class PacientesHabitosToxicologicosController extends Controller
      * @param  \App\PacientesHabitosToxicologicos  $pacientesHabitosToxicologicos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PacientesHabitosToxicologicos $pacientesHabitosToxicologicos)
+    public function destroy( $pacientesHabitosToxicologicos)
     {
-        //
+        DB::table('pacientes_habitos_toxicologicos')->where('id_paciente_habito_toxicologico', $pacientesHabitosToxicologicos)->delete(); 
     }
 }
