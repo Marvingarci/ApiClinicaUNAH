@@ -110,16 +110,26 @@ class PacienteController extends Controller
         
         $paciente->save();
 
-        $usuario = DB::table('logins')->where('cuenta', $paciente->numero_identidad)->first();
-
-        if(!isset($usuario)){
+        if(is_null($paciente->numero_cuenta)){
 
             DB::table('logins')->insert([
                 'cuenta' => $paciente->numero_identidad,
                 'password' => bcrypt($request->input(['password'])),
                 'id_rol' => 1,
-            ]);
+            ]);            
+
         }
+
+        // $usuario = DB::table('logins')->where('cuenta', $paciente->numero_identidad)->first();
+
+        // if(!isset($usuario)){
+
+        //     DB::table('logins')->insert([
+        //         'cuenta' => $paciente->numero_identidad,
+        //         'password' => bcrypt($request->input(['password'])),
+        //         'id_rol' => 1,
+        //     ]);
+        // }
 
 
         

@@ -13,7 +13,7 @@ class RolesSeeder extends Seeder
     {
         $roles = array(
 
-            'Estudiante',
+            'Paciente',
             'Administrador',
             'Medico',
             

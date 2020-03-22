@@ -216,7 +216,7 @@ class LoginController extends Controller
 
         if($user->id_rol == 1){
 
-            $rol = 'Estudiante'; 
+            $rol = 'Paciente'; 
 
             $usuarioRol = DB::table('pacientes')->where('numero_cuenta', $user->cuenta)->first();
 
