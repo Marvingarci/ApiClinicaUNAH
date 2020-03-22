@@ -86,9 +86,16 @@ class EnfermedadesController extends Controller
      * @param  \App\Antecedentes  $antecedentes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antecedentes $antecedentes)
+    public function update(Request $request,  $id_enfermedad)
     {
-        //
+
+        $enfermedad = $request->input(['enfermedad']);
+
+        DB::table('enfermedades')
+        ->where('id_enfermedad', $id_enfermedad)
+        ->update([
+            'enfermedad'=> $enfermedad,
+        ]);
     }
 
     /**
