@@ -51,10 +51,19 @@ class PacientesHospitalariasQuirurgicasController extends Controller
         //
     }
 
+    //obtengo las hospitalarias quirurgicas por pacientey una especifica
     public function obtenerhospitalarias_quirurgicas($id_paciente){
         $paciente_hospitalarias_quirurgicas = DB::select('SELECT  id_hospitalaria_quirurgica, fecha, tiempo_hospitalizacion,       diagnostico,
         tratamiento FROM pacientes_hospitalarias_quirurgicas
          WHERE id_paciente = ?;', [$id_paciente]);
+
+        echo json_encode($paciente_hospitalarias_quirurgicas);
+    }
+
+    public function obtenerUnahospitalaria_quirurgica($id_quirurgica){
+        $paciente_hospitalarias_quirurgicas = DB::select('SELECT  id_hospitalaria_quirurgica, fecha, tiempo_hospitalizacion,       diagnostico,
+        tratamiento FROM pacientes_hospitalarias_quirurgicas
+         WHERE id_hospitalaria_quirurgica = ?;', [$id_quirurgica]);
 
         echo json_encode($paciente_hospitalarias_quirurgicas);
     }
@@ -67,9 +76,21 @@ class PacientesHospitalariasQuirurgicasController extends Controller
      * @param  \App\PacientesHospitalariasQuirurgicas  $pacientesHospitalariasQuirurgicas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PacientesHospitalariasQuirurgicas $pacientesHospitalariasQuirurgicas)
+    public function update(Request $request,  $id_pacientesHospitalariasQuirurgicas)
     {
-        //
+        $fecha = $request->input('fecha');
+        $tiempo_hospitalizacion = $request->input('tiempo_hospitalizacion');
+        $diagnostico = $request->input('diagnostico');
+        $tratamiento = $request->input('tratamiento');
+
+        DB::table('pacientes_hospitalarias_quirurgicas')
+            ->where('id_hospitalaria_quirurgica', $id_pacientesHospitalariasQuirurgicas)
+            ->update([               
+                'fecha' => $fecha,
+                'tiempo_hospitalizacion' => $tiempo_hospitalizacion,
+                'diagnostico' => $diagnostico,
+                'tratamiento' => $tratamiento,
+            ]);      
     }
 
     /**
