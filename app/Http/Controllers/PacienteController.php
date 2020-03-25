@@ -200,47 +200,11 @@ class PacienteController extends Controller
             $lugar_procedencia = $request->input('lugar_procedencia');
             $fecha_nacimiento = $request->input('fecha_nacimiento');
             $sexo = $request->input('sexo');
-            switch ( $estado_civil = $request->input('estado_civil')) {
-                case 'Union Libre':
-                $estado_civil = 2;
-                    break;
-                case 'Soltero':
-                    # code...
-                    $estado_civil =1;
-                    break;
-                case 'Divorciado':
-                    # code...
-                    $estado_civil = 3;
-                    break;
-                case 'Viudo':
-                    # code...
-                    $estado_civil = 4;
-                    break;
-                case 'Casado':
-                    # code...
-                    $estado_civil = 5;
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-            switch ($seguro_medico = $request->input('seguro_medico')) {
-                case 'Privado':
-                $seguro_medico = 1;
-                    break;
-                case 'IHSS':
-                    # code...
-                    $seguro_medico =2;
-                    break;
-                case 'No':
-                    # code...
-                    $estado_civil = 3;
-                    break;
-                
-                default:
-                    # code...
-                    break;
-            }
+
+            $seguro_medico = $request->input('seguro_medico');
+            $estado_civil = $request->input('estado_civil');
+            $categoria = $request->input('categoria');           
+           
             $numero_telefono = $request->input('numero_telefono');
             $imc = $request->input('imc');
             $peso = $request->input('peso');
@@ -250,18 +214,7 @@ class PacienteController extends Controller
             $pulso = $request->input('pulso');  
             $prosene = $request->input('prosene');  
   
-            switch ($request->input('categoria')) {
-                case 'Estudiante':
-                $categoria = 3;
-                    break;
-                case 'Empleado':
-                    $categoria =1;
-                    break;
-                
-                default:
-                     $categoria =2;
-                    break;
-            }
+           
 
             $contrasenia = $request->input('contrasenia');
             
@@ -288,7 +241,7 @@ class PacienteController extends Controller
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
                 'prosene' => $prosene,
-                //'seguro_medico' => $seguro_medico,
+                'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
             ]);
         }
