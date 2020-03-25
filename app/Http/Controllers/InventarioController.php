@@ -23,6 +23,7 @@ class InventarioController extends Controller
                 'id_inventario','unidad','nombre', 'descripcion','inventarios_presentaciones.presentacion',
                 'observacion'
                 )
+                ->orderBy('unidad', 'DESC')
             ->get();
 
 
