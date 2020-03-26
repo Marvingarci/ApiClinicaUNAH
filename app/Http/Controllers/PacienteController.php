@@ -46,12 +46,11 @@ class PacienteController extends Controller
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
-            ->join('telefonos_pacientes', 'pacientes.id_paciente', '=' ,'telefonos_pacientes.id_paciente')
-            ->where('pacientes.id_paciente', $id_paciente)
+            ->where('id_paciente', $id_paciente)
             ->select(
-                'pacientes.id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
+                'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
-                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'telefonos_pacientes.telefono',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
                 'seguros_medicos.seguro_medico', 'categorias.categoria',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
@@ -121,7 +120,20 @@ class PacienteController extends Controller
             ]);            
 
         }
-    
+
+        // $usuario = DB::table('logins')->where('cuenta', $paciente->numero_identidad)->first();
+
+        // if(!isset($usuario)){
+
+        //     DB::table('logins')->insert([
+        //         'cuenta' => $paciente->numero_identidad,
+        //         'password' => bcrypt($request->input(['password'])),
+        //         'id_rol' => 1,
+        //     ]);
+        // }
+
+
+        
 
     }
 
