@@ -148,11 +148,11 @@ class PacienteController extends Controller
     }
 
 
-    public function obtenerColumnaNumeroTelefono($numero_telefono){
+    public function obtenerColumnaNumeroTelefono($telefono){
 
         
-        $telefonos = DB::table('pacientes')->select('numero_telefono')
-        ->where('numero_telefono', $numero_telefono)
+        $telefonos = DB::table('telefonos_pacientes')->select('telefono')
+        ->where('telefono', $telefono)
         ->first();
         
         return response()->json($telefonos);
