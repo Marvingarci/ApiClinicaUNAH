@@ -13,24 +13,9 @@ class TelefonosEmergenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-       
-    //     $telefonos_emergencia = DB::table('pacientes')
-    //     ->join('telefonos_emergencias','pacientes.id_paciente', '=', 'telefonos_emergencias.id_telefono_emergencia')
-        
-    //     ->select(
-    //         'pacientes.id_paciente',
-    //         'telefonos_emergencias.telefono_emergencia',
-    //         'telefonos_emergencias.emergencia_persona'
-    //         )
-    //     ->get();
-
-    // echo json_encode($telefonos_emergencia);
-
+    public function index(){
         $telefonos_emergencia = TelefonosEmergencia::get();
-        echo json_encode($telefonos_emergencia);
-    
+        echo json_encode($telefonos_emergencia);    
     }
 
     
@@ -41,8 +26,7 @@ class TelefonosEmergenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request)    {
         $telefono_emergencia = new TelefonosEmergencia();
         $telefono_emergencia->id_paciente = $request->input(['id_paciente']);
         $telefono_emergencia->telefono_emergencia =$request->input(['telefono_emergencia']);
@@ -56,8 +40,7 @@ class TelefonosEmergenciaController extends Controller
      * @param  \App\TelefonosEmergencia  $telefonosEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function show($id_paciente)
-    {
+    public function show($id_paciente)    {
         $telefonosEmergencia = DB::select(
         'SELECT id_telefono_emergencia, telefono_emergencia, emergencia_persona
          FROM telefonos_emergencias
@@ -77,7 +60,7 @@ class TelefonosEmergenciaController extends Controller
      */
     public function update(Request $request, TelefonosEmergencia $telefonosEmergencia)
     {
-        //
+        
     }
 
     /**
@@ -86,8 +69,7 @@ class TelefonosEmergenciaController extends Controller
      * @param  \App\TelefonosEmergencia  $telefonosEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id_telefono_emergencia)
-    {
+    public function destroy( $id_telefono_emergencia){
         DB::table('telefonos_emergencias')->where('id_telefono_emergencia', $id_telefono_emergencia)->delete(); 
     }
 }

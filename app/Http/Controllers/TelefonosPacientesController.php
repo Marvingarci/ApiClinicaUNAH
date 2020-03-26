@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TelefonosPacientes;
+use Illuminate\Support\facades\DB;
 use Illuminate\Http\Request;
 
 class TelefonosPacientesController extends Controller
@@ -12,10 +13,8 @@ class TelefonosPacientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index()    {
         $telefonos_pacientes = TelefonosPacientes::get();
-
         return response()->json($telefonos_pacientes);
     }
 
@@ -35,10 +34,7 @@ class TelefonosPacientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-
-    {
-
+    public function store(Request $request){
         $datos_validados = $request->validate([
             'id_paciente' => 'required',
             'telefono' => ['unique:telefonos_pacientes', 'required']
@@ -56,9 +52,13 @@ class TelefonosPacientesController extends Controller
      * @param  \App\TelefonosPacientes  $telefonosPacientes
      * @return \Illuminate\Http\Response
      */
-    public function show(TelefonosPacientes $telefonosPacientes)
-    {
-        //
+    public function show( $id_paciente)    {
+        $telefonoPaciente = DB::select(
+            'SELECT id_telefono_paciente, telefono
+             FROM telefonos_pacientes
+             WHERE id_paciente = ? 
+            ', [$id_paciente]);
+            echo json_encode($telefonoPaciente);
     }
 
     /**
@@ -90,8 +90,7 @@ class TelefonosPacientesController extends Controller
      * @param  \App\TelefonosPacientes  $telefonosPacientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TelefonosPacientes $telefonosPacientes)
-    {
-        //
+    public function destroy($id_telefono)    {
+        DB::table('telefonos_pacientes')->where('id_telefono_paciente', $id_telefono)->delete(); 
     }
 }
