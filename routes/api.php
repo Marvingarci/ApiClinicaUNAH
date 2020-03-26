@@ -50,6 +50,7 @@ Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicos
 Route::resource('p_hospitalarias_quirurgicas','PacientesHospitalariasQuirurgicasController');
 Route::resource('enfermedades','EnfermedadesController');
 Route::resource('telefonos_emergencia','TelefonosEmergenciaController');
+Route::resource('telefonos_pacientes','TelefonosPacientesController');
 
 
 
