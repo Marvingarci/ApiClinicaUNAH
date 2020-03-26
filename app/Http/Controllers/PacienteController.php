@@ -46,11 +46,12 @@ class PacienteController extends Controller
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
-            ->where('id_paciente', $id_paciente)
+            ->join('telefonos_pacientes', 'pacientes.id_paciente', '=' ,'telefonos_pacientes.id_paciente')
+            ->where('pacientes.id_paciente', $id_paciente)
             ->select(
-                'id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
+                'pacientes.id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
-                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'numero_telefono',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'telefonos_pacientes.telefono',
                 'seguros_medicos.seguro_medico', 'categorias.categoria',
                 'peso', 'talla', 'imc', 'temperatura', 'presion','pulso','prosene'
                 )
@@ -85,7 +86,6 @@ class PacienteController extends Controller
             'fecha_nacimiento' => ['required' , 'date'],
             'sexo' => 'required',
             'estado_civil' => ['required', 'integer'],
-            'numero_telefono' => ['required', 'regex:/^\d{8}$/'],
             'seguro_medico' => ['required' , 'integer'],
             'categoria' => ['required', 'integer'],
         ]);
@@ -105,7 +105,6 @@ class PacienteController extends Controller
         $paciente->fecha_nacimiento = $datos_validados['fecha_nacimiento'];
         $paciente->sexo = $datos_validados['sexo'];
         $paciente->estado_civil = $datos_validados['estado_civil'];
-        $paciente->numero_telefono = $datos_validados['numero_telefono'];
         $paciente->seguro_medico = $datos_validados['seguro_medico'];
         $paciente->categoria = $datos_validados['categoria'];
         
@@ -120,20 +119,7 @@ class PacienteController extends Controller
             ]);            
 
         }
-
-        // $usuario = DB::table('logins')->where('cuenta', $paciente->numero_identidad)->first();
-
-        // if(!isset($usuario)){
-
-        //     DB::table('logins')->insert([
-        //         'cuenta' => $paciente->numero_identidad,
-        //         'password' => bcrypt($request->input(['password'])),
-        //         'id_rol' => 1,
-        //     ]);
-        // }
-
-
-        
+    
 
     }
 
@@ -206,7 +192,6 @@ class PacienteController extends Controller
             $estado_civil = $request->input('estado_civil');
             $categoria = $request->input('categoria');           
            
-            $numero_telefono = $request->input('numero_telefono');
             $imc = $request->input('imc');
             $peso = $request->input('peso');
             $presion = $request->input('presion');
@@ -234,7 +219,6 @@ class PacienteController extends Controller
                 'fecha_nacimiento' => $fecha_nacimiento, 
                 'sexo' => $sexo,
                 'estado_civil' => $estado_civil,
-                'numero_telefono' => $numero_telefono,
                 'imc' => $imc,
                 'peso' => $peso,
                 'presion' => $presion,
