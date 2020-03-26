@@ -56,7 +56,7 @@ Route::resource('telefonos_pacientes','TelefonosPacientesController');
 
 Route::get('columna_enfermedades/{id_grupo_enfermedad}','EnfermedadesController@obtenerColumnaEnfermedad');
 Route::get('columna_habito_toxicologico','HabitosToxicologicosController@obtenerColumnaHabitoToxicologico');
-Route::get('obtenerColumnaNumeroTelefono/{numero_telefono}','PacienteController@obtenerColumnaNumeroTelefono');
+Route::get('obtenerColumnaNumeroTelefono/{telefono}','PacienteController@obtenerColumnaNumeroTelefono');
 Route::resource('habitos_toxicologicos','HabitosToxicologicosController');
 // Route::get('obtenerUsuario/{cuenta}/{clave}','LoginController@obtenerUsuario');
 Route::post('obtenerUsuario','LoginController@obtenerUsuario');
