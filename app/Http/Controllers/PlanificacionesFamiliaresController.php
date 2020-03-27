@@ -42,13 +42,14 @@ class PlanificacionesFamiliaresController extends Controller
     {
         $datos_validados = $request->validate([
             'planificacion_familiar' => 'required',
-            'observacion_planificacion' => 'max:60|min:4'
+            'metodo_planificacion' => 'nullable',
+            'observacion_planificacion' => 'max:150|min:4|nullable'
         ]);
 
         $planificacion_familiar = new planificacionesFamiliares();
 
         $planificacion_familiar->planificacion_familiar = $datos_validados['planificacion_familiar'];
-        $planificacion_familiar->metodo_planificacion = $request->input(['metodo_planificacion']);
+        $planificacion_familiar->metodo_planificacion = $datos_validados['metodo_planificacion'];
         $planificacion_familiar->observacion_planificacion = $datos_validados['observacion_planificacion'];
         $planificacion_familiar->id_paciente = $request->input(['id_paciente']);
 
