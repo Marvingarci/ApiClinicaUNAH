@@ -192,7 +192,6 @@ class PacienteController extends Controller
             $estado_civil = $request->input('estado_civil');
             $categoria = $request->input('categoria');           
            
-            $numero_telefono = $request->input('numero_telefono');
             $imc = $request->input('imc');
             $peso = $request->input('peso');
             $presion = $request->input('presion');
@@ -220,7 +219,6 @@ class PacienteController extends Controller
                 'fecha_nacimiento' => $fecha_nacimiento, 
                 'sexo' => $sexo,
                 'estado_civil' => $estado_civil,
-                'numero_telefono' => $numero_telefono,
                 'imc' => $imc,
                 'peso' => $peso,
                 'presion' => $presion,

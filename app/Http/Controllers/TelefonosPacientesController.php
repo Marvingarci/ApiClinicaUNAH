@@ -14,7 +14,9 @@ class TelefonosPacientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()    {
-        $telefonos_pacientes = TelefonosPacientes::get();
+        $telefonos_pacientes = DB::table('telefonos_pacientes')
+        ->select('id_paciente','id_telefono_paciente','telefono')
+        ->get();
         return response()->json($telefonos_pacientes);
     }
 
