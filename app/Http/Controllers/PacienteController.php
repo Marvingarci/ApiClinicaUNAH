@@ -86,7 +86,6 @@ class PacienteController extends Controller
             'fecha_nacimiento' => ['required' , 'date'],
             'sexo' => 'required',
             'estado_civil' => ['required', 'integer'],
-            'numero_telefono' => ['required', 'regex:/^\d{8}$/'],
             'seguro_medico' => ['required' , 'integer'],
             'categoria' => ['required', 'integer'],
         ]);
@@ -106,7 +105,6 @@ class PacienteController extends Controller
         $paciente->fecha_nacimiento = $datos_validados['fecha_nacimiento'];
         $paciente->sexo = $datos_validados['sexo'];
         $paciente->estado_civil = $datos_validados['estado_civil'];
-        $paciente->numero_telefono = $datos_validados['numero_telefono'];
         $paciente->seguro_medico = $datos_validados['seguro_medico'];
         $paciente->categoria = $datos_validados['categoria'];
         
