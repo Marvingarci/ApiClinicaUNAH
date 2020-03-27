@@ -42,7 +42,6 @@ class PlanificacionesFamiliaresController extends Controller
     {
         $datos_validados = $request->validate([
             'planificacion_familiar' => 'required',
-            'observacion_planificacion' => 'max:60|min:4'
         ]);
 
         $planificacion_familiar = new planificacionesFamiliares();
