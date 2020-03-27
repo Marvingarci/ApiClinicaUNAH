@@ -39,7 +39,7 @@ class TelefonosPacientesController extends Controller
     public function store(Request $request){
         $datos_validados = $request->validate([
             'id_paciente' => 'required',
-            'telefono' => ['unique:telefonos_pacientes', 'required']
+            'telefono' => ['unique:telefonos_pacientes', 'required', 'regex:/^\d{8}$/']
         ]);
 
         $telefono_paciente = new TelefonosPacientes();

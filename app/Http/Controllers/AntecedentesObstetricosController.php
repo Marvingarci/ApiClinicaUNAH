@@ -41,12 +41,12 @@ class AntecedentesObstetricosController extends Controller
     {
         $datos_validados = $request->validate([
             
-            'partos' => ['required', 'max:100', 'min:0', 'integer'],
-            'abortos' => ['required', 'max:100', 'min:0' , 'integer'],
-            'cesarias' => ['required', 'max:100', 'min:0', 'integer'],
-            'hijos_vivos' => ['required', 'max:100', 'min:0', 'integer'],
-            'hijos_muertos' => ['required', 'max:100', 'min:0', 'integer'],
-            'observaciones' => ['nullable','max:60', 'min:4']
+            'partos' => ['nullable', 'max:100', 'min:0', 'integer'],
+            'abortos' => ['nullable', 'max:100', 'min:0' , 'integer'],
+            'cesarias' => ['nullable', 'max:100', 'min:0', 'integer'],
+            'hijos_vivos' => ['nullable', 'max:100', 'min:0', 'integer'],
+            'hijos_muertos' => ['nullable', 'max:100', 'min:0', 'integer'],
+            'observaciones' => ['nullable','max:150', 'min:4']
         ]);
 
 
