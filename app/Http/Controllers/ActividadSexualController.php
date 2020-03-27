@@ -57,8 +57,8 @@ class ActividadSexualController extends Controller
         $datos_validados = $request->validate([
 
             'actividad_sexual' => 'required',
-            'edad_inicio_sexual' => ['max:99', 'min:1', 'integer'],
-            'numero_parejas_sexuales' => ['max:1000', 'min:1', 'integer']
+            'edad_inicio_sexual' => ['nullable','max:99', 'min:1', 'integer'],
+            'numero_parejas_sexuales' => ['nullable','max:1000', 'min:1', 'integer']
 
         ]);
 
