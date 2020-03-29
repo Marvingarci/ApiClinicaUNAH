@@ -1,7 +1,7 @@
 <?php
 
 namespace database\funciones;
-use Illuminate\Support\facades\DB;
+use DB;
 
 
 class insertarHabito{
