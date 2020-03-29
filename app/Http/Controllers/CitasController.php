@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\citas;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 
 class CitasController extends Controller
 {
