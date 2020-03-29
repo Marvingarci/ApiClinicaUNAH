@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\HabitosToxicologicos;
 use database\funciones\insertarHabito;
-use Illuminate\Support\facades\DB;
+use DB;
 
 use Illuminate\Http\Request;
 
