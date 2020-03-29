@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Administrador;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdministradorController extends Controller
