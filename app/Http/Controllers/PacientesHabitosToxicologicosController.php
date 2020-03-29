@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PacientesHabitosToxicologicos;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 
 
 class PacientesHabitosToxicologicosController extends Controller
