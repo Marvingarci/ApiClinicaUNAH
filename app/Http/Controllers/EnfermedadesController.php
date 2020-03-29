@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enfermedades;
 use database\funciones\insertarEnfermedad;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Http\Request;
 
 // include 'database/funciones/insertarAntecedente';
