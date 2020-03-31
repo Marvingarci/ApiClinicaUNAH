@@ -83,9 +83,17 @@ class ActividadSexualController extends Controller
      */
     public function update(Request $request, $id_actividad_sexual)
     {
-        $actividad_sexual = $request->input(['actividad_sexual']);
-        $edad_inicio_sexual = $request->input(['edad_inicio_sexual']);
-        $numero_parejas_sexuales = $request->input(['numero_parejas_sexuales']);
+        $datos_validados = $request->validate([
+
+            'actividad_sexual' => 'nullable',
+            'edad_inicio_sexual' => ['nullable','max:99', 'min:1', 'integer'],
+            'numero_parejas_sexuales' => ['nullable','max:1000', 'min:1', 'integer']
+
+        ]);
+
+        $actividad_sexual = $datos_validados['actividad_sexual'];
+        $edad_inicio_sexual = $datos_validados['edad_inicio_sexual'];
+        $numero_parejas_sexuales = $datos_validados['numero_parejas_sexuales'];
         $practicas_sexuales_riesgo = $request->input(['practicas_sexuales_riesgo']);
 
 
