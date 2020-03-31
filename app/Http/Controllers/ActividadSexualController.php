@@ -56,7 +56,7 @@ class ActividadSexualController extends Controller
 
         $datos_validados = $request->validate([
 
-            'actividad_sexual' => 'required',
+            'actividad_sexual' => 'nullable',
             'edad_inicio_sexual' => ['nullable','max:99', 'min:1', 'integer'],
             'numero_parejas_sexuales' => ['nullable','max:1000', 'min:1', 'integer']
 
@@ -81,7 +81,7 @@ class ActividadSexualController extends Controller
      * @param  \App\ActividadSexual  $actividadSexual
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_paciente)
+    public function update(Request $request, $id_actividad_sexual)
     {
         $actividad_sexual = $request->input(['actividad_sexual']);
         $edad_inicio_sexual = $request->input(['edad_inicio_sexual']);
@@ -90,7 +90,7 @@ class ActividadSexualController extends Controller
 
 
         DB::table('actividad_sexuals')
-        ->where('id_paciente', $id_paciente)
+        ->where('id_actividad_sexual', $id_actividad_sexual)
         ->update([
 
             'actividad_sexual'=> $actividad_sexual,
@@ -111,7 +111,7 @@ class ActividadSexualController extends Controller
             'id_actividad_sexual','actividad_sexual', 'edad_inicio_sexual','numero_parejas_sexuales',
             'practicas_sexuales.practicas_sexuales_riesgo', 'id_paciente'
            
-            ) 
+            )
         ->first();
 
         echo json_encode($actividad_sexual);
@@ -123,8 +123,8 @@ class ActividadSexualController extends Controller
      * @param  \App\ActividadSexual  $actividadSexual
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ActividadSexual $actividadSexual)
-    {
-        //
+    public function destroy( $id_actividadSexual)
+    {        
+        DB::table('actividad_sexuals')->where('id_paciente', $id_actividadSexual)->delete(); 
     }
 }
