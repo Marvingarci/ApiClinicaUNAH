@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\antecedentes_personales;
 use App\antecedentesPersonales;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 
 
 class AntecedentesPersonalesController extends Controller

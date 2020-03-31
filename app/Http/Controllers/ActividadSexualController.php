@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ActividadSexual;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 
 
 class ActividadSexualController extends Controller

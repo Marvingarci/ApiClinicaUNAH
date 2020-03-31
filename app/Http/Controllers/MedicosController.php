@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Medico;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

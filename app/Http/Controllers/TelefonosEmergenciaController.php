@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TelefonosEmergencia;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Http\Request;
 
 class TelefonosEmergenciaController extends Controller

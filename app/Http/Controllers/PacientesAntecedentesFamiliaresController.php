@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PacientesAntecedentesFamiliares;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Http\Request;
 
 class PacientesAntecedentesFamiliaresController extends Controller

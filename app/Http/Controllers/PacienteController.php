@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class PacienteController extends Controller

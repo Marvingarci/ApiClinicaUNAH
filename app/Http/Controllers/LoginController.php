@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterAuthRequest;
 use  JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Illuminate\Support\facades\DB;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 include '../includes/login_unah.php';
