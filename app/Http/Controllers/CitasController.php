@@ -99,7 +99,7 @@ class CitasController extends Controller
 
         if($cita->nombre == "0"){
 
-            $cita = DB::table('citas')
+            $citas = DB::table('citas')
             ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
             ->where('id_paciente', $id_paciente)
             ->select(
@@ -108,10 +108,10 @@ class CitasController extends Controller
             'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
             ->get();
-            return response()->json([$cita]);
+            echo json_encode($citas);
 
         }else{        
-            $cita = DB::table('citas')
+            $citas = DB::table('citas')
             ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
             ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
             //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
@@ -122,7 +122,7 @@ class CitasController extends Controller
             'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )                
             ->get();
-            return response()->json([$cita]);
+            echo json_encode($citas);
         }
      }
 
