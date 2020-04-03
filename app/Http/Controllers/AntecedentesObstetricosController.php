@@ -25,9 +25,14 @@ class AntecedentesObstetricosController extends Controller
 
         $antecedente_obstetrico = DB::table('antecedentes_obstetricos')
         ->where('id_paciente', $id_paciente)
+        ->select('id_antecedente_obstetrico','partos','abortos',
+        'cesarias','hijos_vivos',
+        'hijos_muertos','fecha_termino_ult_embarazo',
+        'descripcion_termino_ult_embarazo','observaciones','id_paciente'          
+         ) 
         ->first();
 
-        return response()->json($antecedente_obstetrico);
+        echo json_encode($antecedente_obstetrico);
     }
 
 
@@ -50,8 +55,9 @@ class AntecedentesObstetricosController extends Controller
         ]);
 
 
-        $antecedente_obstetrico = new antecedentesObstetricos();
+        $antecedente_obstetrico = new antecedentesObstetricos();     
         
+
         $antecedente_obstetrico->partos = $datos_validados['partos'];
         $antecedente_obstetrico->abortos = $datos_validados['abortos'];
         $antecedente_obstetrico->cesarias = $datos_validados['cesarias'];
@@ -74,7 +80,7 @@ class AntecedentesObstetricosController extends Controller
      * @param  \App\antecedentesObstetricos  $antecedentesObstetricos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_paciente)
+    public function update(Request $request, $id_antecedente_obstetrico)
     {
         $partos = $request->input(['partos']);
         $abortos = $request->input(['abortos']);
@@ -86,7 +92,7 @@ class AntecedentesObstetricosController extends Controller
         $observaciones = $request->input(['observaciones']);
 
         DB::table('antecedentes_obstetricos')
-        ->where('id_paciente', $id_paciente)
+        ->where('id_antecedente_obstetrico', $id_antecedente_obstetrico)
         ->update([
 
             'partos'=> $partos,

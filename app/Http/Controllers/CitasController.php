@@ -108,10 +108,10 @@ class CitasController extends Controller
             'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )
             ->get();
-            return response()->json([$cita]);
+            echo json_encode($citas);
 
         }else{        
-            $cita = DB::table('citas')
+            $citas = DB::table('citas')
             ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
             ->join('inventarios', 'citas.nombre', '=', 'inventarios.id_inventario')
             //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
@@ -122,36 +122,9 @@ class CitasController extends Controller
             'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
             )                
             ->get();
-            return response()->json([$cita]);
+            echo json_encode($citas);
         }
-     
-
-       
-
-
-        // if(empty($paciente)){
-
-
-        //     $paciente = DB::table('citas')
-        //     ->join('remitidoa', 'citas.remitido', '=', 'remitidoa.id_seccion')
-        //     ->where('id_paciente', $id_paciente)
-        //     ->select(
-        //         'id_paciente','peso', 'talla','imc',
-        //         'temperatura', 'presion', 'pulso', 'siguiente_cita',
-        //         'observaciones', 'impresion', 'nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
-        //         )
-                
-        //     ->get();
-
-        //     return response()->json($paciente);
-
-        // }else{
-
-        //     return response()->json($paciente);
-        // }
-
-
-    }
+     }
 
     /**
      * Show the form for editing the specified resource.

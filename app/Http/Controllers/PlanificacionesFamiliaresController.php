@@ -69,7 +69,7 @@ class PlanificacionesFamiliaresController extends Controller
             )
         ->first();
 
-        return response()->json($planificacion_familiar);
+        echo json_encode($planificacion_familiar);
     }
 
     /**
@@ -88,7 +88,7 @@ class PlanificacionesFamiliaresController extends Controller
 
 
         DB::table('planificaciones_familiares')
-            ->where('id_paciente', $id_paciente)
+            ->where('id_planificacion_familiar', $id_paciente)
             ->update([
 
                 'planificacion_familiar'=> $planificacion_familiar,
@@ -104,8 +104,8 @@ class PlanificacionesFamiliaresController extends Controller
      * @param  \App\planificacionesFamiliares  $planificacionesFamiliares
      * @return \Illuminate\Http\Response
      */
-    public function destroy(planificacionesFamiliares $planificacionesFamiliares)
+    public function destroy($id_paciente)
     {
-        //
+        DB::table('planificaciones_familiares')->where('id_paciente', $id_paciente)->delete(); 
     }
 }

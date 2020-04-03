@@ -20,14 +20,7 @@ class AntecedentesGinecologicosController extends Controller
         return response()->json($antecedentes_ginecologicos);
     }
 
-    public function show($id_paciente){
-
-        $antecedente_ginecologico = DB::table('antecedentes_ginecologicos')
-        ->where('id_paciente', $id_paciente)
-        ->first();
-
-        return response()->json($antecedente_ginecologico);
-    }
+  
     
     /**
      * Store a newly created resource in storage.
@@ -69,7 +62,7 @@ class AntecedentesGinecologicosController extends Controller
      * @param  \App\antecedentesGinecologicos  $antecedentesGinecologicos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_paciente)
+    public function update(Request $request, $id_ante_gine)
     {
         $edad_inicio_menstruacion = $request->input(['edad_inicio_menstruacion']);
         $fum = $request->input(['fum']);
@@ -81,7 +74,7 @@ class AntecedentesGinecologicosController extends Controller
         $caracteristicas_ciclo_menstrual = $request->input(['caracteristicas_ciclo_menstrual']);
 
         DB::table('antecedentes_ginecologicos')
-        ->where('id_paciente', $id_paciente)
+        ->where('id_antecedente__ginecologico', $id_ante_gine)
         ->update([
 
             'edad_inicio_menstruacion'=> $edad_inicio_menstruacion,
@@ -96,6 +89,22 @@ class AntecedentesGinecologicosController extends Controller
 
         ]);
 
+    }
+
+    public function show($id_paciente){
+
+        $antecedente_ginecologico = DB::table('antecedentes_ginecologicos')
+       ->where('id_paciente', $id_paciente)
+        ->select(
+            'id_antecedente__ginecologico','edad_inicio_menstruacion', 'fum','citologia','fecha_citologia',
+            'resultado_citologia','duracion_ciclo_menstrual', 'periocidad_ciclo_menstrual','caracteristicas_ciclo_menstrual',
+            'id_paciente'
+         ) 
+         
+        ->first();
+
+
+        echo json_encode($antecedente_ginecologico);
     }
 
     /**

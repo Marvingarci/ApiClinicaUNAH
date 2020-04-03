@@ -22,11 +22,10 @@ class PacienteController extends Controller
             ->join('estados_civiles', 'pacientes.estado_civil', '=', 'estados_civiles.id_estado_civil')
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
-            ->join('telefonos_pacientes', 'pacientes.id_paciente', '=' ,'telefonos_pacientes.id_paciente')
             ->select(
                 'pacientes.id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
-                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'telefonos_pacientes.telefono',
+                'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 
                 'seguros_medicos.seguro_medico', 'categorias.categoria','prosene',DB::raw("DATEDIFF(current_date, fecha_nacimiento)/365 as edad")
                 )
             ->get();
