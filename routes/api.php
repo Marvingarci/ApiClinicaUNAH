@@ -121,6 +121,9 @@ Route::resource('planificaciones_familiares','PlanificacionesFamiliaresControlle
 Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 
+Route::resource('citas','CitasController');
+
+
 
 
 
@@ -162,7 +165,7 @@ Route::get('obtenerColumnaIdentidad/{numero_identidad}','PacienteController@obte
 
 //rutas marvin
 Route::get('pacientes/ultimo/si','PacienteController@ultimoID');
-Route::resource('citas','CitasController');
+Route::resource('historias_subsiguientes','HistoriasSubsiguientesController');
 Route::post('pacientes/actualizarImagen','PacienteController@actualizarfoto');
 
 
