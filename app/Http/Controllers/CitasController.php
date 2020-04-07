@@ -18,8 +18,8 @@ class CitasController extends Controller
         // $citas = Citas::get();
 
         $citas = DB::table('citas')
-        ->join('pacientes', 'id_paciente' , '=' , 'paciente')
-        ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora_cita')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora')
         ->get();
 
         return response()->json($citas);
@@ -47,15 +47,15 @@ class CitasController extends Controller
     {
         $datos_validados = $request->validate([
             'fecha' => ['required', 'date'],
-            'paciente' => ['required'],            
-            'hora_cita' => ['required'],
+            'hora' => ['required', 'date_format:H:i'],
+            'id_paciente' => ['required'],            
         ]);
 
         $cita = new Citas();
 
         $cita->fecha = $datos_validados['fecha'];
-        $cita->paciente = $datos_validados['paciente'];
-        $cita->hora_cita = $datos_validados['hora_cita'];
+        $cita->hora = $datos_validados['hora'];
+        $cita->id_paciente = $datos_validados['id_paciente'];
 
         $cita->save();
     }
