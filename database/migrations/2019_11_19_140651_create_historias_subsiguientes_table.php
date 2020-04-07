@@ -27,6 +27,7 @@ class CreateHistoriasSubsiguientesTable extends Migration
             $table->string('indicaciones')->nullable();
             $table->integer('Remitido')->default(7);
             $table->string('fecha')->nullable();
+            $table->string('hora_cita')->nullable();
             $table->string('nombre')->nullable();
 
             $table->timestamps();
