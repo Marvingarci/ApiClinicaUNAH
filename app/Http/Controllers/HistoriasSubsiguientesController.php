@@ -27,7 +27,7 @@ class HistoriasSubsiguientesController extends Controller
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','historias_subsiguientes.id_paciente',
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
             'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion', 'historias_subsiguientes.pulso',
-            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 
@@ -72,6 +72,7 @@ class HistoriasSubsiguientesController extends Controller
         $historia_subsiguiente->indicaciones = $request->input('indicaciones');
         $historia_subsiguiente->remitido = $request->input('remitido');
         $historia_subsiguiente->fecha = $actual->format('d-m-y');
+        $historia_subsiguiente->hora_cita = $request->input('hora_cita');
         $historia_subsiguiente->nombre = $request->input('nombre');
 
         $historia_subsiguiente->save();
@@ -125,7 +126,7 @@ class HistoriasSubsiguientesController extends Controller
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','historias_subsiguientes.id_paciente',
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
             'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion', 'historias_subsiguientes.pulso',
-            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 
