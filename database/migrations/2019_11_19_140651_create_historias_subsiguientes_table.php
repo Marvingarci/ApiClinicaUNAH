@@ -21,12 +21,13 @@ class CreateHistoriasSubsiguientesTable extends Migration
             $table->string('temperatura')->nullable();
             $table->string('presion')->nullable();
             $table->string('pulso')->nullable();
-            $table->string('siguiente_cita')->nullable();
+            // $table->string('siguiente_cita')->nullable();
             $table->string('observaciones')->nullable();
             $table->string('impresion')->nullable();
             $table->string('indicaciones')->nullable();
             $table->integer('Remitido')->default(7);
-            $table->string('fechayHora')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('hora_cita')->nullable();
             $table->string('nombre')->nullable();
 
             $table->timestamps();

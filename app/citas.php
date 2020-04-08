@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class citas extends Model
+class Citas extends Model
 {
-    protected $primaryKey = 'id_paciente';
+    //
 }
