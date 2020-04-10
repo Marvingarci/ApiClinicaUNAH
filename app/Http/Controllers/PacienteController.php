@@ -267,21 +267,6 @@ class PacienteController extends Controller
             return response()->json($usuario);
     
         }
-
-        // if($request->cuenta){
-
-        //     $usuario = DB::table('pacientes')->where('numero_cuenta', $request->cuenta)->first();
-
-        //      return response()->json($usuario);
-
-        // }else if($request->identidad){
-
-        //     $usuario = DB::table('pacientes')->where('numero_identidad', $request->identidad)->first();
-
-        //     return response()->json($usuario);
-
-        // }
-
         
 
 
@@ -294,6 +279,35 @@ class PacienteController extends Controller
         $modificacion = Paciente::where('id_paciente',$request->input('id_paciente'))->first();
         $new = Paciente::where('id_paciente', $paciente->id_paciente)
             ->update(['imagen' =>  $paciente->imagen]);
+        
+    }
+
+
+    public function contarPacientes(){
+
+        $estudiantes = 
+        DB::select('SELECT COUNT(pacientes.categoria) as estudiantes FROM pacientes where categoria = 3');
+
+        $visitantes = 
+        DB::select('SELECT COUNT(pacientes.categoria) as visitantes FROM pacientes where categoria = 2');
+
+        $empleados = 
+        DB::select('SELECT COUNT(pacientes.categoria) as empleados FROM pacientes where categoria = 1');
+
+        $prosenes =
+        DB::select('SELECT COUNT(prosene) as prosenes FROM pacientes where prosene = 1');
+
+        
+
+
+
+        return response()->json([
+            'estudiantes' => $estudiantes[0]->estudiantes,
+            'empleados' => $empleados[0]->empleados,
+            'visitantes' => $visitantes[0]->visitantes,
+            'prosenes' => $prosenes[0]->prosenes
+        ]);
+
         
     }
 
