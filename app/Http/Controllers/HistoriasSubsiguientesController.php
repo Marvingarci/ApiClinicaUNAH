@@ -26,7 +26,8 @@ class HistoriasSubsiguientesController extends Controller
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','historias_subsiguientes.id_paciente',
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
-            'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion', 'historias_subsiguientes.pulso',
+            'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion_sistolica',
+            'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
             'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
@@ -64,7 +65,8 @@ class HistoriasSubsiguientesController extends Controller
         $historia_subsiguiente->talla = $request->input('talla');
         $historia_subsiguiente->imc = $request->input('imc');
         $historia_subsiguiente->temperatura = $request->input('temperatura'); 
-        $historia_subsiguiente->presion = $request->input('presion');
+        $historia_subsiguiente->presion_sistolica = $request->input('presion_sistolica');
+        $historia_subsiguiente->presion_diastolica = $request->input('presion_diastolica');
         $historia_subsiguiente->pulso = $request->input('pulso');
         // $historia_subsiguiente->siguiente_cita = $request->input('siguiente_cita');
         $historia_subsiguiente->observaciones = $request->input('observaciones');
@@ -125,7 +127,8 @@ class HistoriasSubsiguientesController extends Controller
         ->select(
             'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','historias_subsiguientes.id_paciente',
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
-            'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion', 'historias_subsiguientes.pulso',
+            'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion_sistolica',
+            'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
             'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
@@ -189,6 +192,112 @@ class HistoriasSubsiguientesController extends Controller
         ->get();
 
         return response()->json($pesos);
+
+
+    }
+
+    public function pulsosPaciente($id_paciente){
+
+
+        $pulsos = DB::table('historias_subsiguientes')->select('pulso', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->limit(3)
+        ->get();
+
+        return response()->json($pulsos);
+
+
+    }
+
+    public function todosPulsosPaciente($id_paciente){
+
+        $pulsos = DB::table('historias_subsiguientes')->select('pulso', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->get();
+
+        return response()->json($pulsos);
+
+
+    }
+
+
+    public function alturasPaciente($id_paciente){
+
+
+        $alturas = DB::table('historias_subsiguientes')->select('talla', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->limit(3)
+        ->get();
+
+        return response()->json($alturas);
+
+
+    }
+
+    public function todasAlturasPaciente($id_paciente){
+
+        $alturas = DB::table('historias_subsiguientes')->select('talla', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->get();
+
+        return response()->json($alturas);
+
+
+    }
+
+    public function temperaturasPaciente($id_paciente){
+
+
+        $temperaturas = DB::table('historias_subsiguientes')->select('temperatura', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->limit(3)
+        ->get();
+
+        return response()->json($temperaturas);
+
+
+    }
+
+    public function todasTemperaturasPaciente($id_paciente){
+
+        $temperaturas = DB::table('historias_subsiguientes')->select('temperatura', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->get();
+
+        return response()->json($temperaturas);
+
+
+    }
+
+
+    public function presionesPaciente($id_paciente){
+
+
+        $presiones = DB::table('historias_subsiguientes')->select('presion_sistolica','presion_diastolica', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->limit(3)
+        ->get();
+
+        return response()->json($presiones);
+
+
+    }
+
+    public function todasPresionesPaciente($id_paciente){
+
+        $temperaturas = DB::table('historias_subsiguientes')->select('presion_sistolica','presion_diastolica', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->get();
+
+        return response()->json($temperaturas);
 
 
     }

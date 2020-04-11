@@ -19,9 +19,9 @@ class CreateHistoriasSubsiguientesTable extends Migration
             $table->string('talla')->nullable();
             $table->string('imc')->nullable();
             $table->string('temperatura')->nullable();
-            $table->string('presion')->nullable();
+            $table->string('presion_sistolica')->nullable();
+            $table->string('presion_diastolica')->nullable();
             $table->string('pulso')->nullable();
-            // $table->string('siguiente_cita')->nullable();
             $table->string('observaciones')->nullable();
             $table->string('impresion')->nullable();
             $table->string('indicaciones')->nullable();
