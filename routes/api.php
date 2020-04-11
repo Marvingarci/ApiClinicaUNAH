@@ -71,6 +71,7 @@ Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico
 
 
 
+
 //obtener datos de los grupos de enfermedades Antecedentes Familiares
 Route::get('obtenerdesnutricionAF/{id}','PacientesAntecedentesFamiliaresController@obtenerdesnutricionAF');
 Route::get('obtenermentalesAF/{id}','PacientesAntecedentesFamiliaresController@obtenermentalesAF');
@@ -123,6 +124,10 @@ Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 Route::resource('citas','CitasController');
 Route::get('contarPacientes','PacienteController@contarPacientes');
+Route::get('pesosPaciente/{id_paciente}','HistoriasSubsiguientesController@pesosPaciente');
+Route::get('todosPesosPaciente/{id_paciente}','HistoriasSubsiguientesController@todosPesosPaciente');
+
+
 
 
 

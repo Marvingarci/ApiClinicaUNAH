@@ -311,4 +311,5 @@ class PacienteController extends Controller
         
     }
 
+
 }
