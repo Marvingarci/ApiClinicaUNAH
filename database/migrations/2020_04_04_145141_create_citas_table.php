@@ -16,7 +16,7 @@ class CreateCitasTable extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->bigIncrements('id_cita');
             $table->date('fecha');
-            $table->time('hora');
+            $table->string('hora');
             $table->integer('id_paciente');
             $table->timestamps();
         });
