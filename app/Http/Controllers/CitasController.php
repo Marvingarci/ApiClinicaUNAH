@@ -47,7 +47,8 @@ class CitasController extends Controller
     {
         $datos_validados = $request->validate([
             'fecha' => ['required', 'date'],
-            'hora' => ['required', 'date_format:H:i'],
+            'hora' => ['required'],
+            // 'hora' => ['required', 'date_format:H:i'],
             'id_paciente' => ['required'],            
         ]);
 
