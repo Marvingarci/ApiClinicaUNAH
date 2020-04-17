@@ -67,9 +67,15 @@ class CitasController extends Controller
      * @param  \App\Citas  $citas
      * @return \Illuminate\Http\Response
      */
-    public function show(Citas $citas)
+    public function show($id_paciente)
     {
-        //
+        $citas = DB::table('citas')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora')
+        ->where('citas.id_paciente', $id_paciente)
+        ->get();
+
+        return response()->json($citas);
     }
 
     /**
