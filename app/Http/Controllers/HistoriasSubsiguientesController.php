@@ -131,7 +131,7 @@ class HistoriasSubsiguientesController extends Controller
             'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
             'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
-        ->get();
+        ->first();
 
         return response()->json($historias_subsiguientes);
      }
