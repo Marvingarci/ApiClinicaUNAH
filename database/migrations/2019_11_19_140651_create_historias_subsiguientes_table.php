@@ -14,6 +14,7 @@ class CreateHistoriasSubsiguientesTable extends Migration
     public function up()
     {
         Schema::create('historias_subsiguientes', function (Blueprint $table) {
+            
             $table->char('id_paciente');
             $table->string('peso')->nullable();
             $table->string('talla')->nullable();
@@ -28,7 +29,7 @@ class CreateHistoriasSubsiguientesTable extends Migration
             $table->integer('Remitido')->default(7);
             $table->string('fecha')->nullable();
             $table->string('hora_cita')->nullable();
-            $table->string('nombre')->nullable();
+            $table->string('medicamento')->nullable();
 
             $table->timestamps();
 
