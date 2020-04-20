@@ -166,4 +166,30 @@ class HistoriasSubsiguientesController extends Controller
     {
         //
     }
+
+
+    public function pesosPaciente($id_paciente){
+
+        $pesos = DB::table('historias_subsiguientes')->select('peso', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->limit(3)
+        ->get();
+
+        return response()->json($pesos);
+
+
+    }
+
+    public function todosPesosPaciente($id_paciente){
+
+        $pesos = DB::table('historias_subsiguientes')->select('peso', 'fecha')
+        ->where('id_paciente', $id_paciente)
+        ->orderBy('fecha', 'desc')
+        ->get();
+
+        return response()->json($pesos);
+
+
+    }
 }
