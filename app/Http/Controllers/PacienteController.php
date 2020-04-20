@@ -282,6 +282,20 @@ class PacienteController extends Controller
 
 
     }
+
+    public function cantidad()
+    {
+     //   $cantidadPaciente = 
+       // DB::select('SELECT *  FROM pacientes');
+
+
+        $si= 
+        DB::select('SELECT COUNT(id_paciente) as CantidadTotal FROM pacientes');
+
+        return response()->json($si);    
+        
+    }
+
     public function actualizarfoto(Request $request){
         $paciente = new Paciente();
 
@@ -321,6 +335,8 @@ class PacienteController extends Controller
 
         
     }
+
+    
 
 
 }

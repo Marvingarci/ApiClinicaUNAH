@@ -270,4 +270,209 @@ class HistoriasSubsiguientesController extends Controller
 
 
     }
+    public function todasHistorias(){
+
+        $actual = Carbon::now();
+        $hoy = $actual->format('d-m-y');
+
+        $historias_subsiguientes = DB::table('historias_subsiguientes')
+        ->where('fecha', $hoy)
+        ->select(
+          'historias_subsiguientes.presion_sistolica'
+            )
+        ->get();
+        $historias_subsiguientesnuevas = $historias_subsiguientes->count();
+
+        return response()->json($historias_subsiguientesnuevas);
+
+    }
+    public function totalRemitidos(){
+
+
+        $historias_subsiguientes = DB::table('historias_subsiguientes')
+        ->join('remitidoa', 'historias_subsiguientes.remitido', '=', 'remitidoa.id_seccion')
+        ->select(
+            'remitidoa.id_seccion'
+            )
+        ->where('remitido', 7)
+        ->get();
+        $historias_subsiguientesnuevas = $historias_subsiguientes->count();
+
+        return response()->json($historias_subsiguientesnuevas);
+
+    }
+
+    public function pacientesPorDia(){
+        //dia actual
+        $date = Carbon::now();
+        $date = $date->format('l');
+        // fecha actual
+
+        //declaracion
+        $actual = Carbon::now();
+        $actual2 = Carbon::now();
+        $actual3 = Carbon::now();
+        $actual4 = Carbon::now();
+        $actual5 = Carbon::now();
+        $actual6 = Carbon::now();
+        $actual7 = Carbon::now();
+
+        $hoy = $actual->format('d-m-y');
+        $ayer = $actual2->subDay(1)->format('d-m-y');
+        $anteayer = $actual3->subDay(2)->format('d-m-y');
+        $anteayer2 = $actual4->subDay(3)->format('d-m-y');
+        $anteayer3 = $actual5->subDay(4)->format('d-m-y');
+        $anteayer4 = $actual6->subDay(5)->format('d-m-y');
+        $anteayer5 = $actual7->subDay(6)->format('d-m-y');
+        
+        ////dando formato
+
+
+        $Pacienteshoy = DB::table('historias_subsiguientes')
+        ->where('fecha', $hoy)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $Pacienteshoy = $Pacienteshoy->count();
+
+        $Pacientesayer = DB::table('historias_subsiguientes')
+        ->where('fecha', $ayer)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $Pacientesayer = $Pacientesayer->count();
+
+        $PacientesAnteayer = DB::table('historias_subsiguientes')
+        ->where('fecha', $anteayer)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $PacientesAnteayer = $PacientesAnteayer->count();
+
+        $PacientesAnteayer1 = DB::table('historias_subsiguientes')
+        ->where('fecha', $anteayer2)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $PacientesAnteayer1 = $PacientesAnteayer1->count();
+
+        $PacientesAnteayer2 = DB::table('historias_subsiguientes')
+        ->where('fecha', $anteayer3)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $PacientesAnteayer2 = $PacientesAnteayer2->count();
+
+        $PacientesAnteayer3 = DB::table('historias_subsiguientes')
+        ->where('fecha', $anteayer4)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $PacientesAnteayer3 = $PacientesAnteayer3->count();
+
+        $PacientesAnteayer4 = DB::table('historias_subsiguientes')
+        ->where('fecha', $anteayer5)
+        ->select(
+            'peso'
+            )
+        ->get();
+        $PacientesAnteayer4 = $PacientesAnteayer4->count();
+        
+
+        switch ($date) {
+            case 'Monday':
+                return response()->json([
+                    'Lunes' => $Pacienteshoy,
+                    'Martes' => 0,
+                    'Miercoles' => 0,
+                    'Jueves' => 0,
+                    'Viernes' => 0,
+                    'dia' => 'lunes'
+                ]);
+                break;
+
+            case 'Tuesday':
+                return response()->json([
+                    'Lunes' => $Pacientesayer,
+                    'Martes' => $Pacienteshoy,
+                    'Miercoles' => 0,
+                    'Jueves' => 0,
+                    'Viernes' => 0,
+                    'dia' => 'martes'
+                ]);
+                break;
+        
+            case 'Wednesday':
+                return response()->json([
+                    'Lunes' => $PacientesAnteayer,
+                    'Martes' => $Pacientesayer,
+                    'Miercoles' => $Pacienteshoy,
+                    'Jueves' => 0,
+                    'Viernes' => 0,
+                    'dia' => 'miercoles'
+                ]);
+                break;
+            case 'Thursday':
+                return response()->json([
+                    'Lunes' => $PacientesAnteayer1,
+                    'Martes' => $PacientesAnteayer,
+                    'Miercoles' => $Pacientesayer,
+                    'Jueves' => $Pacienteshoy,
+                    'Viernes' => 0,
+                    'dia' => 'jueves'
+                ]);
+                break;      
+            case 'Friday':
+                return response()->json([
+                    'Lunes' => $PacientesAnteayer3,
+                    'Martes' => $PacientesAnteayer2,
+                    'Miercoles' => $PacientesAnteayer1,
+                    'Jueves' => $Pacientesayer,
+                    'Viernes' => $Pacienteshoy,
+                    'dia' => 'viernes'
+                ]);
+
+                break; 
+                case 'Sunday':
+                    return response()->json([
+                        'Lunes' => $PacientesAnteayer3,
+                        'Martes' => $PacientesAnteayer2,
+                        'Miercoles' => $PacientesAnteayer1,
+                        'Jueves' => $Pacientesayer,
+                        'Viernes' => $Pacienteshoy,
+                        'dia' => 'domingo'
+                    ]);
+    
+                    break; 
+                    case 'Saturday':
+                        return response()->json([
+                            'Lunes' => $PacientesAnteayer3,
+                            'Martes' => $PacientesAnteayer2,
+                            'Miercoles' => $PacientesAnteayer1,
+                            'Jueves' => $Pacientesayer,
+                            'Viernes' => $Pacienteshoy,
+                            'dia' => 'sabado'
+                        ]);
+        
+                        break;  
+            default:
+            
+                break;
+        }
+
+       
+
+       
+
+        
+    }
+
+    
+    
 }
