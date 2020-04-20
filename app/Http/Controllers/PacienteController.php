@@ -154,6 +154,17 @@ class PacienteController extends Controller
         return response()->json($identidad);
 
     }
+    //ESto
+    public function obtenerColumnaNumeroCuenta($numero_cuenta){
+
+
+        $cuenta = DB::table('pacientes')->select('numero_cuenta')
+        ->where('numero_cuenta', $numero_cuenta)
+        ->first();
+        
+        return response()->json($cuenta);
+
+    }
 
     /**
      * Update the specified resource in storage.
