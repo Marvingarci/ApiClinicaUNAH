@@ -276,16 +276,9 @@ class HistoriasSubsiguientesController extends Controller
         $hoy = $actual->format('d-m-y');
 
         $historias_subsiguientes = DB::table('historias_subsiguientes')
-        ->join('remitidoa', 'historias_subsiguientes.remitido', '=', 'remitidoa.id_seccion')
-        ->join('pacientes', 'historias_subsiguientes.id_paciente', '=', 'pacientes.id_paciente')
-        ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
         ->where('fecha', $hoy)
         ->select(
-            'pacientes.numero_cuenta','pacientes.nombre_completo','categorias.categoria','pacientes.carrera','sexo','historias_subsiguientes.id_paciente',
-            'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
-            'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion_sistolica',
-            'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
-            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+          'historias_subsiguientes.presion_sistolica'
             )
         ->get();
         $historias_subsiguientesnuevas = $historias_subsiguientes->count();
@@ -399,7 +392,8 @@ class HistoriasSubsiguientesController extends Controller
                     'Martes' => 0,
                     'Miercoles' => 0,
                     'Jueves' => 0,
-                    'Viernes' => 0
+                    'Viernes' => 0,
+                    'dia' => 'lunes'
                 ]);
                 break;
 
@@ -409,7 +403,8 @@ class HistoriasSubsiguientesController extends Controller
                     'Martes' => $Pacienteshoy,
                     'Miercoles' => 0,
                     'Jueves' => 0,
-                    'Viernes' => 0
+                    'Viernes' => 0,
+                    'dia' => 'martes'
                 ]);
                 break;
         
@@ -419,7 +414,8 @@ class HistoriasSubsiguientesController extends Controller
                     'Martes' => $Pacientesayer,
                     'Miercoles' => $Pacienteshoy,
                     'Jueves' => 0,
-                    'Viernes' => 0
+                    'Viernes' => 0,
+                    'dia' => 'miercoles'
                 ]);
                 break;
             case 'Thursday':
@@ -428,7 +424,8 @@ class HistoriasSubsiguientesController extends Controller
                     'Martes' => $PacientesAnteayer,
                     'Miercoles' => $Pacientesayer,
                     'Jueves' => $Pacienteshoy,
-                    'Viernes' => 0
+                    'Viernes' => 0,
+                    'dia' => 'jueves'
                 ]);
                 break;      
             case 'Friday':
@@ -437,11 +434,35 @@ class HistoriasSubsiguientesController extends Controller
                     'Martes' => $PacientesAnteayer2,
                     'Miercoles' => $PacientesAnteayer1,
                     'Jueves' => $Pacientesayer,
-                    'Viernes' => $Pacienteshoy
+                    'Viernes' => $Pacienteshoy,
+                    'dia' => 'viernes'
                 ]);
-                break;  
+
+                break; 
+                case 'Sunday':
+                    return response()->json([
+                        'Lunes' => $PacientesAnteayer3,
+                        'Martes' => $PacientesAnteayer2,
+                        'Miercoles' => $PacientesAnteayer1,
+                        'Jueves' => $Pacientesayer,
+                        'Viernes' => $Pacienteshoy,
+                        'dia' => 'domingo'
+                    ]);
+    
+                    break; 
+                    case 'Saturday':
+                        return response()->json([
+                            'Lunes' => $PacientesAnteayer3,
+                            'Martes' => $PacientesAnteayer2,
+                            'Miercoles' => $PacientesAnteayer1,
+                            'Jueves' => $Pacientesayer,
+                            'Viernes' => $Pacienteshoy,
+                            'dia' => 'sabado'
+                        ]);
+        
+                        break;  
             default:
-                # code...
+            
                 break;
         }
 
