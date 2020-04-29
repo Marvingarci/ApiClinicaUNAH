@@ -124,8 +124,22 @@ Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 Route::resource('citas','CitasController');
 Route::get('contarPacientes','PacienteController@contarPacientes');
+
+//graficas
 Route::get('pesosPaciente/{id_paciente}','HistoriasSubsiguientesController@pesosPaciente');
 Route::get('todosPesosPaciente/{id_paciente}','HistoriasSubsiguientesController@todosPesosPaciente');
+
+Route::get('pulsosPaciente/{id_paciente}','HistoriasSubsiguientesController@pulsosPaciente');
+Route::get('todosPulsosPaciente/{id_paciente}','HistoriasSubsiguientesController@todosPulsosPaciente');
+
+Route::get('alturasPaciente/{id_paciente}','HistoriasSubsiguientesController@alturasPaciente');
+Route::get('todasAlturasPaciente/{id_paciente}','HistoriasSubsiguientesController@todasAlturasPaciente');
+
+Route::get('temperaturasPaciente/{id_paciente}','HistoriasSubsiguientesController@temperaturasPaciente');
+Route::get('todasTemperaturasPaciente/{id_paciente}','HistoriasSubsiguientesController@todasTemperaturasPaciente');
+
+Route::get('presionesPaciente/{id_paciente}','HistoriasSubsiguientesController@presionesPaciente');
+Route::get('todasPresionesPaciente/{id_paciente}','HistoriasSubsiguientesController@todasPresionesPaciente');
 
 
 
