@@ -189,6 +189,15 @@ Route::get('obtenerColumnaIdentidad/{numero_identidad}','PacienteController@obte
 Route::get('pacientes/ultimo/si','PacienteController@ultimoID');
 Route::resource('historias_subsiguientes','HistoriasSubsiguientesController');
 Route::post('pacientes/actualizarImagen','PacienteController@actualizarfoto');
+Route::get('cantidadPacientesTotal','PacienteController@cantidad');
+Route::get('cantidadHistoriasTotal','HistoriasSubsiguientesController@todasHistorias');
+Route::get('citasHoy','CitasController@citasHoy');
+Route::get('totalRemitidos','HistoriasSubsiguientesController@totalRemitidos');
+Route::get('pacientesPorDia','HistoriasSubsiguientesController@pacientesPorDia');
+
+
+
+
 
 
 

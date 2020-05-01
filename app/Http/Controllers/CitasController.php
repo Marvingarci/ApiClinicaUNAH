@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Citas;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
+
 
 class CitasController extends Controller
 {
@@ -26,6 +28,23 @@ class CitasController extends Controller
 
     
     }
+    public function citasHoy()
+    {
+        // $citas = Citas::get();
+        $actual = Carbon::now();
+        $hoy = $actual->format('y-m-d');
+
+        $citas = DB::table('citas')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora')
+        ->where('fecha', $hoy)
+        ->get();
+
+        return response()->json($citas);
+
+    
+    }
+    
 
     /**
      * Show the form for creating a new resource.
