@@ -28,7 +28,7 @@ class HistoriasSubsiguientesController extends Controller
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
             'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion_sistolica',
             'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
-            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','medicamento', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
         ->get();
 
@@ -68,14 +68,13 @@ class HistoriasSubsiguientesController extends Controller
         $historia_subsiguiente->presion_sistolica = $request->input('presion_sistolica');
         $historia_subsiguiente->presion_diastolica = $request->input('presion_diastolica');
         $historia_subsiguiente->pulso = $request->input('pulso');
-        // $historia_subsiguiente->siguiente_cita = $request->input('siguiente_cita');
         $historia_subsiguiente->observaciones = $request->input('observaciones');
         $historia_subsiguiente->impresion = $request->input('impresion');
         $historia_subsiguiente->indicaciones = $request->input('indicaciones');
         $historia_subsiguiente->remitido = $request->input('remitido');
         $historia_subsiguiente->fecha = $actual->format('d-m-y');
         $historia_subsiguiente->hora_cita = $request->input('hora_cita');
-        $historia_subsiguiente->nombre = $request->input('nombre');
+        $historia_subsiguiente->medicamento = $request->input('medicamento');
 
         $historia_subsiguiente->save();
     }
@@ -88,36 +87,6 @@ class HistoriasSubsiguientesController extends Controller
      */
     public function show($id_paciente)
     {
-        // $historia_subsiguiente = HistoriasSubsiguientes::find($id_paciente);
-
-        // if($historia_subsiguiente->nombre == "0"){
-
-        //     $historia_subsiguiente = DB::table('historias_subsiguientes')
-        //     ->join('remitidoa', 'historias_subsiguientes.remitido', '=', 'remitidoa.id_seccion')
-        //     ->where('id_paciente', $id_paciente)
-        //     ->select(
-        //     'id_paciente','peso', 'talla','imc',
-        //     'temperatura', 'presion', 'pulso', 'siguiente_cita',
-        //     'observaciones', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
-        //     )
-        //     ->get();
-        //     echo json_encode($historia_subsiguiente);
-
-        // }else{        
-        //     $historia_subsiguiente = DB::table('historias_subsiguientes')
-        //     ->join('remitidoa', 'historias_subsiguientes.remitido', '=', 'remitidoa.id_seccion')
-        //     ->join('inventarios', 'historias_subsiguientes.nombre', '=', 'inventarios.id_inventario')
-        //     //->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
-        //     ->where('id_paciente', $id_paciente)
-        //     ->select(
-        //     'id_paciente','peso', 'talla','imc',
-        //     'temperatura', 'presion', 'pulso', 'siguiente_cita',
-        //     'observaciones', 'impresion','inventarios.nombre', 'indicaciones', 'remitidoa.seccion', 'fechayHora'
-        //     )                
-        //     ->get();
-        //     echo json_encode($historia_subsiguiente);
-        // }
-
 
         $historias_subsiguientes = DB::table('historias_subsiguientes')
         ->join('remitidoa', 'historias_subsiguientes.remitido', '=', 'remitidoa.id_seccion')
@@ -129,9 +98,9 @@ class HistoriasSubsiguientesController extends Controller
             'historias_subsiguientes.peso', 'historias_subsiguientes.talla','historias_subsiguientes.imc',
             'historias_subsiguientes.temperatura', 'historias_subsiguientes.presion_sistolica',
             'historias_subsiguientes.presion_diastolica', 'historias_subsiguientes.pulso',
-            'observaciones','nombre', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
+            'observaciones','medicamento', 'impresion', 'indicaciones', 'remitidoa.seccion', 'fecha','hora_cita', DB::raw("DATEDIFF(current_date, pacientes.fecha_nacimiento)/365 as edad")
             )
-        ->get();
+        ->first();
 
         return response()->json($historias_subsiguientes);
      }
