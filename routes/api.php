@@ -123,6 +123,7 @@ Route::resource('antecedentes_obstetricos','AntecedentesObstetricosController');
 
 
 Route::resource('citas','CitasController');
+Route::get('citas_vigentes/{id_paciente}','CitasController@citasVigentes');
 Route::get('contarPacientes','PacienteController@contarPacientes');
 
 //graficas
