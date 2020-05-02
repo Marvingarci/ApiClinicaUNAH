@@ -28,6 +28,7 @@ class CitasController extends Controller
 
     
     }
+
     public function citasHoy()
     {
         // $citas = Citas::get();
@@ -38,6 +39,37 @@ class CitasController extends Controller
         ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
         ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora')
         ->where('fecha', $hoy)
+        ->get();
+
+        return response()->json($citas);
+
+    
+    }
+
+
+    public function citasVigentes($id_paciente)
+    {
+        // $ultimasCitas= DB::table('citas')->select('fecha')
+        // ->where('id_paciente', $id_paciente)->orderBy('id_cita', 'desc')->limit(2)->get();
+        // // $ultimaFecha = DB::select('SELECT MAX(fecha) as fecha FROM citas where id_paciente = ?', [$id_paciente]);
+
+
+        $actual = Carbon::now();
+        $hoyFecha = $actual->format('y-m-d');
+        $hoyHora = $actual->format('h:m:s');
+
+
+        $citas = DB::table('citas')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('id_cita', 'pacientes.nombre_completo as paciente', 'fecha','hora')
+        ->where(
+            
+            [   
+                ['citas.id_paciente', $id_paciente],
+                ['fecha','>=', $hoyFecha],
+                // ['fecha', '>', $ultimasCitas[1]->fecha]
+            ]
+        )
         ->get();
 
         return response()->json($citas);
