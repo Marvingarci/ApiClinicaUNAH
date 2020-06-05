@@ -29,13 +29,14 @@ Route::post('obtenerUsuario','LoginController@obtenerUsuario');
 // estas rutas requiren de un token válido para poder accederse.
 Route::group(['middleware' => 'jwt.auth'], function () {
 
+    Route::post('logout', 'LoginController@logout'); 
+    Route::post('getCurrentUser', 'LoginController@getAuthUser');
    
 
 
 });
 
-Route::post('logout', 'LoginController@logout'); 
-Route::post('getCurrentUser', 'LoginController@getAuthUser');
+
 
 //rutas brasly
 Route::resource('datos_login','LoginController');
