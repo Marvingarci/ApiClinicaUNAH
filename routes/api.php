@@ -34,7 +34,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     //rutas brasly
     Route::resource('datos_login','LoginController');
-    Route::resource('pacientes','PacienteController');
+    
     Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
     Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
     Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicosController');
@@ -219,3 +219,4 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 });
 
 
+Route::resource('pacientes','PacienteController');
