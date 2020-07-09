@@ -230,7 +230,7 @@ class PacienteController extends Controller
                 'lugar_procedencia' => $lugar_procedencia,
                 'fecha_nacimiento' => $fecha_nacimiento, 
                 'sexo' => $sexo,
-                'estado_civil' => $estado_civil,
+                //'estado_civil' => $estado_civil,
                 'imc' => $imc,
                 'peso' => $peso,
                 'presion' => $presion,
@@ -238,8 +238,8 @@ class PacienteController extends Controller
                 'temperatura' => $temperatura,
                 'pulso' => $pulso,
                 'prosene' => $prosene,
-                'seguro_medico' => $seguro_medico,
-                'categoria' => $categoria,
+                //'seguro_medico' => $seguro_medico,
+               // 'categoria' => $categoria,
             ]);
 
         
