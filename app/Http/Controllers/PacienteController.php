@@ -118,6 +118,8 @@ class PacienteController extends Controller
             ]);            
 
         }
+
+        
     
 
     }
@@ -239,6 +241,8 @@ class PacienteController extends Controller
                 'seguro_medico' => $seguro_medico,
                 'categoria' => $categoria,
             ]);
+
+        
         }
 
                  
