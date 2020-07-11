@@ -40,8 +40,6 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
 //rutas brasly
 Route::resource('datos_login','LoginController');
-Route::post('actualizar_contrasena','LoginController@actualizarContrasena');
-Route::post('actualizar_cuenta','LoginController@actualizarCuenta');
 Route::resource('pacientes','PacienteController');
 Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
 Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
@@ -62,15 +60,11 @@ Route::post('obtenerPaciente','PacienteController@obtenerPaciente');
 Route::get('obtenerMedico/{id}','MedicosController@obtenerMedico');
 Route::post('verificarClave','LoginController@verificarClave');
 Route::post('duplicarRegistro','LoginController@duplicarRegistro');
-<<<<<<< HEAD
 Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico');
 Route::get('obtenerUsuarioConCorreo/{correo}','LoginController@obtenerUsuarioConCorreo');
 //Route::get('obtenerUsuarioConId/{correo}','LoginController@obtenerUsuarioConId');
 Route::post('/contactar', 'LoginController@contact')->name('contact');
 Route::post('/mandarIdAView', 'LoginController@mandarIdAView')->name('mandarIdAView');
-=======
-Route::get('obtenerIdLogin/{cuenta}','LoginController@obtenerIdLogin');
->>>>>>> 672efb749cb7b4d8c4f54ff2a6edfea4d2c5f6bc
 
 
 //obtener datos de los grupos de enfermedades Antecedentes Familiares
