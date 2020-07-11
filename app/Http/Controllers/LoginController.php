@@ -85,7 +85,32 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
+
     {
+        
+       
+        
+        
+    }
+
+    public function actualizarCuenta(Request $request){
+
+
+            DB::table('logins')
+            ->where('id_login', $request->id_login)
+            ->update([
+    
+                
+                'cuenta' => $request->cuenta,
+                
+
+                
+            ]);
+        
+    }
+
+    public function actualizarContrasena(Request $request){
+
         if($request->cuenta){
 
             if($request->input('password')!= null ){
@@ -112,8 +137,6 @@ class LoginController extends Controller
                 ->update(['password' =>  $nuevo_password]);
             }
         }
-        
-        
     }
 
     /**
@@ -373,16 +396,18 @@ class LoginController extends Controller
 
     }
     
-    public function obtenerIdLoginMedico($medico){
+    public function obtenerIdLogin($cuenta){
 
         $id = DB::table('logins')
             ->select('id_login')
-            ->where('cuenta', $medico)
+            ->where('cuenta', $cuenta)
             ->first();
 
            
         return response()->json($id);
     }
+
+ 
 
 
     public function obtenerUsuarioConCorreo($usuario){
