@@ -11,8 +11,6 @@ use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 include '../includes/login_unah.php';
-use Mail;
-use View;
 
 class LoginController extends Controller
 
@@ -382,55 +380,6 @@ class LoginController extends Controller
 
            
         return response()->json($id);
-    }
-
-
-    public function obtenerUsuarioConCorreo($usuario){
-
-        $id = DB::table('pacientes')
-            ->select('id_paciente','nombre_completo','correo_electronico')
-            ->where('correo_electronico', $usuario)
-            ->first(); 
-             return response()->json($id);         
-            
-    }
-
-    // public function obtenerUsuarioConId($usuario){ 
-
-    //     $prueba = DB::table('pacientes')
-    //         ->select('id_paciente')
-    //         ->where('correo_electronico', $usuario)
-    //         ->first(); 
-    //          return view('email')->with('prueba',$prueba);         
-            
-    // }
-
-
-
-
-
-
-    public static  function mandarIdAView(  Request $request){ 
-        $prueba = $request->input('id_paciente');     
-    // View::share('identificador', $identificador);    
-    //return view('email')->with('identificador', $identificador);
-    return view('email')->with('prueba',$prueba);  
-    }
-
-
-
-
-
-
-     public function contact( Request $request){          
-        $correo = $request->input('correo_electronico');        
-        $subject = "Recuperacion de contraseña";        
-        $for = "$correo";
-        Mail::send('email',$request->all(),function($msj) use($subject,$correo){
-            $msj->from("melvindavidsevillamedina@gmail.com","Clinica UNAH-TEC");
-            $msj->subject($subject);
-            $msj->to($correo);            
-        });        
     }
 
 
