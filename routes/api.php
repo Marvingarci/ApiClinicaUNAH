@@ -61,6 +61,10 @@ Route::get('obtenerMedico/{id}','MedicosController@obtenerMedico');
 Route::post('verificarClave','LoginController@verificarClave');
 Route::post('duplicarRegistro','LoginController@duplicarRegistro');
 Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico');
+Route::get('obtenerUsuarioConCorreo/{correo}','LoginController@obtenerUsuarioConCorreo');
+//Route::get('obtenerUsuarioConId/{correo}','LoginController@obtenerUsuarioConId');
+Route::post('/contactar', 'LoginController@contact')->name('contact');
+Route::post('/mandarIdAView', 'LoginController@mandarIdAView')->name('mandarIdAView');
 
 
 //obtener datos de los grupos de enfermedades Antecedentes Familiares
