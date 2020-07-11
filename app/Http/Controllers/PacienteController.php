@@ -7,12 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Contact;
-use Illuminate\Support\Facades\Mail;
-
-
 class PacienteController extends Controller
-
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +23,7 @@ class PacienteController extends Controller
             ->join('seguros_medicos', 'pacientes.seguro_medico', '=', 'seguros_medicos.id_seguro_medico')
             ->join('categorias', 'pacientes.categoria', '=', 'categorias.id_categorias')
             ->select(
-                'pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_cuenta','numero_identidad',
+                'pacientes.id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 
                 'seguros_medicos.seguro_medico', 'categorias.categoria','prosene',DB::raw("DATEDIFF(current_date, fecha_nacimiento)/365 as edad")
@@ -53,7 +48,7 @@ class PacienteController extends Controller
             ->join('telefonos_pacientes', 'pacientes.id_paciente', '=' ,'telefonos_pacientes.id_paciente')
             ->where('pacientes.id_paciente', $id_paciente)
             ->select(
-                'pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_cuenta','numero_identidad',
+                'pacientes.id_paciente','nombre_completo', 'numero_cuenta','numero_identidad',
                 'imagen', 'direccion', 'carrera', 'lugar_procedencia',
                 'fecha_nacimiento', 'sexo', 'estados_civiles.estado_civil', 'telefonos_pacientes.telefono',
                 'seguros_medicos.seguro_medico', 'categorias.categoria',
@@ -81,7 +76,6 @@ class PacienteController extends Controller
 
             'id_paciente' => 'required',
             'nombre_completo' => ['required', 'regex:/^[a-zA-zñÑáéíóúÁÉÍÓÚ\s]{0,100}$/'],
-            'correo_electronico' => 'required',
             'numero_cuenta' => ['nullable','regex:/^[2][0-9]{10}$/', 'unique:pacientes'],
             'numero_identidad' => ['required', 'regex: /^\d{4}\d{4}\d{5}$/ ', 'unique:pacientes'],
             'imagen'=>'nullable',
@@ -101,7 +95,6 @@ class PacienteController extends Controller
 
         $paciente->id_paciente = $datos_validados['id_paciente']; 
         $paciente->nombre_completo = $datos_validados['nombre_completo'];
-        $paciente->correo_electronico = $datos_validados['correo_electronico'];
         $paciente->numero_cuenta = $datos_validados['numero_cuenta'];
         $paciente->numero_identidad = $datos_validados['numero_identidad'];
         $paciente->imagen = $datos_validados['imagen']; 
@@ -195,8 +188,7 @@ class PacienteController extends Controller
 
         if($request->input('nombre_completo')!=null){
 
-            $nombre_completo = $request->input('nombre_completo');            
-            $correo_electronico = $request->input('correo_electronico');
+            $nombre_completo = $request->input('nombre_completo');
             $numero_cuenta = $request->input('numero_cuenta');
             $numero_identidad = $request->input('numero_identidad');
             $imagen = $request->input('imagen'); 
@@ -228,7 +220,6 @@ class PacienteController extends Controller
             ->update([
 
                 'nombre_completo'=> $nombre_completo,
-                'correo_electronico'=> $correo_electronico,
                 'numero_cuenta' => $numero_cuenta,
                 'numero_identidad' => $numero_identidad, 
                 'imagen' => $imagen,
