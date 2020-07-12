@@ -416,7 +416,7 @@ class LoginController extends Controller
             ->select('id_paciente','nombre_completo','correo_electronico')
             ->where('correo_electronico', $usuario)
             ->first(); 
-             return response()->json($id);         
+            echo json_encode($id);       
             
     }
 
