@@ -65,8 +65,8 @@ Route::post('duplicarRegistro','LoginController@duplicarRegistro');
 Route::get('obtenerIdLoginMedico/{medico}','LoginController@obtenerIdLoginMedico');
 Route::get('obtenerUsuarioConCorreo/{correo}','LoginController@obtenerUsuarioConCorreo');
 //Route::get('obtenerUsuarioConId/{correo}','LoginController@obtenerUsuarioConId');
-Route::post('/contactar', 'LoginController@contact')->name('contact');
-Route::post('/mandarIdAView', 'LoginController@mandarIdAView')->name('mandarIdAView');
+Route::post('contactar', 'LoginController@contact');
+Route::post('mandarIdAView', 'LoginController@mandarIdAView');
 Route::get('obtenerIdLogin/{cuenta}','LoginController@obtenerIdLogin');
 
 
