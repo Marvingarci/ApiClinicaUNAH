@@ -412,11 +412,11 @@ class LoginController extends Controller
 
     public function obtenerUsuarioConCorreo($usuario){
 
-        $id = DB::table('pacientes')
+        $usuario = DB::table('pacientes')
             ->select('id_paciente','nombre_completo','correo_electronico')
             ->where('correo_electronico', $usuario)
             ->first(); 
-            echo json_encode($id);       
+            return response()->json($usuario);       
             
     }
 
@@ -432,9 +432,7 @@ class LoginController extends Controller
 
 
 
-
-
-
+    // esto no lo ocupas
     public static  function mandarIdAView(  Request $request){ 
         $prueba = $request->input('id_paciente');     
     // View::share('identificador', $identificador);    
@@ -445,17 +443,21 @@ class LoginController extends Controller
 
 
 
+     public function contact( Request $request){      
 
-
-     public function contact( Request $request){          
-        $correo = $request->input('correo_electronico');        
+        $correo = $request->correo_electronico;     
+        $id_paciente = $request->id_paciente;   
         $subject = "Recuperacion de contraseña";        
         $for = "$correo";
-        Mail::send('email',$request->all(),function($msj) use($subject,$correo){
+
+        $data = ['link' => 'http://localhost:4200/recuperarcontrasenia/'.$id_paciente];
+
+        Mail::send('email', $data, function($msj) use($subject,$correo){
             $msj->from("melvindavidsevillamedina@gmail.com","Clinica UNAH-TEC");
             $msj->subject($subject);
             $msj->to($correo);            
         });        
+
     }
 
 
