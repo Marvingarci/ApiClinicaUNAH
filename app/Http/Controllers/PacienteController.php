@@ -174,6 +174,16 @@ class PacienteController extends Controller
         return response()->json($cuenta);
 
     }
+    public function obtenerColumnaCorreo($correo_electronico){
+
+
+        $correo = DB::table('pacientes')->select('correo_electronico')
+        ->where('correo_electronico', $correo_electronico)
+        ->first();
+        
+        return response()->json($correo);
+
+    }
 
     /**
      * Update the specified resource in storage.
