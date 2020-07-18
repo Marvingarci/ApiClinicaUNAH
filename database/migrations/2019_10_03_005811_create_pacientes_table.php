@@ -14,7 +14,7 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->char('id_paciente');
+            $table->bigIncrements('id_paciente');
             $table->string('numero_paciente')->unique()->nullable();
             $table->string('nombre_completo');
             $table->string('correo_electronico')->unique()->nullable();
@@ -38,7 +38,7 @@ class CreatePacientesTable extends Migration
             $table->string('prosene')->nullable();           
             $table->timestamps();
 
-            $table->primary('id_paciente');
+            // $table->primary('id_paciente');
         });
     }
 
