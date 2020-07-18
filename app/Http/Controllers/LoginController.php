@@ -155,17 +155,10 @@ class LoginController extends Controller
 
 		$cuenta = $request->input('cuenta');
         $password = $request->input('password');
-
-        $alumno = accesoAlumno($cuenta, $password);
         
         $datos_login= new Login();
         
-        $datos_login->cuenta = $alumno['cuenta'];
-        $datos_login->nombre = $alumno['nombre'];
-        $datos_login->carrera = $alumno['carrera'];
-        $datos_login->centro = $alumno['centro'];
-        $datos_login->numero_identidad = $alumno['numero_identidad'];
-        $datos_login->imagen = $alumno['imagen'];
+        $datos_login->cuenta = $cuenta;
         $datos_login->password = bcrypt($request->password);
         $datos_login->id_rol = 1;
         $datos_login->save();
@@ -181,6 +174,34 @@ class LoginController extends Controller
         
 	}
 
+    public function ingresarFormulario(Request $request){
+
+        $cuenta = $request->input('cuenta');
+        $password = $request->input('password');
+
+        $alumno = accesoAlumno($cuenta, $password);
+
+        if(is_null($alumno)){
+
+            return  response()->json(["codigoError" => 1, "msg"=> "numero de cuenta o contraseña incorrecta"]);
+
+        }else{
+
+            return  response()->json(["codigoError" => 2, 
+                    "cuenta" => $alumno['cuenta'],
+                    "nombre" => $alumno['nombre'],
+                    "carrera" => $alumno['carrera'],
+                    "centro" => $alumno['centro'],
+                    "numero_identidad" => $alumno['numero_identidad'],
+                    "imagen" => $alumno['imagen'],
+                    // "correo" => $alumno['correo']
+
+                    ]);
+        }
+                
+
+
+    }
     public  function  login(Request  $request) {
 
 		$input = $request->only('cuenta', 'password');
