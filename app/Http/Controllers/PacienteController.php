@@ -79,7 +79,7 @@ class PacienteController extends Controller
 
         $datos_validados = $request->validate([
 
-            'id_paciente' => 'required',
+            // 'id_paciente' => 'required',
             'nombre_completo' => ['required', 'regex:/^[a-zA-zñÑáéíóúÁÉÍÓÚ\s]{0,100}$/'],
             'correo_electronico' => 'required',
             'numero_cuenta' => ['nullable','regex:/^[2][0-9]{10}$/', 'unique:pacientes'],
@@ -99,7 +99,7 @@ class PacienteController extends Controller
 
         $paciente = new Paciente();
 
-        $paciente->id_paciente = $datos_validados['id_paciente']; 
+        // $paciente->id_paciente = $datos_validados['id_paciente']; 
         $paciente->nombre_completo = $datos_validados['nombre_completo'];
         $paciente->correo_electronico = $datos_validados['correo_electronico'];
         $paciente->numero_cuenta = $datos_validados['numero_cuenta'];
@@ -133,11 +133,10 @@ class PacienteController extends Controller
 
     public function ultimoID(){
 
-        $si= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes');
+        $id= DB::select('SELECT MAX(id_paciente) as ultimoId FROM pacientes');
 
-        return response()->json($si);
+        return response()->json($id);
 
-        
         
     }
 
