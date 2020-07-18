@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('loguear', 'LoginController@login');// cuando el usuario ya esta registrado.
 Route::post('registrar', 'LoginController@register');// cuando el usuario entra por primera vez.
+Route::post('ingresarFormulario', 'LoginController@ingresarFormulario');// cuando el usuario entra por primera vez.
 Route::post('obtenerUsuario','LoginController@obtenerUsuario');
 
 
