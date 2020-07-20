@@ -76,7 +76,31 @@ class CitasController extends Controller
 
     
     }
+    //metodo que devuelve las fechas de las citas
+    public function citasFechas($id_paciente)
+    {
+        $citas = DB::table('citas')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('fecha')
+        ->where('citas.id_paciente', $id_paciente)
+        ->get();
+
+        return response()->json($citas);
+
     
+    }
+    public function citasporFecha($fecha)
+    {
+        $citas = DB::table('citas')
+        ->join('pacientes', 'pacientes.id_paciente' , '=' , 'citas.id_paciente')
+        ->select('pacientes.nombre_completo as paciente','hora')
+        ->where('citas.fecha', $fecha)
+        ->get();
+
+        return response()->json($citas);
+
+    
+    }
 
     /**
      * Show the form for creating a new resource.
