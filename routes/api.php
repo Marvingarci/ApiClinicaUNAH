@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('loguear', 'LoginController@login');// cuando el usuario ya esta registrado.
 Route::post('registrar', 'LoginController@register');// cuando el usuario entra por primera vez.
+Route::post('ingresarFormulario', 'LoginController@ingresarFormulario');// cuando el usuario entra por primera vez.
 Route::post('obtenerUsuario','LoginController@obtenerUsuario');
 
 
@@ -165,6 +166,7 @@ Route::post('medicamentos/egreso','InventarioController@disminucion');
 Route::get('obtenerColumnaUsuarioMedicos/{usuario}','MedicosController@obtenerColumnaUsuarioMedicos');
 Route::get('obtenerColumnaIdentidad/{numero_identidad}','PacienteController@obtenerColumnaIdentidad');
 Route::get('obtenerColumnaNumeroCuenta/{numero_cuenta}','PacienteController@obtenerColumnaNumeroCuenta');
+Route::get('obtenerColumnaCorreo/{correo_electronico}','PacienteController@obtenerColumnaCorreo');
 
 
 
