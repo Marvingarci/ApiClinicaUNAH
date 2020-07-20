@@ -194,6 +194,11 @@ Route::get('cantidadHistoriasTotal','HistoriasSubsiguientesController@todasHisto
 Route::get('citasHoy','CitasController@citasHoy');
 Route::get('totalRemitidos','HistoriasSubsiguientesController@totalRemitidos');
 Route::get('pacientesPorDia','HistoriasSubsiguientesController@pacientesPorDia');
+Route::get('citas_fechas/{id_paciente}','CitasController@citasFechas');
+Route::get('citasPorFecha/{fecha}','CitasController@citasporFecha');
+
+
+
 
 
 
