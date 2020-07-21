@@ -29,6 +29,8 @@ class MedicosController extends Controller
        // $medicos = Medicos::get();
         echo json_encode($medicos);
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -177,5 +179,20 @@ class MedicosController extends Controller
         
         echo json_encode($medicos);
 
+    }
+    public function obtenerColumnaIdentidadMedico()
+    {
+        $medicos = DB::table('medicos')
+        ->join('especialidades', 'medicos.especialidad', '=', 'especialidades.id_especialidad')
+        
+       ->select(
+          'id_medico','usuario','nombre',
+           'numero_identidad', 'especialidades.especialidad'
+           
+           ) 
+        ->get();
+
+       // $medicos = Medicos::get();
+        echo json_encode($medicos);
     }
 }
