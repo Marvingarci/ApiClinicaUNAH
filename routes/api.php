@@ -198,7 +198,8 @@ Route::get('totalRemitidos','HistoriasSubsiguientesController@totalRemitidos');
 Route::get('pacientesPorDia','HistoriasSubsiguientesController@pacientesPorDia');
 Route::get('citas_fechas/{id_paciente}','CitasController@citasFechas');
 Route::get('citasPorFecha/{fecha}','CitasController@citasporFecha');
-
+Route::get('obtenerColumnaIdentidad','MedicosController@obtenerColumnaIdentidadMedico');
+Route::get('obtenerColumnaIdentidadAdmin','AdministradorController@obtenerColumnaIdentidadAdmin');
 
 
 
