@@ -133,6 +133,15 @@ class AdministradorController extends Controller
         echo json_encode($admin);
 
     }
+    public function obtenerColumnaIdentidadAdmin(){
+
+        $admin = DB::table('administradores')->select('identidad')
+        
+        ->get();
+        
+        echo json_encode($admin);
+
+    }
 
     public function obtenerAdministrador($id){
         
