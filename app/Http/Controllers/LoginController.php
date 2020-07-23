@@ -468,13 +468,13 @@ class LoginController extends Controller
 
         $correo = $request->correo_electronico;     
         $id_paciente = $request->id_paciente;   
-        $subject = "Recuperacion de contraseña";        
+        $subject = "Recuperación de contraseña";        
         $for = "$correo";
 
         $data = ['link' => 'http://localhost:4200/recuperarcontrasenia/'.$id_paciente];
 
         Mail::send('email', $data, function($msj) use($subject,$correo){
-            $msj->from("melvindavidsevillamedina@gmail.com","Clinica UNAH-TEC");
+            $msj->from("melvindavidsevillamedina@gmail.com","Clínica UNAH-TEC Danlí");
             $msj->subject($subject);
             $msj->to($correo);            
         });        
