@@ -182,6 +182,17 @@ class PacienteController extends Controller
 
     }
 
+    public function obtenerColumnaTelefonoEmergencia($telefono_emergencia){
+
+
+        $telefono_E = DB::table('telefonos_emergencias')->select('telefono_emergencia')
+        ->where('telefono_emergencia', $telefono_emergencia)
+        ->first();
+        
+        return response()->json($telefono_E);
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
