@@ -44,6 +44,12 @@ Route::resource('datos_login','LoginController');
 Route::post('actualizar_contrasena','LoginController@actualizarContrasena');
 Route::post('actualizar_cuenta','LoginController@actualizarCuenta');
 Route::resource('pacientes','PacienteController');
+
+Route::get('obtenersoloestudiantes','PacienteController@obtenersoloestudiantes');
+Route::get('obtenersoloempleados','PacienteController@obtenersoloempleados');
+Route::get('obtenersolovisitantes','PacienteController@obtenersolovisitantes');
+Route::get('obtenersoloprosenes','PacienteController@obtenersoloprosenes');
+
 Route::resource('pacientes_antecedentes_familiares','PacientesAntecedentesFamiliaresController');
 Route::resource('pacientes_antecedentes_personales','PacientesAntecedentesPersonalesController');
 Route::resource('pacientes_habitos_toxicologicos','PacientesHabitosToxicologicosController');
