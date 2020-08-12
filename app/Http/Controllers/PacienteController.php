@@ -138,9 +138,43 @@ class PacienteController extends Controller
         
     }
 
+    public function obtenersoloestudiantes(){   
+        $estudiante = 3;       
+        $soloestudiantes = DB::table('pacientes')
+        ->select('pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_cuenta','numero_identidad')
+        ->where('categoria',$estudiante)
+        ->get();        
+        return response()->json($soloestudiantes);
+    }
+
+    public function obtenersoloempleados(){     
+        $empleado = 1;  
+        $soloempleados = DB::table('pacientes')
+        ->select('pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_identidad')
+        ->where('categoria', $empleado)
+        ->get();        
+        return response()->json($soloempleados);
+    }
+
+    public function obtenersolovisitantes(){  
+        $visitante = 2;        
+        $solovisitantes = DB::table('pacientes')
+        ->select('pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_identidad')
+        ->where('categoria',  $visitante )
+        ->get();        
+        return response()->json($solovisitantes);
+    }
+
+    public function obtenersoloprosenes(){        
+        $soloprosenes = DB::table('pacientes')
+        ->select('pacientes.id_paciente','nombre_completo', 'correo_electronico','numero_identidad')
+        ->where('prosene', 'Si')
+        ->get();        
+        return response()->json($soloprosenes);
+    }
+
 
     public function obtenerColumnaNumeroTelefono($telefono){
-
         
         $telefonos = DB::table('telefonos_pacientes')->select('telefono')
         ->where('telefono', $telefono)
