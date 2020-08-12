@@ -167,6 +167,7 @@ Route::get('obtenerColumnaUsuarioMedicos/{usuario}','MedicosController@obtenerCo
 Route::get('obtenerColumnaIdentidad/{numero_identidad}','PacienteController@obtenerColumnaIdentidad');
 Route::get('obtenerColumnaNumeroCuenta/{numero_cuenta}','PacienteController@obtenerColumnaNumeroCuenta');
 Route::get('obtenerColumnaCorreo/{correo_electronico}','PacienteController@obtenerColumnaCorreo');
+Route::get('obtenerColumnaTelefonoEmergencia/{telefono_emergencia}','PacienteController@obtenerColumnaTelefonoEmergencia');
 
 
 
