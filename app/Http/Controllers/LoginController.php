@@ -474,7 +474,7 @@ class LoginController extends Controller
         $data = ['link' => 'http://localhost:4200/recuperarcontrasenia/'.$id_paciente];
 
         Mail::send('email', $data, function($msj) use($subject,$correo){
-            $msj->from("melvindavidsevillamedina@gmail.com","Clínica UNAH-TEC Danlí");
+            $msj->from("clinicaunah@gmail.com","Clínica UNAH-TEC Danlí");
             $msj->subject($subject);
             $msj->to($correo);            
         });        
